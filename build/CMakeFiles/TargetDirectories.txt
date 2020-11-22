@@ -1,0 +1,8 @@
+/home/rutiouran/software/geant4.10.06.p02/examples/work/build/CMakeFiles/install/local.dir
+/home/rutiouran/software/geant4.10.06.p02/examples/work/build/CMakeFiles/install.dir
+/home/rutiouran/software/geant4.10.06.p02/examples/work/build/CMakeFiles/list_install_components.dir
+/home/rutiouran/software/geant4.10.06.p02/examples/work/build/CMakeFiles/rebuild_cache.dir
+/home/rutiouran/software/geant4.10.06.p02/examples/work/build/CMakeFiles/edit_cache.dir
+/home/rutiouran/software/geant4.10.06.p02/examples/work/build/CMakeFiles/B1.dir
+/home/rutiouran/software/geant4.10.06.p02/examples/work/build/CMakeFiles/install/strip.dir
+/home/rutiouran/software/geant4.10.06.p02/examples/work/build/CMakeFiles/work.dir
