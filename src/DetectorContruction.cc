@@ -89,13 +89,13 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  G4ThreeVector pos1 = G4ThreeVector(0,  0, 0);
 
  G4double vach_pRMin = 0.*mm;		//its size 
- G4double vach_pRMax = 500.*mm;
+ G4double vach_pRMax = 250.*mm;
  G4double vach_pDZ = 200.*mm;
  G4double vach_pSshi = 0.*deg;
  G4double vach_pDshi = 360.*deg; 
  G4Tubs* solidvach =
       new G4Tubs("vach",
-        vach_pRMin, vach_pRMax, vach_pDZ, vach_pSshi, vach_pDshi);
+        vach_pRMin, vach_pRMax, vach_pDZ/2, vach_pSshi, vach_pDshi);
  
  G4LogicalVolume* logicalvach =
       new G4LogicalVolume(solidvach,		//its solid
@@ -120,13 +120,13 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  G4ThreeVector pos2 = G4ThreeVector(0, 0, 0);
 
  G4double Alch_pRMin = 0.*mm;
- G4double Alch_pRMax = 350.*mm;
+ G4double Alch_pRMax = 175.*mm;
  G4double Alch_DZ = 10.*mm;
  G4double Alch_pSshi = 0.*deg;
  G4double Alch_pDshi = 360.*deg;
  G4Tubs* solidAlch =
    new G4Tubs("Alch",
-         Alch_pRMin, Alch_pRMax, Alch_DZ, Alch_pSshi, Alch_pDshi);
+         Alch_pRMin, Alch_pRMax, Alch_DZ/2, Alch_pSshi, Alch_pDshi);
 
  G4LogicalVolume* logicalAlch = 
    new G4LogicalVolume(solidAlch,		//its solid
@@ -166,7 +166,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  G4double D2O_DZ = 3.*mm;
  G4EllipticalTube* solidD2O =
     new G4EllipticalTube("D2O",
-        D2O_DX, D2O_DY, D2O_DZ);
+        D2O_DX/2, D2O_DY/2, D2O_DZ/2);
 
  G4LogicalVolume* logicD2O =
     new G4LogicalVolume(solidD2O,		//its solid
