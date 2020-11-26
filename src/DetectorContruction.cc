@@ -86,7 +86,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  G4NistManager* nist1 = G4NistManager::Instance();
  G4Material* vach_mat = nist1->FindOrBuildMaterial("G4_Galactic");
  
- G4ThreeVector pos1 = G4ThreeVector(0,  0, 0);
+ G4ThreeVector pos1 = G4ThreeVector(0, 0, 0);
 
  G4double vach_pRMin = 0.*mm;		//its size 
  G4double vach_pRMax = 250.*mm;
@@ -110,14 +110,43 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 		    false, 			//no boolean operation
 		    0, 				//copy number
 		    checkOverlaps);		//overlaps checking
+
+ //
+ //hermetic window
+ //
+ G4NistManager* nist2 = G4NistManager::Instance();
+ G4Material* hewi_mat = nist2->FindOrBuildMaterial("G4_Be");
  
+ G4ThreeVector pos2 = G4ThreeVector(0, 150*mm, -5.05*mm);
+
+ G4double hewi_DX = 3.*mm;			//its size
+ G4double hewi_DY = 6.*mm;
+ G4double hewi_DZ = 0.1*mm; 
+ 
+ G4EllipticalTube* solidhewi =
+   new G4EllipticalTube("solidhewi",
+       hewi_DX/2, hewi_DY/2, hewi_DZ/2);
+
+ G4LogicalVolume* logicalhewi =
+   new G4LogicalVolume(solidhewi,		//its solid
+		       hewi_mat,		//its material
+		       "hewi");			//its name
+
+   new G4PVPlacement(0,				//no rotation
+		     pos2,			//at(0, 150.*mm, -5.05*mm)
+		     logicalhewi,		//its logical volume
+                     "hewi",			//its name
+		     logicalvach,		//its mather volume
+		     false,			//no boolean operation
+		     0,				//copy number
+                     checkOverlaps);		//overlaps checking
  //
  //Al chanber
  //
- G4NistManager* nist2 = G4NistManager::Instance();
- G4Material* Alch_mat = nist2->FindOrBuildMaterial("G4_Al");
+ G4NistManager* nist3 = G4NistManager::Instance();
+ G4Material* Alch_mat = nist3->FindOrBuildMaterial("G4_Al");
  
- G4ThreeVector pos2 = G4ThreeVector(0, 0, 0);
+ G4ThreeVector pos3 = G4ThreeVector(0, 0, 0);
 
  G4double Alch_pRMin = 0.*mm;
  G4double Alch_pRMax = 175.*mm;
@@ -134,7 +163,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 		       "Alch");			//its name
 
      new G4PVPlacement(0,			//no rotation
-		       G4ThreeVector(),		//at(0, 0, 0)
+		       pos3,			//at(0, 0, 0)
 		       logicalAlch, 		//its logical volume
 		       "Alch",			//its name
 		       logicalvach, 		//its mather volume
@@ -159,9 +188,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  D2O_mat->AddElement(elD, natoms=2);
  D2O_mat->AddElement(elO, natoms=1);
 
- G4ThreeVector pos3 = G4ThreeVector(0.*mm, 173.5*mm, -4.6*mm);
+ G4ThreeVector pos4 = G4ThreeVector(0.*mm, 150.*mm, -4.6*mm);
 
- //G4double D2O_DX = 0.8*mm;
  G4double D2O_DX = 3.*mm;
  G4double D2O_DY = 6.*mm;
  G4double D2O_DZ = 0.8*mm;
@@ -175,7 +203,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 		        "D2O");			//its name
 
   new G4PVPlacement(0,				//no rotation
-		    pos3,			//at position
+		    pos4,			//at (0, 150.*mm, -4.6*mm)
 		    logicD2O,			//its logical
 		    "D2O",			//its name
 		    logicalAlch, 		//its mother volume
