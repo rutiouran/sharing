@@ -161,9 +161,10 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
  G4ThreeVector pos3 = G4ThreeVector(0.*mm, 173.5*mm, -4.6*mm);
 
- G4double D2O_DX = 0.8*mm;
+ //G4double D2O_DX = 0.8*mm;
+ G4double D2O_DX = 3.*mm;
  G4double D2O_DY = 6.*mm;
- G4double D2O_DZ = 3.*mm;
+ G4double D2O_DZ = 0.8*mm;
  G4EllipticalTube* solidD2O =
     new G4EllipticalTube("D2O",
         D2O_DX/2, D2O_DY/2, D2O_DZ/2);
