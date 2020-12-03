@@ -7,6 +7,7 @@
 #include "G4ThreeVector.hh"
 #include "G4SDManager.hh"
 #include "G4ios.hh"
+#include "g4root.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -52,6 +53,16 @@ G4bool HeavyWaterSD::ProcessHits(G4Step* step,
 {  
   // energy deposit
   auto edep = step->GetTotalEnergyDeposit();
+
+  int pid = step->GetTrack()->GetParticleDefinition()->GetPDGEncoding();
+  std::cout << "pid: " << pid << std::endl;
+  //std::cout << "step: " << step << std::endl;
+
+  G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
+  analysisManager->FillNtupleDColumn(0, pid);
+  analysisManager->AddNtupleRow();
+
+  //////////////////////////////////////////////////////////////////////////
   
   // step length
   G4double stepLength = 0.;

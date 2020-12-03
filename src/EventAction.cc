@@ -59,6 +59,7 @@ void EventAction::BeginOfEventAction(const G4Event*)
 void EventAction::EndOfEventAction(const G4Event*)
 {   
   // accumulate statistics in run action
+#if 0
   std::cout << "edep: " << fEdep << std::endl;
   G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
 
@@ -67,6 +68,7 @@ void EventAction::EndOfEventAction(const G4Event*)
 
 
   fRunAction->AddEdep(fEdep);
+#endif
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

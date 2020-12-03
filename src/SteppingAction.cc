@@ -53,6 +53,16 @@ SteppingAction::~SteppingAction()
 
 void SteppingAction::UserSteppingAction(const G4Step* step)
 {
+#if 0
+  int pid = step->GetTrack()->GetParticleDefinition()->GetPDGEncoding();
+  std::cout << "pid: " << pid << std::endl;
+  std::cout << "step: " << step << std::endl;
+#endif
+
+  // collect energy deposited in this step
+  G4double edepStep = step->GetTotalEnergyDeposit();
+  fEventAction->AddEdep(edepStep);  
+
   if (!fScoringVolume) { 
     const DetectorConstruction* detectorConstruction
       = static_cast<const DetectorConstruction*>
@@ -60,7 +70,6 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
     fScoringVolume = detectorConstruction->GetScoringVolume();   
   }
 
-  std::cout << "step: " << step << std::endl;
 
   // get volume of the current step
   G4LogicalVolume* volume 
@@ -69,10 +78,6 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
       
   // check if we are in scoring volume
   if (volume != fScoringVolume) return;
-
-  // collect energy deposited in this step
-  G4double edepStep = step->GetTotalEnergyDeposit();
-  fEventAction->AddEdep(edepStep);  
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

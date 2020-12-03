@@ -39,29 +39,32 @@ int main(int argc,char **argv)
 	analysisManager->SetActivation(true);
 
         analysisManager->CreateNtuple("particle", "particle");
+        analysisManager->CreateNtupleDColumn("pid");
+#if 0
         analysisManager->CreateNtupleDColumn("px");
         analysisManager->CreateNtupleDColumn("py");
         analysisManager->CreateNtupleDColumn("pz");
         analysisManager->CreateNtupleDColumn("energy");
         analysisManager->CreateNtupleDColumn("edep");
+#endif
         analysisManager->FinishNtuple();
 
 
 	#ifdef G4MULTITHREADED		//选择：选择一个不同的随机的引擎
-	G4MTRunManger *runmanager = new G4MTRRunManager;	//G4Random::setTheEngine(new CLHEP::MTwistEngine);
+	G4MTRunManger *runManager = new G4MTRRunManager;	//G4Random::setTheEngine(new CLHEP::MTwistEngine);
 	#else
-	G4RunManager *runmanager = new G4RunManager;	//构造默认的运行管理器
+	G4RunManager *runManager = new G4RunManager;	//构造默认的运行管理器
 	#endif
 
-	runmanager->SetUserInitialization(new DetectorConstruction());		//设置强制性初始化类
+	runManager->SetUserInitialization(new DetectorConstruction());		//设置强制性初始化类
 
 
 	G4VModularPhysicsList *physicsList = new QBBC;		//物理清单
 	physicsList->SetVerboseLevel(1);
-	runmanager->SetUserInitialization(physicsList);
+	runManager->SetUserInitialization(physicsList);
 
 
-	runmanager->SetUserInitialization(new ActionInitialization());		//用户行为初始化
+	runManager->SetUserInitialization(new ActionInitialization());		//用户行为初始化
 
 
 	G4VisManager *visManager = new G4VisExecutive;		//初始形象化
@@ -81,7 +84,8 @@ int main(int argc,char **argv)
 	{
 		UImanager->ApplyCommand("/control/execute init_vis.mac");
 		ui->SessionStart();
-        }
+		delete ui;
+    }
 
   
 	//if ( analysisManager->IsActive() ) 
@@ -89,6 +93,9 @@ int main(int argc,char **argv)
            std::cout << "hhhhhh" << std::endl;
            analysisManager->Write();
            analysisManager->CloseFile();
-        }
+    }
+
+	delete visManager;
+	delete runManager;
 }
 
