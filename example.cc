@@ -8,13 +8,22 @@
 #endif
 
 #include "G4UImanager.hh"
+#include "G4UIcommand.hh"
 #include "QBBC.hh"
 
 #include "G4VisExecutive.hh"
 #include "G4UIExecutive.hh"
 
 #include "Randomize.hh"
+#include "g4root.hh"
 
+namespace {
+  void PrintUsage(){
+    G4cerr << "Usage:" << G4endl;
+    G4cerr << "example [-m macro ] [-u UIsession ] [-t nThreads]" << G4endl;
+    G4cerr << "  note -t option is available only for multi-threaded mode." << G4endl;
+}
+}
 int main(int argc,char **argv)
 {
 	G4UIExecutive *ui = 0;		//检测交互模式（如果没有参数）并定义 UI 会话
@@ -22,6 +31,20 @@ int main(int argc,char **argv)
 	{
 		ui = new G4UIExecutive(argc, argv);
 	}
+
+        G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
+	std::string outputFileName("output.root");
+        analysisManager->SetFileName(outputFileName);
+	analysisManager->OpenFile();
+	analysisManager->SetActivation(true);
+
+        analysisManager->CreateNtuple("particle", "particle");
+        analysisManager->CreateNtupleDColumn("px");
+        analysisManager->CreateNtupleDColumn("py");
+        analysisManager->CreateNtupleDColumn("pz");
+        analysisManager->CreateNtupleDColumn("energy");
+        analysisManager->CreateNtupleDColumn("edep");
+        analysisManager->FinishNtuple();
 
 
 	#ifdef G4MULTITHREADED		//选择：选择一个不同的随机的引擎
@@ -58,6 +81,14 @@ int main(int argc,char **argv)
 	{
 		UImanager->ApplyCommand("/control/execute init_vis.mac");
 		ui->SessionStart();
-    }
+        }
+
+  
+	//if ( analysisManager->IsActive() ) 
+	{
+           std::cout << "hhhhhh" << std::endl;
+           analysisManager->Write();
+           analysisManager->CloseFile();
+        }
 }
 

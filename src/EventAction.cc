@@ -32,6 +32,7 @@
 
 #include "G4Event.hh"
 #include "G4RunManager.hh"
+#include "g4root.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -58,6 +59,13 @@ void EventAction::BeginOfEventAction(const G4Event*)
 void EventAction::EndOfEventAction(const G4Event*)
 {   
   // accumulate statistics in run action
+  std::cout << "edep: " << fEdep << std::endl;
+  G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
+
+  analysisManager->FillNtupleDColumn(4, fEdep);
+  analysisManager->AddNtupleRow();
+
+
   fRunAction->AddEdep(fEdep);
 }
 
