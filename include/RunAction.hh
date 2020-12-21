@@ -1,6 +1,3 @@
-/// \file B1RunAction.hh
-/// \brief Definition of the B1RunAction class
-
 #ifndef RunAction_h
 #define RunAction_h 1
 
@@ -19,7 +16,7 @@ class G4Run;
 class RunAction : public G4UserRunAction
 {
   public:
-    RunAction();
+    RunAction(EventAction* eventAction);
     virtual ~RunAction();
 
     // virtual G4Run* GenerateRun();
@@ -34,4 +31,3 @@ class RunAction : public G4UserRunAction
 };
 
 #endif
-

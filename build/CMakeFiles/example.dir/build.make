@@ -148,9 +148,22 @@ CMakeFiles/example.dir/src/HeavyWaterSD.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/example.dir/src/HeavyWaterSD.cc.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rutiouran/github/sharing/src/HeavyWaterSD.cc -o CMakeFiles/example.dir/src/HeavyWaterSD.cc.s
 
+CMakeFiles/example.dir/src/PhysicsList.cc.o: CMakeFiles/example.dir/flags.make
+CMakeFiles/example.dir/src/PhysicsList.cc.o: ../src/PhysicsList.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rutiouran/github/sharing/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/example.dir/src/PhysicsList.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/example.dir/src/PhysicsList.cc.o -c /home/rutiouran/github/sharing/src/PhysicsList.cc
+
+CMakeFiles/example.dir/src/PhysicsList.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/example.dir/src/PhysicsList.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rutiouran/github/sharing/src/PhysicsList.cc > CMakeFiles/example.dir/src/PhysicsList.cc.i
+
+CMakeFiles/example.dir/src/PhysicsList.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/example.dir/src/PhysicsList.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rutiouran/github/sharing/src/PhysicsList.cc -o CMakeFiles/example.dir/src/PhysicsList.cc.s
+
 CMakeFiles/example.dir/src/PrimaryGeneratorAction.cc.o: CMakeFiles/example.dir/flags.make
 CMakeFiles/example.dir/src/PrimaryGeneratorAction.cc.o: ../src/PrimaryGeneratorAction.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rutiouran/github/sharing/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/example.dir/src/PrimaryGeneratorAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rutiouran/github/sharing/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/example.dir/src/PrimaryGeneratorAction.cc.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/example.dir/src/PrimaryGeneratorAction.cc.o -c /home/rutiouran/github/sharing/src/PrimaryGeneratorAction.cc
 
 CMakeFiles/example.dir/src/PrimaryGeneratorAction.cc.i: cmake_force
@@ -163,7 +176,7 @@ CMakeFiles/example.dir/src/PrimaryGeneratorAction.cc.s: cmake_force
 
 CMakeFiles/example.dir/src/RunAction.cc.o: CMakeFiles/example.dir/flags.make
 CMakeFiles/example.dir/src/RunAction.cc.o: ../src/RunAction.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rutiouran/github/sharing/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/example.dir/src/RunAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rutiouran/github/sharing/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/example.dir/src/RunAction.cc.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/example.dir/src/RunAction.cc.o -c /home/rutiouran/github/sharing/src/RunAction.cc
 
 CMakeFiles/example.dir/src/RunAction.cc.i: cmake_force
@@ -176,7 +189,7 @@ CMakeFiles/example.dir/src/RunAction.cc.s: cmake_force
 
 CMakeFiles/example.dir/src/SteppingAction.cc.o: CMakeFiles/example.dir/flags.make
 CMakeFiles/example.dir/src/SteppingAction.cc.o: ../src/SteppingAction.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rutiouran/github/sharing/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/example.dir/src/SteppingAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rutiouran/github/sharing/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/example.dir/src/SteppingAction.cc.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/example.dir/src/SteppingAction.cc.o -c /home/rutiouran/github/sharing/src/SteppingAction.cc
 
 CMakeFiles/example.dir/src/SteppingAction.cc.i: cmake_force
@@ -196,6 +209,7 @@ example_OBJECTS = \
 "CMakeFiles/example.dir/src/EventAction.cc.o" \
 "CMakeFiles/example.dir/src/HeavyWater.cc.o" \
 "CMakeFiles/example.dir/src/HeavyWaterSD.cc.o" \
+"CMakeFiles/example.dir/src/PhysicsList.cc.o" \
 "CMakeFiles/example.dir/src/PrimaryGeneratorAction.cc.o" \
 "CMakeFiles/example.dir/src/RunAction.cc.o" \
 "CMakeFiles/example.dir/src/SteppingAction.cc.o"
@@ -210,6 +224,7 @@ example: CMakeFiles/example.dir/src/DeuteronNuclearPhysics.cc.o
 example: CMakeFiles/example.dir/src/EventAction.cc.o
 example: CMakeFiles/example.dir/src/HeavyWater.cc.o
 example: CMakeFiles/example.dir/src/HeavyWaterSD.cc.o
+example: CMakeFiles/example.dir/src/PhysicsList.cc.o
 example: CMakeFiles/example.dir/src/PrimaryGeneratorAction.cc.o
 example: CMakeFiles/example.dir/src/RunAction.cc.o
 example: CMakeFiles/example.dir/src/SteppingAction.cc.o
@@ -260,7 +275,7 @@ example: /home/rutiouran/software/geant4/lib/libG4intercoms.so
 example: /home/rutiouran/software/geant4/lib/libG4global.so
 example: /home/rutiouran/software/geant4/lib/libG4clhep.so
 example: CMakeFiles/example.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/rutiouran/github/sharing/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable example"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/rutiouran/github/sharing/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable example"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/example.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

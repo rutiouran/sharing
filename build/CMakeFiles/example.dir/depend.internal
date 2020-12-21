@@ -4,6 +4,7 @@
 CMakeFiles/example.dir/example.cc.o
  ../include/ActionInitialization.hh
  ../include/DetectorConstruction.hh
+ ../include/PhysicsList.hh
  /home/rutiouran/github/sharing/example.cc
  /home/rutiouran/software/geant4/include/Geant4/CLHEP/Geometry/BasicVector3D.h
  /home/rutiouran/software/geant4/include/Geant4/CLHEP/Geometry/Normal3D.h
@@ -1915,6 +1916,189 @@ CMakeFiles/example.dir/src/HeavyWaterSD.cc.o
  /home/rutiouran/software/geant4/include/Geant4/tools/wroot/tree
  /home/rutiouran/software/geant4/include/Geant4/tools/wroot/wbuf
  /home/rutiouran/software/geant4/include/Geant4/trkdefs.hh
+CMakeFiles/example.dir/src/PhysicsList.cc.o
+ ../include/DeuteronNuclearPhysics.hh
+ ../include/PhysicsList.hh
+ /home/rutiouran/github/sharing/src/PhysicsList.cc
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/DualRand.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/JamesRandom.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/MTwistEngine.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/MixMaxRng.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandBinomial.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandBinomial.icc
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandBit.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandBit.icc
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandBreitWigner.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandBreitWigner.icc
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandChiSquare.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandChiSquare.icc
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandExpZiggurat.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandExponential.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandExponential.icc
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandFlat.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandFlat.icc
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandGamma.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandGamma.icc
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandGauss.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandGauss.icc
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandGaussQ.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandGaussQ.icc
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandGaussZiggurat.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandGeneral.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandGeneral.icc
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandLandau.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandLandau.icc
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandPoisson.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandPoisson.icc
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandPoissonQ.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandPoissonQ.icc
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandStudentT.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandStudentT.icc
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/Random.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/Random.icc
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandomEngine.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RandomEngine.icc
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/Randomize.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RanecuEngine.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/Ranlux64Engine.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RanluxEngine.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Random/RanshiEngine.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Units/PhysicalConstants.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Units/SystemOfUnits.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Utility/defs.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Utility/memory.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Utility/thread_local.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Vector/AxisAngle.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Vector/AxisAngle.icc
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Vector/LorentzVector.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Vector/LorentzVector.icc
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Vector/Rotation.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Vector/Rotation.icc
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Vector/RotationInterfaces.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Vector/RotationInterfaces.icc
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Vector/RotationX.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Vector/RotationX.icc
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Vector/RotationY.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Vector/RotationY.icc
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Vector/RotationZ.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Vector/RotationZ.icc
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Vector/ThreeVector.h
+ /home/rutiouran/software/geant4/include/Geant4/CLHEP/Vector/ThreeVector.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4Allocator.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4AllocatorPool.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4AutoLock.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4Cache.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4CacheDetails.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4DataVector.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4DataVector.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4Decay.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4DecayPhysics.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4DecayProcessType.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4DynamicParticle.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4DynamicParticle.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4ElectronOccupancy.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4Element.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4ElementTable.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4ElementVector.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4EnvironmentUtils.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4Exception.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4ExceptionSeverity.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4Exp.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4FastVector.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4ForceCondition.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4GPILSelection.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4GeomSplitter.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4GlobalConfig.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4IonisParamElm.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4IonisParamMat.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4Isotope.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4IsotopeVector.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4Log.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4LogicalVolume.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4LogicalVolume.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4LorentzVector.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4MCCIndexConversionTable.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4Material.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4MaterialCutsCouple.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4MaterialPropertiesIndex.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4MaterialPropertiesTable.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4MaterialPropertiesTable.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4MaterialPropertyVector.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4MaterialTable.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4OrderedTable.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4PDefManager.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4ParticleChange.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4ParticleChange.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4ParticleChangeForDecay.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4ParticleDefinition.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4ParticleDefinition.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4ParticleMomentum.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4ParticleTable.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4ParticleTable.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4ParticleTableIterator.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4PhysicsListHelper.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4PhysicsListOrderingParameter.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4PhysicsModelCatalog.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4PhysicsOrderedFreeVector.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4PhysicsTable.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4PhysicsTable.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4PhysicsVector.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4PhysicsVector.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4PhysicsVectorType.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4ProcessType.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4ProductionCuts.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4ProductionCutsTable.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4RadioactiveDecayPhysics.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4ReferenceCountedHandle.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4Region.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4Region.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4RotationMatrix.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4SandiaTable.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4Step.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4Step.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4StepPoint.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4StepPoint.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4StepStatus.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4SteppingControl.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4String.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4String.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4SystemOfUnits.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4ThreadLocalSingleton.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4Threading.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4ThreeVector.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4TouchableHandle.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4Track.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4Track.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4TrackFastVector.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4TrackStatus.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4TrackVector.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4Types.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4UnitsTable.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4UnitsTable.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4VExceptionHandler.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VModularPhysicsList.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VParticleChange.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VParticleChange.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4VPhysicalVolume.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VPhysicalVolume.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4VPhysicsConstructor.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VProcess.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VRestDiscreteProcess.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VTouchable.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VTouchable.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4VUPLSplitter.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VUserPhysicsList.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VUserTrackInformation.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4ios.hh
+ /home/rutiouran/software/geant4/include/Geant4/Randomize.hh
+ /home/rutiouran/software/geant4/include/Geant4/geomdefs.hh
+ /home/rutiouran/software/geant4/include/Geant4/geomwdefs.hh
+ /home/rutiouran/software/geant4/include/Geant4/globals.hh
+ /home/rutiouran/software/geant4/include/Geant4/pwdefs.hh
+ /home/rutiouran/software/geant4/include/Geant4/rundefs.hh
+ /home/rutiouran/software/geant4/include/Geant4/templates.hh
+ /home/rutiouran/software/geant4/include/Geant4/tls.hh
+ /home/rutiouran/software/geant4/include/Geant4/trkdefs.hh
 CMakeFiles/example.dir/src/PrimaryGeneratorAction.cc.o
  ../include/PrimaryGeneratorAction.hh
  /home/rutiouran/github/sharing/src/PrimaryGeneratorAction.cc
@@ -2192,6 +2376,7 @@ CMakeFiles/example.dir/src/PrimaryGeneratorAction.cc.o
  /home/rutiouran/software/geant4/include/Geant4/trkdefs.hh
 CMakeFiles/example.dir/src/RunAction.cc.o
  ../include/DetectorConstruction.hh
+ ../include/EventAction.hh
  ../include/PrimaryGeneratorAction.hh
  ../include/RunAction.hh
  /home/rutiouran/github/sharing/src/RunAction.cc
@@ -2273,10 +2458,16 @@ CMakeFiles/example.dir/src/RunAction.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4AffineTransform.icc
  /home/rutiouran/software/geant4/include/Geant4/G4Allocator.hh
  /home/rutiouran/software/geant4/include/Geant4/G4AllocatorPool.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4AnalysisManagerState.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4AnalysisUtilities.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4AnalysisVerbose.hh
  /home/rutiouran/software/geant4/include/Geant4/G4ApplicationState.hh
  /home/rutiouran/software/geant4/include/Geant4/G4AutoLock.hh
  /home/rutiouran/software/geant4/include/Geant4/G4AuxiliaryNavServices.hh
  /home/rutiouran/software/geant4/include/Geant4/G4AuxiliaryNavServices.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4BaseAnalysisManager.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4BaseFileManager.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4BinScheme.hh
  /home/rutiouran/software/geant4/include/Geant4/G4BlockingList.hh
  /home/rutiouran/software/geant4/include/Geant4/G4BlockingList.icc
  /home/rutiouran/software/geant4/include/Geant4/G4ClassificationOfNewTrack.hh
@@ -2296,6 +2487,7 @@ CMakeFiles/example.dir/src/RunAction.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4ExceptionSeverity.hh
  /home/rutiouran/software/geant4/include/Geant4/G4Exp.hh
  /home/rutiouran/software/geant4/include/Geant4/G4FastVector.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4Fcn.hh
  /home/rutiouran/software/geant4/include/Geant4/G4ForceCondition.hh
  /home/rutiouran/software/geant4/include/Geant4/G4GPILSelection.hh
  /home/rutiouran/software/geant4/include/Geant4/G4GRSSolid.hh
@@ -2304,7 +2496,12 @@ CMakeFiles/example.dir/src/RunAction.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4GRSVolume.icc
  /home/rutiouran/software/geant4/include/Geant4/G4GeomSplitter.hh
  /home/rutiouran/software/geant4/include/Geant4/G4GlobalConfig.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4H1ToolsManager.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4H2ToolsManager.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4H3ToolsManager.hh
  /home/rutiouran/software/geant4/include/Geant4/G4HCofThisEvent.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4HnInformation.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4HnManager.hh
  /home/rutiouran/software/geant4/include/Geant4/G4IonisParamElm.hh
  /home/rutiouran/software/geant4/include/Geant4/G4IonisParamMat.hh
  /home/rutiouran/software/geant4/include/Geant4/G4Isotope.hh
@@ -2334,6 +2531,8 @@ CMakeFiles/example.dir/src/RunAction.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4NormalNavigation.hh
  /home/rutiouran/software/geant4/include/Geant4/G4NormalNavigation.icc
  /home/rutiouran/software/geant4/include/Geant4/G4OrderedTable.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4P1ToolsManager.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4P2ToolsManager.hh
  /home/rutiouran/software/geant4/include/Geant4/G4PDefManager.hh
  /home/rutiouran/software/geant4/include/Geant4/G4ParameterisedNavigation.hh
  /home/rutiouran/software/geant4/include/Geant4/G4ParameterisedNavigation.icc
@@ -2391,8 +2590,12 @@ CMakeFiles/example.dir/src/RunAction.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4String.hh
  /home/rutiouran/software/geant4/include/Geant4/G4String.icc
  /home/rutiouran/software/geant4/include/Geant4/G4SystemOfUnits.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4THnManager.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4THnManager.icc
  /home/rutiouran/software/geant4/include/Geant4/G4Threading.hh
  /home/rutiouran/software/geant4/include/Geant4/G4ThreeVector.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4ToolsAnalysisManager.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4ToolsAnalysisManager.icc
  /home/rutiouran/software/geant4/include/Geant4/G4TouchableHandle.hh
  /home/rutiouran/software/geant4/include/Geant4/G4TouchableHistory.hh
  /home/rutiouran/software/geant4/include/Geant4/G4TouchableHistory.icc
@@ -2415,17 +2618,27 @@ CMakeFiles/example.dir/src/RunAction.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4UItokenNum.hh
  /home/rutiouran/software/geant4/include/Geant4/G4UnitsTable.hh
  /home/rutiouran/software/geant4/include/Geant4/G4UnitsTable.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4UserEventAction.hh
  /home/rutiouran/software/geant4/include/Geant4/G4UserRunAction.hh
  /home/rutiouran/software/geant4/include/Geant4/G4UserStackingAction.hh
  /home/rutiouran/software/geant4/include/Geant4/G4UserSteppingAction.hh
  /home/rutiouran/software/geant4/include/Geant4/G4UserTrackingAction.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VAccumulable.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VAccumulable.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4VAnalysisManager.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VAnalysisManager.icc
  /home/rutiouran/software/geant4/include/Geant4/G4VDigiCollection.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VExceptionHandler.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VExternalNavigation.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VFileManager.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VH1Manager.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VH2Manager.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VH3Manager.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VHitsCollection.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VNotifier.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VNtupleManager.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VP1Manager.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VP2Manager.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VPVParameterisation.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VParticleChange.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VParticleChange.icc
@@ -2451,12 +2664,79 @@ CMakeFiles/example.dir/src/RunAction.cc.o
  /home/rutiouran/software/geant4/include/Geant4/Randomize.hh
  /home/rutiouran/software/geant4/include/Geant4/evmandefs.hh
  /home/rutiouran/software/geant4/include/Geant4/evtdefs.hh
+ /home/rutiouran/software/geant4/include/Geant4/g4analysis.hh
+ /home/rutiouran/software/geant4/include/Geant4/g4analysis_defs.hh
+ /home/rutiouran/software/geant4/include/Geant4/g4hntools_defs.hh
  /home/rutiouran/software/geant4/include/Geant4/geomdefs.hh
  /home/rutiouran/software/geant4/include/Geant4/geomwdefs.hh
  /home/rutiouran/software/geant4/include/Geant4/globals.hh
  /home/rutiouran/software/geant4/include/Geant4/pwdefs.hh
  /home/rutiouran/software/geant4/include/Geant4/templates.hh
  /home/rutiouran/software/geant4/include/Geant4/tls.hh
+ /home/rutiouran/software/geant4/include/Geant4/tools/charp_out
+ /home/rutiouran/software/geant4/include/Geant4/tools/cid
+ /home/rutiouran/software/geant4/include/Geant4/tools/cids
+ /home/rutiouran/software/geant4/include/Geant4/tools/forit
+ /home/rutiouran/software/geant4/include/Geant4/tools/histo/axes
+ /home/rutiouran/software/geant4/include/Geant4/tools/histo/axis
+ /home/rutiouran/software/geant4/include/Geant4/tools/histo/b1
+ /home/rutiouran/software/geant4/include/Geant4/tools/histo/b2
+ /home/rutiouran/software/geant4/include/Geant4/tools/histo/b3
+ /home/rutiouran/software/geant4/include/Geant4/tools/histo/base_histo
+ /home/rutiouran/software/geant4/include/Geant4/tools/histo/h1
+ /home/rutiouran/software/geant4/include/Geant4/tools/histo/h1d
+ /home/rutiouran/software/geant4/include/Geant4/tools/histo/h2
+ /home/rutiouran/software/geant4/include/Geant4/tools/histo/h2d
+ /home/rutiouran/software/geant4/include/Geant4/tools/histo/h3
+ /home/rutiouran/software/geant4/include/Geant4/tools/histo/h3d
+ /home/rutiouran/software/geant4/include/Geant4/tools/histo/histo_data
+ /home/rutiouran/software/geant4/include/Geant4/tools/histo/p1
+ /home/rutiouran/software/geant4/include/Geant4/tools/histo/p1d
+ /home/rutiouran/software/geant4/include/Geant4/tools/histo/p2
+ /home/rutiouran/software/geant4/include/Geant4/tools/histo/p2d
+ /home/rutiouran/software/geant4/include/Geant4/tools/histo/profile_data
+ /home/rutiouran/software/geant4/include/Geant4/tools/impi
+ /home/rutiouran/software/geant4/include/Geant4/tools/lina/eqT
+ /home/rutiouran/software/geant4/include/Geant4/tools/long_out
+ /home/rutiouran/software/geant4/include/Geant4/tools/mem
+ /home/rutiouran/software/geant4/include/Geant4/tools/mnmx
+ /home/rutiouran/software/geant4/include/Geant4/tools/ntuple_booking
+ /home/rutiouran/software/geant4/include/Geant4/tools/press_func
+ /home/rutiouran/software/geant4/include/Geant4/tools/rcmp
+ /home/rutiouran/software/geant4/include/Geant4/tools/realloc
+ /home/rutiouran/software/geant4/include/Geant4/tools/safe_cast
+ /home/rutiouran/software/geant4/include/Geant4/tools/scast
+ /home/rutiouran/software/geant4/include/Geant4/tools/snpf
+ /home/rutiouran/software/geant4/include/Geant4/tools/sout
+ /home/rutiouran/software/geant4/include/Geant4/tools/stype
+ /home/rutiouran/software/geant4/include/Geant4/tools/touplow
+ /home/rutiouran/software/geant4/include/Geant4/tools/typedefs
+ /home/rutiouran/software/geant4/include/Geant4/tools/vdata
+ /home/rutiouran/software/geant4/include/Geant4/tools/vfind
+ /home/rutiouran/software/geant4/include/Geant4/tools/vmanip
+ /home/rutiouran/software/geant4/include/Geant4/tools/wroot/base_leaf
+ /home/rutiouran/software/geant4/include/Geant4/tools/wroot/basket
+ /home/rutiouran/software/geant4/include/Geant4/tools/wroot/branch
+ /home/rutiouran/software/geant4/include/Geant4/tools/wroot/branch_element
+ /home/rutiouran/software/geant4/include/Geant4/tools/wroot/branch_object
+ /home/rutiouran/software/geant4/include/Geant4/tools/wroot/buffer
+ /home/rutiouran/software/geant4/include/Geant4/tools/wroot/columns.icc
+ /home/rutiouran/software/geant4/include/Geant4/tools/wroot/date
+ /home/rutiouran/software/geant4/include/Geant4/tools/wroot/ibo
+ /home/rutiouran/software/geant4/include/Geant4/tools/wroot/icol
+ /home/rutiouran/software/geant4/include/Geant4/tools/wroot/idir
+ /home/rutiouran/software/geant4/include/Geant4/tools/wroot/ifile
+ /home/rutiouran/software/geant4/include/Geant4/tools/wroot/imutex
+ /home/rutiouran/software/geant4/include/Geant4/tools/wroot/iobject
+ /home/rutiouran/software/geant4/include/Geant4/tools/wroot/itree
+ /home/rutiouran/software/geant4/include/Geant4/tools/wroot/key
+ /home/rutiouran/software/geant4/include/Geant4/tools/wroot/leaf
+ /home/rutiouran/software/geant4/include/Geant4/tools/wroot/mpi_create_basket
+ /home/rutiouran/software/geant4/include/Geant4/tools/wroot/named
+ /home/rutiouran/software/geant4/include/Geant4/tools/wroot/ntuple
+ /home/rutiouran/software/geant4/include/Geant4/tools/wroot/seek
+ /home/rutiouran/software/geant4/include/Geant4/tools/wroot/tree
+ /home/rutiouran/software/geant4/include/Geant4/tools/wroot/wbuf
  /home/rutiouran/software/geant4/include/Geant4/trajectoryControl.hh
  /home/rutiouran/software/geant4/include/Geant4/trkdefs.hh
 CMakeFiles/example.dir/src/SteppingAction.cc.o
