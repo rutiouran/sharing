@@ -16,7 +16,7 @@ class G4Run;
 class RunAction : public G4UserRunAction
 {
   public:
-    RunAction(EventAction* eventAction);
+    RunAction();
     virtual ~RunAction();
 
     // virtual G4Run* GenerateRun();
@@ -26,8 +26,9 @@ class RunAction : public G4UserRunAction
     void AddEdep (G4double edep); 
 
   private:
-    G4Accumulable<G4double> fEdep;
-    G4Accumulable<G4double> fEdep2;
+    //EventAction* fEventAction;
+    G4Accumulable<G4double> fEdep {0.};
+    G4Accumulable<G4double> fEdep2 {0.};
 };
 
 #endif

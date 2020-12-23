@@ -12,27 +12,26 @@
 #include "G4UnitsTable.hh"
 #include "G4SystemOfUnits.hh"
 
-RunAction::RunAction(EventAction* eventAction)
-: G4UserRunAction(),
-  fEventAction(eventAction)
-{ 
+RunAction::RunAction()
+: G4UserRunAction()
+{
   //Set printing event number per each event
   G4RunManager::GetRunManager()->SetPrintProgress(1);
   
   //Create analysis manager
   auto analysisManager = G4Analysis::ManagerInstance("root");
-  G4cout << "Using" << analysisManager->GetTupe() << G4endl;
+  G4cout << "Using" << analysisManager->GetType() << G4endl;
 
   //Create directories
   analysisManager->SetVerboseLevel(1);
-  analysisManager->SetNtuplemerging(true);
+  analysisManager->SetNtupleMerging(true);
 
   //Book histograms, ntuple
   //
 
   //Creating histograms
   analysisManager->CreateH1("Edeu","Edep in deuteron", 100, 0., 13*MeV);
-  analysisManager->CreateH1("Ldeu","trackL in deyteron",100, 0., 1*cm);
+  analysisManager->CreateH1("Ldeu","trackL in deuteron",100, 0., 1*cm);
 
   //Creating ntuple
   analysisManager->CreateNtuple("example","Edep and TrackL");
@@ -150,6 +149,7 @@ void RunAction::EndOfRunAction(const G4Run*)
   //
   analysisManager->Write();
   analysisManager->CloseFile();
+}
 }
 
 void RunAction::AddEdep(G4double edep)

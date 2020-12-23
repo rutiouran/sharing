@@ -9,7 +9,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/rutiouran/github/sharing/src/DetectorConstruction.cc" "/home/rutiouran/github/sharing/build/CMakeFiles/example.dir/src/DetectorConstruction.cc.o"
   "/home/rutiouran/github/sharing/src/DeuteronNuclearPhysics.cc" "/home/rutiouran/github/sharing/build/CMakeFiles/example.dir/src/DeuteronNuclearPhysics.cc.o"
   "/home/rutiouran/github/sharing/src/EventAction.cc" "/home/rutiouran/github/sharing/build/CMakeFiles/example.dir/src/EventAction.cc.o"
-  "/home/rutiouran/github/sharing/src/HeavyWater.cc" "/home/rutiouran/github/sharing/build/CMakeFiles/example.dir/src/HeavyWater.cc.o"
+  "/home/rutiouran/github/sharing/src/HeavyWaterHit.cc" "/home/rutiouran/github/sharing/build/CMakeFiles/example.dir/src/HeavyWaterHit.cc.o"
   "/home/rutiouran/github/sharing/src/HeavyWaterSD.cc" "/home/rutiouran/github/sharing/build/CMakeFiles/example.dir/src/HeavyWaterSD.cc.o"
   "/home/rutiouran/github/sharing/src/PhysicsList.cc" "/home/rutiouran/github/sharing/build/CMakeFiles/example.dir/src/PhysicsList.cc.o"
   "/home/rutiouran/github/sharing/src/PrimaryGeneratorAction.cc" "/home/rutiouran/github/sharing/build/CMakeFiles/example.dir/src/PrimaryGeneratorAction.cc.o"

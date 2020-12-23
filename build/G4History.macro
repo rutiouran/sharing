@@ -24,13 +24,5 @@
 /vis/viewer/set/autoRefresh true
 /vis/viewer/refresh
 /vis/verbose warnings
-/gun/particle pi0
-/run/beamOn 10
+/run/beamOn 1000
 /vis/scene/notifyHandlers scene-0
-/gun/particle mu-
-/run/beamOn 10
-/run/beamOn 101
-/gun/particle pi0
-/run/beamOn 101
-/gun/particle deuteron
-/run/beamOn 10

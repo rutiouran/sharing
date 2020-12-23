@@ -304,32 +304,32 @@ src/EventAction.cc.s:
 	$(MAKE) -f CMakeFiles/example.dir/build.make CMakeFiles/example.dir/src/EventAction.cc.s
 .PHONY : src/EventAction.cc.s
 
-src/HeavyWater.o: src/HeavyWater.cc.o
+src/HeavyWaterHit.o: src/HeavyWaterHit.cc.o
 
-.PHONY : src/HeavyWater.o
+.PHONY : src/HeavyWaterHit.o
 
 # target to build an object file
-src/HeavyWater.cc.o:
-	$(MAKE) -f CMakeFiles/example.dir/build.make CMakeFiles/example.dir/src/HeavyWater.cc.o
-.PHONY : src/HeavyWater.cc.o
+src/HeavyWaterHit.cc.o:
+	$(MAKE) -f CMakeFiles/example.dir/build.make CMakeFiles/example.dir/src/HeavyWaterHit.cc.o
+.PHONY : src/HeavyWaterHit.cc.o
 
-src/HeavyWater.i: src/HeavyWater.cc.i
+src/HeavyWaterHit.i: src/HeavyWaterHit.cc.i
 
-.PHONY : src/HeavyWater.i
+.PHONY : src/HeavyWaterHit.i
 
 # target to preprocess a source file
-src/HeavyWater.cc.i:
-	$(MAKE) -f CMakeFiles/example.dir/build.make CMakeFiles/example.dir/src/HeavyWater.cc.i
-.PHONY : src/HeavyWater.cc.i
+src/HeavyWaterHit.cc.i:
+	$(MAKE) -f CMakeFiles/example.dir/build.make CMakeFiles/example.dir/src/HeavyWaterHit.cc.i
+.PHONY : src/HeavyWaterHit.cc.i
 
-src/HeavyWater.s: src/HeavyWater.cc.s
+src/HeavyWaterHit.s: src/HeavyWaterHit.cc.s
 
-.PHONY : src/HeavyWater.s
+.PHONY : src/HeavyWaterHit.s
 
 # target to generate assembly for a file
-src/HeavyWater.cc.s:
-	$(MAKE) -f CMakeFiles/example.dir/build.make CMakeFiles/example.dir/src/HeavyWater.cc.s
-.PHONY : src/HeavyWater.cc.s
+src/HeavyWaterHit.cc.s:
+	$(MAKE) -f CMakeFiles/example.dir/build.make CMakeFiles/example.dir/src/HeavyWaterHit.cc.s
+.PHONY : src/HeavyWaterHit.cc.s
 
 src/HeavyWaterSD.o: src/HeavyWaterSD.cc.o
 
@@ -494,9 +494,9 @@ help:
 	@echo "... src/EventAction.o"
 	@echo "... src/EventAction.i"
 	@echo "... src/EventAction.s"
-	@echo "... src/HeavyWater.o"
-	@echo "... src/HeavyWater.i"
-	@echo "... src/HeavyWater.s"
+	@echo "... src/HeavyWaterHit.o"
+	@echo "... src/HeavyWaterHit.i"
+	@echo "... src/HeavyWaterHit.s"
 	@echo "... src/HeavyWaterSD.o"
 	@echo "... src/HeavyWaterSD.i"
 	@echo "... src/HeavyWaterSD.s"

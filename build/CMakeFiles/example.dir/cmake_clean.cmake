@@ -4,7 +4,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/example.dir/src/DetectorConstruction.cc.o"
   "CMakeFiles/example.dir/src/DeuteronNuclearPhysics.cc.o"
   "CMakeFiles/example.dir/src/EventAction.cc.o"
-  "CMakeFiles/example.dir/src/HeavyWater.cc.o"
+  "CMakeFiles/example.dir/src/HeavyWaterHit.cc.o"
   "CMakeFiles/example.dir/src/HeavyWaterSD.cc.o"
   "CMakeFiles/example.dir/src/PhysicsList.cc.o"
   "CMakeFiles/example.dir/src/PrimaryGeneratorAction.cc.o"

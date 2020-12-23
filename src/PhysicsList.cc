@@ -6,6 +6,7 @@
 #include "G4DecayPhysics.hh"
 #include "G4RadioactiveDecayPhysics.hh"
 #include "DeuteronNuclearPhysics.hh"
+#include "G4ionIonisation.hh"
 
 PhysicsList::PhysicsList()
 : G4VModularPhysicsList()
@@ -16,6 +17,8 @@ PhysicsList::PhysicsList()
   RegisterPhysics(new G4DecayPhysics());
   //Dadioactive Decay
   RegisterPhysics(new G4RadioactiveDecayPhysics());
+  //G4ionIonisation
+  RegisterPhysics(new G4ionIonisation(extern deuterion));
 }
 
 PhysicsList::~PhysicsList()

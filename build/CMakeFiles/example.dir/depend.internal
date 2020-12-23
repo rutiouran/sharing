@@ -496,6 +496,7 @@ CMakeFiles/example.dir/example.cc.o
 CMakeFiles/example.dir/src/ActionInitialization.cc.o
  ../include/ActionInitialization.hh
  ../include/EventAction.hh
+ ../include/HeavyWaterHit.hh
  ../include/PrimaryGeneratorAction.hh
  ../include/RunAction.hh
  ../include/SteppingAction.hh
@@ -524,6 +525,7 @@ CMakeFiles/example.dir/src/ActionInitialization.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4PrimaryVertex.hh
  /home/rutiouran/software/geant4/include/Geant4/G4String.hh
  /home/rutiouran/software/geant4/include/Geant4/G4String.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4THitsCollection.hh
  /home/rutiouran/software/geant4/include/Geant4/G4Threading.hh
  /home/rutiouran/software/geant4/include/Geant4/G4ThreeVector.hh
  /home/rutiouran/software/geant4/include/Geant4/G4Types.hh
@@ -533,6 +535,8 @@ CMakeFiles/example.dir/src/ActionInitialization.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4VAccumulable.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VAccumulable.icc
  /home/rutiouran/software/geant4/include/Geant4/G4VExceptionHandler.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VHit.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VHitsCollection.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VPrimaryGenerator.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VUserActionInitialization.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VUserPrimaryGeneratorAction.hh
@@ -1172,6 +1176,8 @@ CMakeFiles/example.dir/src/DeuteronNuclearPhysics.cc.o
  /home/rutiouran/software/geant4/include/Geant4/trkdefs.hh
 CMakeFiles/example.dir/src/EventAction.cc.o
  ../include/EventAction.hh
+ ../include/HeavyWaterHit.hh
+ ../include/HeavyWaterSD.hh
  ../include/RunAction.hh
  /home/rutiouran/github/sharing/src/EventAction.cc
  /home/rutiouran/software/geant4/include/Geant4/CLHEP/Geometry/BasicVector3D.h
@@ -1265,6 +1271,7 @@ CMakeFiles/example.dir/src/EventAction.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4BlockingList.hh
  /home/rutiouran/software/geant4/include/Geant4/G4BlockingList.icc
  /home/rutiouran/software/geant4/include/Geant4/G4ClassificationOfNewTrack.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4CollectionNameVector.hh
  /home/rutiouran/software/geant4/include/Geant4/G4DCofThisEvent.hh
  /home/rutiouran/software/geant4/include/Geant4/G4DataVector.hh
  /home/rutiouran/software/geant4/include/Geant4/G4DataVector.icc
@@ -1294,6 +1301,7 @@ CMakeFiles/example.dir/src/EventAction.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4H2ToolsManager.hh
  /home/rutiouran/software/geant4/include/Geant4/G4H3ToolsManager.hh
  /home/rutiouran/software/geant4/include/Geant4/G4HCofThisEvent.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4HCtable.hh
  /home/rutiouran/software/geant4/include/Geant4/G4HnInformation.hh
  /home/rutiouran/software/geant4/include/Geant4/G4HnManager.hh
  /home/rutiouran/software/geant4/include/Geant4/G4IonisParamElm.hh
@@ -1368,7 +1376,10 @@ CMakeFiles/example.dir/src/EventAction.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4RotationMatrix.hh
  /home/rutiouran/software/geant4/include/Geant4/G4RunManager.hh
  /home/rutiouran/software/geant4/include/Geant4/G4RunManagerKernel.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4SDManager.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4SDStructure.hh
  /home/rutiouran/software/geant4/include/Geant4/G4SandiaTable.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4SensitiveVolumeList.hh
  /home/rutiouran/software/geant4/include/Geant4/G4SmartTrackStack.hh
  /home/rutiouran/software/geant4/include/Geant4/G4SmartVoxelHeader.hh
  /home/rutiouran/software/geant4/include/Geant4/G4SmartVoxelHeader.icc
@@ -1387,6 +1398,7 @@ CMakeFiles/example.dir/src/EventAction.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4SteppingManager.hh
  /home/rutiouran/software/geant4/include/Geant4/G4String.hh
  /home/rutiouran/software/geant4/include/Geant4/G4String.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4THitsCollection.hh
  /home/rutiouran/software/geant4/include/Geant4/G4THnManager.hh
  /home/rutiouran/software/geant4/include/Geant4/G4THnManager.icc
  /home/rutiouran/software/geant4/include/Geant4/G4TNtupleDescription.hh
@@ -1421,6 +1433,8 @@ CMakeFiles/example.dir/src/EventAction.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4UImessenger.hh
  /home/rutiouran/software/geant4/include/Geant4/G4UIparameter.hh
  /home/rutiouran/software/geant4/include/Geant4/G4UItokenNum.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4UnitsTable.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4UnitsTable.icc
  /home/rutiouran/software/geant4/include/Geant4/G4UserEventAction.hh
  /home/rutiouran/software/geant4/include/Geant4/G4UserRunAction.hh
  /home/rutiouran/software/geant4/include/Geant4/G4UserStackingAction.hh
@@ -1439,6 +1453,7 @@ CMakeFiles/example.dir/src/EventAction.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4VH1Manager.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VH2Manager.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VH3Manager.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VHit.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VHitsCollection.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VNtupleManager.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VP1Manager.hh
@@ -1450,6 +1465,9 @@ CMakeFiles/example.dir/src/EventAction.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4VPhysicalVolume.icc
  /home/rutiouran/software/geant4/include/Geant4/G4VProcess.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VRNtupleManager.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VReadOutGeometry.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VSDFilter.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VSensitiveDetector.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VSolid.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VSolid.icc
  /home/rutiouran/software/geant4/include/Geant4/G4VSteppingVerbose.hh
@@ -1575,9 +1593,9 @@ CMakeFiles/example.dir/src/EventAction.cc.o
  /home/rutiouran/software/geant4/include/Geant4/tools/wroot/wbuf
  /home/rutiouran/software/geant4/include/Geant4/trajectoryControl.hh
  /home/rutiouran/software/geant4/include/Geant4/trkdefs.hh
-CMakeFiles/example.dir/src/HeavyWater.cc.o
+CMakeFiles/example.dir/src/HeavyWaterHit.cc.o
  ../include/HeavyWaterHit.hh
- /home/rutiouran/github/sharing/src/HeavyWater.cc
+ /home/rutiouran/github/sharing/src/HeavyWaterHit.cc
  /home/rutiouran/software/geant4/include/Geant4/CLHEP/Geometry/BasicVector3D.h
  /home/rutiouran/software/geant4/include/Geant4/CLHEP/Geometry/Normal3D.h
  /home/rutiouran/software/geant4/include/Geant4/CLHEP/Geometry/Point3D.h
@@ -1989,6 +2007,7 @@ CMakeFiles/example.dir/src/PhysicsList.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4AutoLock.hh
  /home/rutiouran/software/geant4/include/Geant4/G4Cache.hh
  /home/rutiouran/software/geant4/include/Geant4/G4CacheDetails.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4DNAModelSubType.hh
  /home/rutiouran/software/geant4/include/Geant4/G4DataVector.hh
  /home/rutiouran/software/geant4/include/Geant4/G4DataVector.icc
  /home/rutiouran/software/geant4/include/Geant4/G4Decay.hh
@@ -2000,6 +2019,12 @@ CMakeFiles/example.dir/src/PhysicsList.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4Element.hh
  /home/rutiouran/software/geant4/include/Geant4/G4ElementTable.hh
  /home/rutiouran/software/geant4/include/Geant4/G4ElementVector.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4EmElementSelector.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4EmModelManager.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4EmParameters.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4EmProcessSubType.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4EmSaturation.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4EmTableType.hh
  /home/rutiouran/software/geant4/include/Geant4/G4EnvironmentUtils.hh
  /home/rutiouran/software/geant4/include/Geant4/G4Exception.hh
  /home/rutiouran/software/geant4/include/Geant4/G4ExceptionSeverity.hh
@@ -2025,11 +2050,14 @@ CMakeFiles/example.dir/src/PhysicsList.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4MaterialPropertiesTable.icc
  /home/rutiouran/software/geant4/include/Geant4/G4MaterialPropertyVector.hh
  /home/rutiouran/software/geant4/include/Geant4/G4MaterialTable.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4MscStepLimitType.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4NuclearFormfactorType.hh
  /home/rutiouran/software/geant4/include/Geant4/G4OrderedTable.hh
  /home/rutiouran/software/geant4/include/Geant4/G4PDefManager.hh
  /home/rutiouran/software/geant4/include/Geant4/G4ParticleChange.hh
  /home/rutiouran/software/geant4/include/Geant4/G4ParticleChange.icc
  /home/rutiouran/software/geant4/include/Geant4/G4ParticleChangeForDecay.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4ParticleChangeForLoss.hh
  /home/rutiouran/software/geant4/include/Geant4/G4ParticleDefinition.hh
  /home/rutiouran/software/geant4/include/Geant4/G4ParticleDefinition.icc
  /home/rutiouran/software/geant4/include/Geant4/G4ParticleMomentum.hh
@@ -2038,6 +2066,7 @@ CMakeFiles/example.dir/src/PhysicsList.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4ParticleTableIterator.hh
  /home/rutiouran/software/geant4/include/Geant4/G4PhysicsListHelper.hh
  /home/rutiouran/software/geant4/include/Geant4/G4PhysicsListOrderingParameter.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4PhysicsLogVector.hh
  /home/rutiouran/software/geant4/include/Geant4/G4PhysicsModelCatalog.hh
  /home/rutiouran/software/geant4/include/Geant4/G4PhysicsOrderedFreeVector.hh
  /home/rutiouran/software/geant4/include/Geant4/G4PhysicsTable.hh
@@ -2075,6 +2104,11 @@ CMakeFiles/example.dir/src/PhysicsList.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4Types.hh
  /home/rutiouran/software/geant4/include/Geant4/G4UnitsTable.hh
  /home/rutiouran/software/geant4/include/Geant4/G4UnitsTable.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4VContinuousDiscreteProcess.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VEmAngularDistribution.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VEmFluctuationModel.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VEmModel.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VEnergyLossProcess.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VExceptionHandler.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VModularPhysicsList.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VParticleChange.hh
@@ -2089,6 +2123,7 @@ CMakeFiles/example.dir/src/PhysicsList.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4VUPLSplitter.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VUserPhysicsList.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VUserTrackInformation.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4ionIonisation.hh
  /home/rutiouran/software/geant4/include/Geant4/G4ios.hh
  /home/rutiouran/software/geant4/include/Geant4/Randomize.hh
  /home/rutiouran/software/geant4/include/Geant4/geomdefs.hh
@@ -2377,6 +2412,7 @@ CMakeFiles/example.dir/src/PrimaryGeneratorAction.cc.o
 CMakeFiles/example.dir/src/RunAction.cc.o
  ../include/DetectorConstruction.hh
  ../include/EventAction.hh
+ ../include/HeavyWaterHit.hh
  ../include/PrimaryGeneratorAction.hh
  ../include/RunAction.hh
  /home/rutiouran/github/sharing/src/RunAction.cc
@@ -2590,6 +2626,7 @@ CMakeFiles/example.dir/src/RunAction.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4String.hh
  /home/rutiouran/software/geant4/include/Geant4/G4String.icc
  /home/rutiouran/software/geant4/include/Geant4/G4SystemOfUnits.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4THitsCollection.hh
  /home/rutiouran/software/geant4/include/Geant4/G4THnManager.hh
  /home/rutiouran/software/geant4/include/Geant4/G4THnManager.icc
  /home/rutiouran/software/geant4/include/Geant4/G4Threading.hh
@@ -2634,6 +2671,7 @@ CMakeFiles/example.dir/src/RunAction.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4VH1Manager.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VH2Manager.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VH3Manager.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VHit.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VHitsCollection.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VNotifier.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VNtupleManager.hh
@@ -2742,6 +2780,7 @@ CMakeFiles/example.dir/src/RunAction.cc.o
 CMakeFiles/example.dir/src/SteppingAction.cc.o
  ../include/DetectorConstruction.hh
  ../include/EventAction.hh
+ ../include/HeavyWaterHit.hh
  ../include/SteppingAction.hh
  /home/rutiouran/github/sharing/src/SteppingAction.cc
  /home/rutiouran/software/geant4/include/Geant4/CLHEP/Geometry/BasicVector3D.h
@@ -2931,6 +2970,7 @@ CMakeFiles/example.dir/src/SteppingAction.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4SteppingManager.hh
  /home/rutiouran/software/geant4/include/Geant4/G4String.hh
  /home/rutiouran/software/geant4/include/Geant4/G4String.icc
+ /home/rutiouran/software/geant4/include/Geant4/G4THitsCollection.hh
  /home/rutiouran/software/geant4/include/Geant4/G4Threading.hh
  /home/rutiouran/software/geant4/include/Geant4/G4ThreeVector.hh
  /home/rutiouran/software/geant4/include/Geant4/G4TouchableHandle.hh
@@ -2960,6 +3000,7 @@ CMakeFiles/example.dir/src/SteppingAction.cc.o
  /home/rutiouran/software/geant4/include/Geant4/G4VDigiCollection.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VExceptionHandler.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VExternalNavigation.hh
+ /home/rutiouran/software/geant4/include/Geant4/G4VHit.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VHitsCollection.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VPVParameterisation.hh
  /home/rutiouran/software/geant4/include/Geant4/G4VParticleChange.hh
