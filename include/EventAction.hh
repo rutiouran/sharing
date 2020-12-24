@@ -5,7 +5,7 @@
 #include "globals.hh"
 #include "HeavyWaterHit.hh"
 
-class RunAction;
+//class RunAction;
 
 /// Event action class
 ///

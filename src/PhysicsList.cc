@@ -8,6 +8,8 @@
 #include "DeuteronNuclearPhysics.hh"
 #include "G4ionIonisation.hh"
 
+#include "ElectromagneticPhysics.hh"
+
 PhysicsList::PhysicsList()
 : G4VModularPhysicsList()
 { 
@@ -15,10 +17,14 @@ PhysicsList::PhysicsList()
   SetVerboseLevel(1);
   //Decay
   RegisterPhysics(new G4DecayPhysics());
-  //Dadioactive Decay
-  RegisterPhysics(new G4RadioactiveDecayPhysics());
+
+  //Radioactive Decay
+  //RegisterPhysics(new G4RadioactiveDecayPhysics());
+
   //G4ionIonisation
-  RegisterPhysics(new G4ionIonisation(extern deuterion));
+  RegisterPhysics(new DeuteronNuclearPhysics());
+
+  //RegisterPhysics(new ElectromagneticPhysics());
 }
 
 PhysicsList::~PhysicsList()

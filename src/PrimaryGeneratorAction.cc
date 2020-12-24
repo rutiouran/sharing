@@ -1,8 +1,6 @@
-/// \file B1PrimaryGeneratorAction.cc
-/// \brief Implementation of the B1PrimaryGeneratorAction class
-
 #include "PrimaryGeneratorAction.hh"
 
+#include "G4Event.hh"
 #include "G4LogicalVolumeStore.hh"
 #include "G4LogicalVolume.hh"
 #include "G4Box.hh"
@@ -13,12 +11,10 @@
 #include "G4SystemOfUnits.hh"
 #include "Randomize.hh"
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
 PrimaryGeneratorAction::PrimaryGeneratorAction()
-: G4VUserPrimaryGeneratorAction(),
-  fParticleGun(0), 
-  fEnvelopeBox(0)
+: G4VUserPrimaryGeneratorAction()
+  //fParticleGun(0), 
+  //fWorldBox(0)
 {
   G4int n_particle = 1;
   fParticleGun  = new G4ParticleGun(n_particle);
@@ -33,26 +29,22 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
   fParticleGun->SetParticleEnergy(13.*MeV);
 }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
 PrimaryGeneratorAction::~PrimaryGeneratorAction()
 {
   delete fParticleGun;
 }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
 void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
-  //this function is called at the begining of ecah event
+  //this function is called at the begining of each event
   //
 
   // In order to avoid dependence of PrimaryGeneratorAction
   // on DetectorConstruction class we get Envelope volume
   // from G4LogicalVolumeStore.
+  /*
   G4double worldZHalfLength = 0.;
   auto worldLV = G4LogicalVolumeStore::GetInstance()->GetVolume("World");
-
   G4Box* worldBox = nullptr;
   if ( worldLV )
   {
@@ -71,11 +63,9 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     G4Exception("B1PrimaryGeneratorAction::GeneratePrimaries()",
      "MyCode0002",JustWarning,msg);
   }
-  
+  */
   //set gun position 
   fParticleGun->SetParticlePosition( G4ThreeVector(0.*mm, 150.*mm, -50.*mm) );
 
   fParticleGun->GeneratePrimaryVertex(anEvent);
 }
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

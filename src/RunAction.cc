@@ -19,7 +19,7 @@ RunAction::RunAction()
   G4RunManager::GetRunManager()->SetPrintProgress(1);
   
   //Create analysis manager
-  auto analysisManager = G4Analysis::ManagerInstance("root");
+  auto analysisManager = G4AnalysisManager::Instance();
   G4cout << "Using" << analysisManager->GetType() << G4endl;
 
   //Create directories
@@ -30,13 +30,13 @@ RunAction::RunAction()
   //
 
   //Creating histograms
-  analysisManager->CreateH1("Edeu","Edep in deuteron", 100, 0., 13*MeV);
-  analysisManager->CreateH1("Ldeu","trackL in deuteron",100, 0., 1*cm);
+  analysisManager->CreateH1("Ehwt","Edep in heavy water target", 100, 0., 13*MeV);
+  analysisManager->CreateH1("Lhwt","trackL in heavy water target",100, 0., 1*cm);
 
   //Creating ntuple
   analysisManager->CreateNtuple("example","Edep and TrackL");
-  analysisManager->CreateNtupleDColumn("Edeu");
-  analysisManager->CreateNtupleDColumn("Ldeu");
+  analysisManager->CreateNtupleDColumn("Ehwt");
+  analysisManager->CreateNtupleDColumn("Lhwt");
 }
 
 RunAction::~RunAction()

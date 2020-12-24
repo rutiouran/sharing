@@ -277,6 +277,33 @@ src/DeuteronNuclearPhysics.cc.s:
 	$(MAKE) -f CMakeFiles/example.dir/build.make CMakeFiles/example.dir/src/DeuteronNuclearPhysics.cc.s
 .PHONY : src/DeuteronNuclearPhysics.cc.s
 
+src/ElectromagneticPhysics.o: src/ElectromagneticPhysics.cc.o
+
+.PHONY : src/ElectromagneticPhysics.o
+
+# target to build an object file
+src/ElectromagneticPhysics.cc.o:
+	$(MAKE) -f CMakeFiles/example.dir/build.make CMakeFiles/example.dir/src/ElectromagneticPhysics.cc.o
+.PHONY : src/ElectromagneticPhysics.cc.o
+
+src/ElectromagneticPhysics.i: src/ElectromagneticPhysics.cc.i
+
+.PHONY : src/ElectromagneticPhysics.i
+
+# target to preprocess a source file
+src/ElectromagneticPhysics.cc.i:
+	$(MAKE) -f CMakeFiles/example.dir/build.make CMakeFiles/example.dir/src/ElectromagneticPhysics.cc.i
+.PHONY : src/ElectromagneticPhysics.cc.i
+
+src/ElectromagneticPhysics.s: src/ElectromagneticPhysics.cc.s
+
+.PHONY : src/ElectromagneticPhysics.s
+
+# target to generate assembly for a file
+src/ElectromagneticPhysics.cc.s:
+	$(MAKE) -f CMakeFiles/example.dir/build.make CMakeFiles/example.dir/src/ElectromagneticPhysics.cc.s
+.PHONY : src/ElectromagneticPhysics.cc.s
+
 src/EventAction.o: src/EventAction.cc.o
 
 .PHONY : src/EventAction.o
@@ -491,6 +518,9 @@ help:
 	@echo "... src/DeuteronNuclearPhysics.o"
 	@echo "... src/DeuteronNuclearPhysics.i"
 	@echo "... src/DeuteronNuclearPhysics.s"
+	@echo "... src/ElectromagneticPhysics.o"
+	@echo "... src/ElectromagneticPhysics.i"
+	@echo "... src/ElectromagneticPhysics.s"
 	@echo "... src/EventAction.o"
 	@echo "... src/EventAction.i"
 	@echo "... src/EventAction.s"

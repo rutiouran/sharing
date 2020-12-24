@@ -93,6 +93,11 @@ void EventAction::EndOfEventAction(const G4Event* event)
   //fill histograms
   analysisManager->FillH1(0, hwHit->GetEdep());
   analysisManager->FillH1(1, hwHit->GetTrackLength()); 
+  
+  //Fill ntuple
+  analysisManager->FillNtupleDColumn(0, hwHit->GetEdep());
+  analysisManager->FillNtupleDColumn(1, hwHit->GetTrackLength());
+  analysisManager->AddNtupleRow();
 
   // accumulate statistics in run action
 #if 0

@@ -3,6 +3,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/example.dir/src/ActionInitialization.cc.o"
   "CMakeFiles/example.dir/src/DetectorConstruction.cc.o"
   "CMakeFiles/example.dir/src/DeuteronNuclearPhysics.cc.o"
+  "CMakeFiles/example.dir/src/ElectromagneticPhysics.cc.o"
   "CMakeFiles/example.dir/src/EventAction.cc.o"
   "CMakeFiles/example.dir/src/HeavyWaterHit.cc.o"
   "CMakeFiles/example.dir/src/HeavyWaterSD.cc.o"
