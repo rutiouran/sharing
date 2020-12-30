@@ -19,6 +19,7 @@
 #include "Randomize.hh"
 #include "g4root.hh"
 
+/*
 namespace {
   void PrintUsage(){
     G4cerr << "Usage:" << G4endl;
@@ -26,6 +27,8 @@ namespace {
     G4cerr << "  note -t option is available only for multi-threaded mode." << G4endl;
 }
 }
+*/
+
 int main(int argc,char **argv)		//Detect interactive mode (if no arguments ) and define UI session
 {
   G4UIExecutive *ui = 0;
@@ -106,8 +109,6 @@ int main(int argc,char **argv)		//Detect interactive mode (if no arguments ) and
   analysisManager->Write();
   analysisManager->CloseFile();
   }
-
-
 
 delete visManager;
 delete runManager;

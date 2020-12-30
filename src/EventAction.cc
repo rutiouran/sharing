@@ -95,8 +95,8 @@ void EventAction::EndOfEventAction(const G4Event* event)
   analysisManager->FillH1(1, hwHit->GetTrackLength()); 
   
   //Fill ntuple
-  analysisManager->FillNtupleDColumn(0, hwHit->GetEdep());
-  analysisManager->FillNtupleDColumn(1, hwHit->GetTrackLength());
+  analysisManager->FillNtupleDColumn(1, hwHit->GetEdep());
+  analysisManager->FillNtupleDColumn(2, hwHit->GetTrackLength());
   analysisManager->AddNtupleRow();
 
   // accumulate statistics in run action

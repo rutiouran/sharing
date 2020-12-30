@@ -134,7 +134,7 @@ void DeuteronNuclearPhysics::ConstructProcess()
                (particle->GetPDGCharge() != 0.0) && 
                (particle->GetParticleName() != "chargedgeantino")) {
 	
-	  std::cout << particle->GetParticleName() << std::endl;
+	  //std::cout << particle->GetParticleName() << std::endl;
                
       //all others charged particles except geantino
       ph->RegisterProcess(new G4hMultipleScattering(), particle);

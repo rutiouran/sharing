@@ -34,9 +34,11 @@ RunAction::RunAction()
   analysisManager->CreateH1("Lhwt","trackL in heavy water target",100, 0., 1*cm);
 
   //Creating ntuple
+  std::cout << "analysisManager->CreateNtuple" << std::endl;
   analysisManager->CreateNtuple("example","Edep and TrackL");
   analysisManager->CreateNtupleDColumn("Ehwt");
   analysisManager->CreateNtupleDColumn("Lhwt");
+  analysisManager->FinishNtuple();
 }
 
 RunAction::~RunAction()
@@ -50,11 +52,7 @@ void RunAction::BeginOfRunAction(const G4Run*)
   //G4RunManager::GetRunManager()->SetRandomNumberStore(false);
   
   //Get analysis manager
-  auto analysisManager = G4AnalysisManager::Instance();
-
-  //Open an output file
-  G4String fileName = "example";
-  analysisManager->OpenFile(fileName);
+  //auto analysisManager = G4AnalysisManager::Instance();
 }
 
 void RunAction::EndOfRunAction(const G4Run*)

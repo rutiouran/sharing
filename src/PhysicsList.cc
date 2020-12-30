@@ -19,12 +19,12 @@ PhysicsList::PhysicsList()
   RegisterPhysics(new G4DecayPhysics());
 
   //Radioactive Decay
-  //RegisterPhysics(new G4RadioactiveDecayPhysics());
+  RegisterPhysics(new G4RadioactiveDecayPhysics());
 
   //G4ionIonisation
   RegisterPhysics(new DeuteronNuclearPhysics());
 
-  //RegisterPhysics(new ElectromagneticPhysics());
+  RegisterPhysics(new ElectromagneticPhysics());
 }
 
 PhysicsList::~PhysicsList()

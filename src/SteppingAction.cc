@@ -1,6 +1,3 @@
-/// \file B1SteppingAction.cc
-/// \brief Implementation of the B1SteppingAction class
-
 #include "SteppingAction.hh"
 #include "EventAction.hh"
 #include "DetectorConstruction.hh"
@@ -9,8 +6,6 @@
 #include "G4Event.hh"
 #include "G4RunManager.hh"
 #include "G4LogicalVolume.hh"
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 SteppingAction::SteppingAction(EventAction* eventAction)
 : G4UserSteppingAction(),
