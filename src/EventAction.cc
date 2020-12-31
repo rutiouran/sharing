@@ -15,8 +15,6 @@
 
 EventAction::EventAction()
 : G4UserEventAction(),
-  //fRunAction(runAction),
-  //fEdep(0.)
   fHwHCID(-1)
 {}
 

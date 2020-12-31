@@ -19,16 +19,6 @@
 #include "Randomize.hh"
 #include "g4root.hh"
 
-/*
-namespace {
-  void PrintUsage(){
-    G4cerr << "Usage:" << G4endl;
-    G4cerr << "example [-m macro ] [-u UIsession ] [-t nThreads]" << G4endl;
-    G4cerr << "  note -t option is available only for multi-threaded mode." << G4endl;
-}
-}
-*/
-
 int main(int argc,char **argv)		//Detect interactive mode (if no arguments ) and define UI session
 {
   G4UIExecutive *ui = 0;
@@ -100,16 +90,6 @@ int main(int argc,char **argv)		//Detect interactive mode (if no arguments ) and
   ui->SessionStart();
   delete ui;
   }
-
-  
-
-  //if ( analysisManager->IsActive() )		//modifing~~~~~~~~~~~~~~~~~~~~~~
-  //{
-  //std::cout << "end of running" << std::endl;
-  //analysisManager->Write();
-  //analysisManager->CloseFile();
-  //}
-
 delete visManager;
 delete runManager;
 }

@@ -13,12 +13,8 @@ SteppingAction::SteppingAction(EventAction* eventAction)
   fScoringVolume(0)
 {}
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
 SteppingAction::~SteppingAction()
 {}
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void SteppingAction::UserSteppingAction(const G4Step* step)
 {
@@ -39,7 +35,6 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
     fScoringVolume = detectorConstruction->GetScoringVolume();   
   }
 
-
   // get volume of the current step
   G4LogicalVolume* volume 
     = step->GetPreStepPoint()->GetTouchableHandle()
@@ -48,6 +43,3 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
   // check if we are in scoring volume
   if (volume != fScoringVolume) return;
 }
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
