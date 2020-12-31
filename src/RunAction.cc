@@ -4,6 +4,7 @@
 #include "EventAction.hh"
 
 #include "g4analysis.hh"
+#include "G4VAnalysisManager.hh"
 #include "G4RunManager.hh"
 #include "G4Run.hh"
 #include "G4AccumulableManager.hh"
@@ -32,12 +33,13 @@ RunAction::RunAction()
   //Creating histograms
   analysisManager->CreateH1("Ehwt","Edep in heavy water target", 100, 0., 13*MeV);
   analysisManager->CreateH1("Lhwt","trackL in heavy water target",100, 0., 1*cm);
+  analysisManager->CreateH1("pid", "Pid in heavy water target", 100, 0., 9000);
 
   //Creating ntuple
-  std::cout << "analysisManager->CreateNtuple" << std::endl;
-  analysisManager->CreateNtuple("example","Edep and TrackL");
+  analysisManager->CreateNtuple("output","Edep and TrackL");
   analysisManager->CreateNtupleDColumn("Ehwt");
   analysisManager->CreateNtupleDColumn("Lhwt");
+  analysisManager->CreateNtupleDColumn("pid");
   analysisManager->FinishNtuple();
 }
 
@@ -52,7 +54,11 @@ void RunAction::BeginOfRunAction(const G4Run*)
   //G4RunManager::GetRunManager()->SetRandomNumberStore(false);
   
   //Get analysis manager
-  //auto analysisManager = G4AnalysisManager::Instance();
+  auto analysisManager = G4AnalysisManager::Instance();
+
+  //Open an output file	
+  G4String fileName = "output";
+  analysisManager->OpenFile(fileName);  
 }
 
 void RunAction::EndOfRunAction(const G4Run*)

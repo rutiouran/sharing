@@ -39,22 +39,22 @@ int main(int argc,char **argv)		//Detect interactive mode (if no arguments ) and
  
 
 
-  G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();	//modifing~~~~~~~~~~~~~~~~~~~
-  std::string outputFileName("output.root");
-  analysisManager->SetFileName(outputFileName);
-  analysisManager->OpenFile();
-  analysisManager->SetActivation(true);
+  //G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();	//modifing~~~~~~~~~~~~~~~~~~~
+  //std::string outputFileName("output.root");
+  //analysisManager->SetFileName(outputFileName);
+  //analysisManager->OpenFile();
+  //analysisManager->SetActivation(true);
 
-  analysisManager->CreateNtuple("particle", "particle");
-  analysisManager->CreateNtupleDColumn("pid");
-#if 0		
-  analysisManager->CreateNtupleDColumn("px");
-  analysisManager->CreateNtupleDColumn("py");
-  analysisManager->CreateNtupleDColumn("pz");
-  analysisManager->CreateNtupleDColumn("energy");
-  analysisManager->CreateNtupleDColumn("edep");
-#endif
-  analysisManager->FinishNtuple();
+  //analysisManager->CreateNtuple("particle", "particle");
+  //analysisManager->CreateNtupleDColumn("pid");
+//#if 0		
+  //analysisManager->CreateNtupleDColumn("px");
+  //analysisManager->CreateNtupleDColumn("py");
+  //analysisManager->CreateNtupleDColumn("pz");
+  //analysisManager->CreateNtupleDColumn("energy");
+  //analysisManager->CreateNtupleDColumn("edep");
+//#endif
+  //analysisManager->FinishNtuple();
 
 
 
@@ -104,13 +104,12 @@ int main(int argc,char **argv)		//Detect interactive mode (if no arguments ) and
   
 
   //if ( analysisManager->IsActive() )		//modifing~~~~~~~~~~~~~~~~~~~~~~
-  {
-  std::cout << "end of running" << std::endl;
-  analysisManager->Write();
-  analysisManager->CloseFile();
-  }
+  //{
+  //std::cout << "end of running" << std::endl;
+  //analysisManager->Write();
+  //analysisManager->CloseFile();
+  //}
 
 delete visManager;
 delete runManager;
 }
-
