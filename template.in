@@ -1,0 +1,9 @@
+# Macro file for example work test
+
+/run/initialize
+
+# gamma 6 MeV
+/gun/particle mu-
+/gun/energy PARTICLEENERGY MeV
+#
+/run/beamOn 1000
