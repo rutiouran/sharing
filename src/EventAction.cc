@@ -53,9 +53,7 @@ void EventAction::PrintEventStatistics
 }
 
 void EventAction::BeginOfEventAction(const G4Event*)
-{    
-  //fEdep = 0.;
-}
+{}
 
 void EventAction::EndOfEventAction(const G4Event* event)
 {
@@ -91,21 +89,10 @@ void EventAction::EndOfEventAction(const G4Event* event)
   //fill histograms
   analysisManager->FillH1(0, hwHit->GetEdep());
   analysisManager->FillH1(1, hwHit->GetTrackLength()); 
-  
+  analysisManager->FillH1(2, hwHit->GetPid());
   //Fill ntuple
-  analysisManager->FillNtupleDColumn(1, hwHit->GetEdep());
-  analysisManager->FillNtupleDColumn(2, hwHit->GetTrackLength());
+  analysisManager->FillNtupleDColumn(0, hwHit->GetEdep());
+  analysisManager->FillNtupleDColumn(1, hwHit->GetTrackLength());
+  analysisManager->FillNtupleDColumn(2, hwHit->GetPid());
   analysisManager->AddNtupleRow();
-
-  // accumulate statistics in run action
-#if 0
-  std::cout << "edep: " << fEdep << std::endl;
-  G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
-
-  analysisManager->FillNtupleDColumn(4, fEdep);
-  analysisManager->AddNtupleRow();
-
-
-  fRunAction->AddEdep(fEdep);
-#endif
 }

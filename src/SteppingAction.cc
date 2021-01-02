@@ -18,15 +18,9 @@ SteppingAction::~SteppingAction()
 
 void SteppingAction::UserSteppingAction(const G4Step* step)
 {
-#if 0
-  int pid = step->GetTrack()->GetParticleDefinition()->GetPDGEncoding();
-  std::cout << "pid: " << pid << std::endl;
-  std::cout << "step: " << step << std::endl;
-#endif
-
   // collect energy deposited in this step
-  G4double edepStep = step->GetTotalEnergyDeposit();
-  fEventAction->AddEdep(edepStep);  
+  //G4double edepStep = step->GetTotalEnergyDeposit();
+  //fEventAction->AddEdep(edepStep);  
 
   if (!fScoringVolume) { 
     const DetectorConstruction* detectorConstruction

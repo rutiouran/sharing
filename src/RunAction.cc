@@ -32,7 +32,7 @@ RunAction::RunAction()
   //Creating histograms
   analysisManager->CreateH1("Ehwt","Edep in heavy water target", 100, 0., 13*MeV);
   analysisManager->CreateH1("Lhwt","trackL in heavy water target",100, 0., 1*cm);
-  analysisManager->CreateH1("pid", "Pid in heavy water target", 100, 0., 9000);
+  analysisManager->CreateH1("pid", "Pid in heavy water target", 100, 0., 3000);
 
   //Creating ntuple
   analysisManager->CreateNtuple("output","Edep and TrackL");
@@ -89,10 +89,4 @@ void RunAction::EndOfRunAction(const G4Run*)
   analysisManager->Write();
   analysisManager->CloseFile();
 }
-}
-
-void RunAction::AddEdep(G4double edep)
-{
-  fEdep  += edep;
-  fEdep2 += edep*edep;
 }

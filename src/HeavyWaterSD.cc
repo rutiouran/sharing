@@ -1,6 +1,3 @@
-/// \file HeavyWaterSD.cc
-/// \brief Implementation of the HeavyWaterSD class
-
 #include "HeavyWaterSD.hh"
 #include "G4HCofThisEvent.hh"
 #include "G4Step.hh"
@@ -8,8 +5,6 @@
 #include "G4SDManager.hh"
 #include "G4ios.hh"
 #include "g4root.hh"
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 HeavyWaterSD::HeavyWaterSD(
                             const G4String& name, 
@@ -20,13 +15,8 @@ HeavyWaterSD::HeavyWaterSD(
   collectionName.insert(hitsCollectionName);
 }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
 HeavyWaterSD::~HeavyWaterSD() 
-{ 
-}
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+{}
 
 void HeavyWaterSD::Initialize(G4HCofThisEvent* hce)
 {
@@ -40,29 +30,26 @@ void HeavyWaterSD::Initialize(G4HCofThisEvent* hce)
   hce->AddHitsCollection( hcID, fHitsCollection ); 
 
   // Create hits
-  // fNofCells for cells + one more for total sums 
   for (G4int i=0; i<1; i++ ) {
     fHitsCollection->insert(new HeavyWaterHit());
   }
 }
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 G4bool HeavyWaterSD::ProcessHits(G4Step* step, 
                                      G4TouchableHistory*)
 {  
   // energy deposit
   auto edep = step->GetTotalEnergyDeposit();
+  
+  // energy loss
+  //auto edep = step->GetDeltaEnergy();
 
   int pid = step->GetTrack()->GetParticleDefinition()->GetPDGEncoding();
-  std::cout << "pid: " << pid << std::endl;
-  //std::cout << "step: " << step << std::endl;
+  //std::cout << "pid: " << pid << ", edep: " << edep << ", step: " << step << std::endl; 
 
   G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
-  analysisManager->FillNtupleDColumn(0, pid);
-  analysisManager->AddNtupleRow();
-
-  //////////////////////////////////////////////////////////////////////////
+  analysisManager->FillNtupleDColumn(2, pid);
+  //analysisManager->AddNtupleRow();
   
   // step length
   G4double stepLength = 0.;
@@ -91,13 +78,9 @@ G4bool HeavyWaterSD::ProcessHits(G4Step* step,
     = (*fHitsCollection)[fHitsCollection->entries()-1];
   
   // Add values
-  hit->Add(edep, stepLength);
-  hitTotal->Add(edep, stepLength); 
-      
+  hit->Add(edep, stepLength, pid);
   return true;
 }
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void HeavyWaterSD::EndOfEvent(G4HCofThisEvent*)
 {
@@ -110,5 +93,3 @@ void HeavyWaterSD::EndOfEvent(G4HCofThisEvent*)
      for ( std::size_t i=0; i<nofHits; ++i ) (*fHitsCollection)[i]->Print();
   }
 }
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

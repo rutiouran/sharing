@@ -25,10 +25,10 @@ class RunAction : public G4UserRunAction
 
     void AddEdep (G4double edep); 
 
-  private:
+  //private:
     //EventAction* fEventAction;
-    G4Accumulable<G4double> fEdep {0.};
-    G4Accumulable<G4double> fEdep2 {0.};
+    //G4Accumulable<G4double> fEdep {0.};
+    //G4Accumulable<G4double> fEdep2 {0.};
 };
 
 #endif

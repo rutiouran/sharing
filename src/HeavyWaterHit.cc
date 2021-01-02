@@ -1,6 +1,3 @@
-/// \file HeavyWaterHit.cc
-/// \brief Implementation of the HeavyWaterHit class
-
 #include "HeavyWaterHit.hh"
 #include "G4UnitsTable.hh"
 #include "G4VVisManager.hh"
@@ -12,54 +9,46 @@
 
 G4ThreadLocal G4Allocator<HeavyWaterHit>* HeavyWaterHitAllocator = 0;
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
 HeavyWaterHit::HeavyWaterHit()
  : G4VHit(),
    fEdep(0.),
-   fTrackLength(0.)
+   fTrackLength(0.),
+   fPid(0)
 {}
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-HeavyWaterHit::~HeavyWaterHit() {}
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+HeavyWaterHit::~HeavyWaterHit() 
+{}
 
 HeavyWaterHit::HeavyWaterHit(const HeavyWaterHit& right)
   : G4VHit()
 {
   fEdep        = right.fEdep;
   fTrackLength = right.fTrackLength;
+  fPid         = right.fPid;
 }
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 const HeavyWaterHit& HeavyWaterHit::operator=(const HeavyWaterHit& right)
 {
   fEdep        = right.fEdep;
   fTrackLength = right.fTrackLength;
+  fPid         = right.fPid;
 
   return *this;
 }
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 G4bool HeavyWaterHit::operator==(const HeavyWaterHit& right) const
 {
   return ( this == &right ) ? true : false;
 }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
 void HeavyWaterHit::Print()
 {
   G4cout
      << "Edep: " 
-     << std::setw(7) << G4BestUnit(fEdep,"Energy")
-     << " track length: " 
-     << std::setw(7) << G4BestUnit( fTrackLength,"Length")
+     << std::setw(7) << G4BestUnit( fEdep, "Energy")
+     << "Track length: " 
+     << std::setw(7) << G4BestUnit( fTrackLength, "Length")
+     << "Pid: "
+     << std::setw(7) << G4BestUnit( fPid, "Pid")
      << G4endl;
 }
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

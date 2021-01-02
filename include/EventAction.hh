@@ -26,8 +26,6 @@ private:
   void PrintEventStatistics(G4double hwEdep, G4double hwTrackLength) const;
   
   G4int fHwHCID;
-
-  //RunAction* fRunAction;
-  G4double     fEdep;
+  G4double fEdep;
 };
 #endif

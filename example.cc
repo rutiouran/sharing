@@ -12,7 +12,6 @@
 
 #include "PhysicsList.hh"
 #include "QBBC.hh"
-
 #include "G4VisExecutive.hh"
 #include "G4UIExecutive.hh"
 
@@ -26,27 +25,6 @@ int main(int argc,char **argv)		//Detect interactive mode (if no arguments ) and
   {
   ui = new G4UIExecutive(argc, argv);
   }
- 
-
-
-  //G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();	//modifing~~~~~~~~~~~~~~~~~~~
-  //std::string outputFileName("output.root");
-  //analysisManager->SetFileName(outputFileName);
-  //analysisManager->OpenFile();
-  //analysisManager->SetActivation(true);
-
-  //analysisManager->CreateNtuple("particle", "particle");
-  //analysisManager->CreateNtupleDColumn("pid");
-//#if 0		
-  //analysisManager->CreateNtupleDColumn("px");
-  //analysisManager->CreateNtupleDColumn("py");
-  //analysisManager->CreateNtupleDColumn("pz");
-  //analysisManager->CreateNtupleDColumn("energy");
-  //analysisManager->CreateNtupleDColumn("edep");
-//#endif
-  //analysisManager->FinishNtuple();
-
-
 
   //Potionally:choose a different Randow engine
   //
@@ -62,8 +40,8 @@ int main(int argc,char **argv)		//Detect interactive mode (if no arguments ) and
   runManager->SetUserInitialization(new DetectorConstruction());
 
   //Physics list
-  //G4VModularPhysicsList* physicsList = new QBBC;
-  G4VModularPhysicsList* physicsList = new PhysicsList();
+  G4VModularPhysicsList* physicsList = new QBBC;
+  //G4VModularPhysicsList* physicsList = new PhysicsList();
   physicsList->SetVerboseLevel(1);
   runManager->SetUserInitialization(physicsList);
 

@@ -1,6 +1,3 @@
-/// \file HeavyWaterSD.hh
-/// \brief Definition of the HeavyWaterSD class
-
 #ifndef HeavyWaterSD_h
 #define HeavyWaterSD_h 1
 
@@ -13,7 +10,7 @@
 class G4Step;
 class G4HCofThisEvent;
 
-/// Calorimeter sensitive detector class
+/// Heavy water Target sensitive detector class
 ///
 /// In Initialize(), it creates one hit for each calorimeter layer and one more
 /// hit for accounting the total quantities in all layers.
@@ -36,7 +33,5 @@ class HeavyWaterSD : public G4VSensitiveDetector
   private:
     HeavyWaterHitsCollection* fHitsCollection;
 };
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 #endif

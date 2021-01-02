@@ -1,6 +1,3 @@
-/// \file HeavyWaterHit.hh
-/// \brief Definition of the HeavyWaterHit class
-
 #ifndef HeavyWaterHit_h
 #define HeavyWaterHit_h 1
 
@@ -10,7 +7,7 @@
 #include "G4ThreeVector.hh"
 #include "G4Threading.hh"
 
-/// Calorimeter hit class
+/// Heavy Water Target hit class
 ///
 /// It defines data members to store the the energy deposit and track lengths
 /// of charged particles in a selected volume:
@@ -35,24 +32,21 @@ class HeavyWaterHit : public G4VHit
     virtual void Print();
 
     // methods to handle data
-    void Add(G4double de, G4double dl);
+    void Add(G4double de, G4double dl, G4int dp);
 
     // get methods
     G4double GetEdep() const;
     G4double GetTrackLength() const;
-      
+    G4int    GetPid() const;
   private:
     G4double fEdep;        ///< Energy deposit in the sensitive volume
     G4double fTrackLength; ///< Track length in the  sensitive volume
+    G4int    fPid;         ///< Pid in the sensitive volume
 };
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 using HeavyWaterHitsCollection = G4THitsCollection<HeavyWaterHit>;
 
 extern G4ThreadLocal G4Allocator<HeavyWaterHit>* HeavyWaterHitAllocator;
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 inline void* HeavyWaterHit::operator new(size_t)
 {
@@ -72,19 +66,26 @@ inline void HeavyWaterHit::operator delete(void *hit)
   HeavyWaterHitAllocator->FreeSingle((HeavyWaterHit*) hit);
 }
 
-inline void HeavyWaterHit::Add(G4double de, G4double dl) {
+inline void HeavyWaterHit::Add(G4double de, G4double dl, G4int dp)
+{
   fEdep += de; 
   fTrackLength += dl;
+  fPid += dp;
 }
 
-inline G4double HeavyWaterHit::GetEdep() const { 
+inline G4double HeavyWaterHit::GetEdep() const 
+{ 
   return fEdep; 
 }
 
-inline G4double HeavyWaterHit::GetTrackLength() const { 
+inline G4double HeavyWaterHit::GetTrackLength() const 
+{ 
   return fTrackLength; 
 }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+inline G4int HeavyWaterHit::GetPid() const
+{
+  return fPid;
+}
 
 #endif

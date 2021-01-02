@@ -49,6 +49,9 @@ set(EXAMPLE_SCRIPTS
   run1.mac
   run2.mac
   vis.mac
+  plot.C
+  template.in
+  batchRun.sh
   )
 
 foreach(_script ${EXAMPLE_SCRIPTS})
