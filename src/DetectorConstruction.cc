@@ -60,12 +60,15 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 		          false,		//no boolean operation
 		          0,			//copy number
 		          checkOverlaps);	//overlaps checking
-
+ 
+ //
+ //Shield(material:Boron containing polyethylene + Pb)
+ //
+ 
  //
  //vacuum chanber
  //
- G4NistManager* nist1 = G4NistManager::Instance();
- G4Material* vach_mat = nist1->FindOrBuildMaterial("G4_Galactic");
+ G4Material* vach_mat = nist->FindOrBuildMaterial("G4_Galactic");
  
  G4ThreeVector pos1 = G4ThreeVector(0, 0, 0);
 
@@ -95,8 +98,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  //
  //hermetic window
  //
- G4NistManager* nist2 = G4NistManager::Instance();
- G4Material* hewi_mat = nist2->FindOrBuildMaterial("G4_Be");
+ G4Material* hewi_mat = nist->FindOrBuildMaterial("G4_Be");
  
  G4ThreeVector pos2 = G4ThreeVector(0, 150*mm, -5.05*mm);
 
@@ -124,8 +126,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  //
  //Al chanber
  //
- G4NistManager* nist3 = G4NistManager::Instance();
- G4Material* Alch_mat = nist3->FindOrBuildMaterial("G4_Al");
+ G4Material* Alch_mat = nist->FindOrBuildMaterial("G4_Al");
  
  G4ThreeVector pos3 = G4ThreeVector(0, 0, 0);
 
@@ -151,6 +152,36 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 		       false, 			//no boolean operation
 		       0,			//copy number
 		       checkOverlaps);		//overlaps checking
+
+ //
+ //Cooling Water
+ //
+ G4Material* CoWa_mat = nist->FindOrBuildMaterial("G4_WATER");
+
+ G4ThreeVector CoWa_pos = G4ThreeVector(0.*mm, 150.*mm, 2.5*mm);
+ 
+ G4double CoWa_DX = 6.*mm;
+ G4double CoWa_DY = 12.*mm;
+ G4double CoWa_DZ = 1.5*mm;
+ G4EllipticalTube* solidCoWa =
+   new G4EllipticalTube("CoWa",
+       CoWa_DX, CoWa_DY, CoWa_DZ);
+
+ G4LogicalVolume* logicalCoWa =
+   new G4LogicalVolume(solidCoWa,		//its solid
+		       CoWa_mat,		//its material
+                       "CoWa");			//its name
+
+   new G4PVPlacement(0,				//no rotation
+		     CoWa_pos,			//at(0.*mm, 150.*mm, 2.5*mm)
+		     logicalCoWa,		//its logical volume
+		     "CoWa",			//its name
+		     logicalAlch,		//its mather volume
+		     false,			//no boolean operation
+		     0,				//copy number
+		     checkOverlaps);		//overlaps checking
+  
+
  //
  //Heavy Water
  //
@@ -171,12 +202,12 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
  G4ThreeVector pos4 = G4ThreeVector(0.*mm, 150.*mm, -4.6*mm);
 
- G4double HeavyWater_DX = 3.*mm;
- G4double HeavyWater_DY = 6.*mm;
- G4double HeavyWater_DZ = 0.8*mm;
+ G4double HeavyWater_DX = 1.5*mm;
+ G4double HeavyWater_DY = 3.*mm;
+ G4double HeavyWater_DZ = 0.4*mm;
  G4EllipticalTube* solidHeavyWater =
     new G4EllipticalTube("HeavyWater",
-        HeavyWater_DX/2, HeavyWater_DY/2, HeavyWater_DZ/2);
+        HeavyWater_DX, HeavyWater_DY, HeavyWater_DZ);
 
  G4LogicalVolume* logicHeavyWater =
     new G4LogicalVolume(solidHeavyWater,	//its solid
