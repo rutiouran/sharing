@@ -66,43 +66,41 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  //
  //Shield(material:Boron containing polyethylene + Pb)
  //
- //G4Material* shie_mat1_poly = nist->FindOrBuildMaterial("G4_POLYETHYLENE");		//material: polyethylene
+ G4Material* shie_mat1_poly = nist->FindOrBuildMaterial("G4_POLYETHYLENE");		//material: polyethylene
  
  G4double z, a, density, fractionmass;
  G4String name, symbol;
  G4int ncomponents, natoms;
- /*
+ 
  a = 10.811*g/mole;									//material:B4C
- G4Element* elB = G4Element(name="Boron", symbol="B", z=5., a);
+ G4Element* elB = new G4Element(name="Boron", symbol="B", z=5., a);
 
  a = 12.01*g/mole;
- G4Element* elC = G4Element(name="Carbon", symbol="C", z=6., a);
+ G4Element* elC = new G4Element(name="Carbon", symbol="C", z=6., a);
 
  density = 2.52*g/cm3;
  G4Material* shie_mat1_B4C = new G4Material(name="B4C", density, ncomponents=2);
- shie_mat2_B4C->AddElement(elB, natoms=4);
- shie_mat2_B4C->AddElement(elC, natoms=1); 
- */
- G4Material* shie_mat2_Pb = nist->FindOrBuildMaterial("G4_Pb");				//material:Pb
+ shie_mat1_B4C->AddElement(elB, natoms=4);
+ shie_mat1_B4C->AddElement(elC, natoms=1); 
  
- /*
  density = 1.048*g/cm3;
  G4Material* shie_mat = new G4Material("Boron cantaining polythelene", density, ncomponents=2);	//material:Boron cantaining polythelene
  shie_mat->AddMaterial(shie_mat1_poly, fractionmass=92.0*perCent);
  shie_mat->AddMaterial(shie_mat1_B4C,  fractionmass= 8.0*perCent);
- */
+
+ G4Material* shie_mat2_Pb = nist->FindOrBuildMaterial("G4_Pb");                         //material:Pb
 
  //shie_Pb_in
- G4double shie_Pb_in_sizeXY = 1.*m;
- G4double shie_Pb_in_sizeZ  = 1.*m;
+ G4double shie_Pb_in_sizeXY = 1.00*m;
+ G4double shie_Pb_in_sizeZ  = 1.00*m;
 
  G4Box* solidShie_Pb_in =
         new G4Box("Shie_Pb_in",      //its name
         0.5*shie_Pb_in_sizeXY, 0.5*shie_Pb_in_sizeXY, 0.5*shie_Pb_in_sizeZ);           //its size
  
  //shie_Pb_out
- G4double shie_Pb_out_sizeXY = 1.1*m;
- G4double shie_Pb_out_sizeZ  = 1.1*m;
+ G4double shie_Pb_out_sizeXY = 1.02*m;
+ G4double shie_Pb_out_sizeZ  = 1.02*m;
  
  G4Box* solidShie_Pb_out = 
 	new G4Box("Shie_Pb_out",	//its name
@@ -122,7 +120,43 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   new G4PVPlacement(0,                          //no rotation
                     G4ThreeVector(),            //at (0, 0, 0)
                     logicShie_Pb, 	        //its logical volume
-                    "Shie_Pb_out",              //its name
+                    "Shie_Pb",                  //its name
+                    logicWorld,                 //its mather volume
+                    true,                       //boolean operation:subtraction
+                    0,                          //copy number
+                    checkOverlaps);             //overlaps checking
+ 
+ //shie_Po_in
+ G4double shie_Po_in_sizeXY = 1.02*m;
+ G4double shie_Po_in_sizeZ  = 1.02*m;
+
+ G4Box* solidShie_Po_in =
+	new G4Box("Shie_Po_in",		//it name
+	0.5*shie_Po_in_sizeXY, 0.5*shie_Po_in_sizeXY, 0.5*shie_Po_in_sizeZ);           //its size
+
+ //shie_Po_out
+ G4double shie_Po_out_sizeXY = 1.10*m;
+ G4double shie_Po_out_sizeZ  = 1.10*m;
+
+ G4Box* solidShie_Po_out =
+        new G4Box("Shie_Po_out",         //it name
+        0.5*shie_Po_out_sizeXY, 0.5*shie_Po_out_sizeXY, 0.5*shie_Po_out_sizeZ);           //its size
+
+ //Shie_Po
+ G4SubtractionSolid* solidShie_Po =
+        new G4SubtractionSolid("Shie_Po",               //its solid name
+                               solidShie_Po_out,        //solid one
+                               solidShie_Po_in);        //solid two
+
+ G4LogicalVolume* logicShie_Po =
+        new G4LogicalVolume(solidShie_Po,       //its solid
+                            shie_mat,  	        //its material
+                            "Shie_Po");         //its name
+
+  new G4PVPlacement(0,                          //no rotation
+                    G4ThreeVector(),            //at (0, 0, 0)
+                    logicShie_Po,               //its logical volume
+                    "Shie_Po",  	        //its name
                     logicWorld,                 //its mather volume
                     true,                       //boolean operation:subtraction
                     0,                          //copy number
