@@ -18,6 +18,8 @@
 #include "G4VPhysicalVolume.hh"
 #include "G4GlobalMagFieldMessenger.hh"
 
+#include "G4SubtractionSolid.hh"
+
 //G4ThreadLocal
 //G4GlobalMagFieldMessenger* DetectorConstrucion::fMagFieldMessenger = 0;
 
@@ -64,7 +66,68 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  //
  //Shield(material:Boron containing polyethylene + Pb)
  //
+ //G4Material* shie_mat1_poly = nist->FindOrBuildMaterial("G4_POLYETHYLENE");		//material: polyethylene
  
+ G4double z, a, density, fractionmass;
+ G4String name, symbol;
+ G4int ncomponents, natoms;
+ /*
+ a = 10.811*g/mole;									//material:B4C
+ G4Element* elB = G4Element(name="Boron", symbol="B", z=5., a);
+
+ a = 12.01*g/mole;
+ G4Element* elC = G4Element(name="Carbon", symbol="C", z=6., a);
+
+ density = 2.52*g/cm3;
+ G4Material* shie_mat1_B4C = new G4Material(name="B4C", density, ncomponents=2);
+ shie_mat2_B4C->AddElement(elB, natoms=4);
+ shie_mat2_B4C->AddElement(elC, natoms=1); 
+ */
+ G4Material* shie_mat2_Pb = nist->FindOrBuildMaterial("G4_Pb");				//material:Pb
+ 
+ /*
+ density = 1.048*g/cm3;
+ G4Material* shie_mat = new G4Material("Boron cantaining polythelene", density, ncomponents=2);	//material:Boron cantaining polythelene
+ shie_mat->AddMaterial(shie_mat1_poly, fractionmass=92.0*perCent);
+ shie_mat->AddMaterial(shie_mat1_B4C,  fractionmass= 8.0*perCent);
+ */
+
+ //shie_Pb_in
+ G4double shie_Pb_in_sizeXY = 1.*m;
+ G4double shie_Pb_in_sizeZ  = 1.*m;
+
+ G4Box* solidShie_Pb_in =
+        new G4Box("Shie_Pb_in",      //its name
+        0.5*shie_Pb_in_sizeXY, 0.5*shie_Pb_in_sizeXY, 0.5*shie_Pb_in_sizeZ);           //its size
+ 
+ //shie_Pb_out
+ G4double shie_Pb_out_sizeXY = 1.1*m;
+ G4double shie_Pb_out_sizeZ  = 1.1*m;
+ 
+ G4Box* solidShie_Pb_out = 
+	new G4Box("Shie_Pb_out",	//its name
+	0.5*shie_Pb_out_sizeXY, 0.5*shie_Pb_out_sizeXY, 0.5*shie_Pb_out_sizeZ);		//its size
+
+ //Shie_Pb
+ G4SubtractionSolid* solidShie_Pb =
+	new G4SubtractionSolid("Shie_Pb", 		//its solid name
+			       solidShie_Pb_out,	//solid one
+			       solidShie_Pb_in);	//solid two
+
+ G4LogicalVolume* logicShie_Pb =
+	new G4LogicalVolume(solidShie_Pb,	//its solid
+			    shie_mat2_Pb,	//its material
+			    "Shie_Pb");		//its name
+
+  new G4PVPlacement(0,                          //no rotation
+                    G4ThreeVector(),            //at (0, 0, 0)
+                    logicShie_Pb, 	        //its logical volume
+                    "Shie_Pb_out",              //its name
+                    logicWorld,                 //its mather volume
+                    true,                       //boolean operation:subtraction
+                    0,                          //copy number
+                    checkOverlaps);             //overlaps checking
+
  //
  //vacuum chanber
  //
@@ -88,7 +151,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   
   new G4PVPlacement(0,				//no rotation
 		    G4ThreeVector(),		//at(0,0,0)
-                    logicalvach,			//its logical volume
+                    logicalvach,		//its logical volume
 		    "vach",			//its name
 		    logicWorld,			//its mather volume
 		    false, 			//no boolean operation
@@ -185,14 +248,14 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  //
  //Heavy Water
  //
- G4double z, a, density;	//Heavy Water material
- G4String name, symble;
- G4int ncomponents, natoms;
+ //G4double z, a, density;	//Heavy Water material
+ //G4String name, symbol;
+ //G4int ncomponents, natoms;
  a = 2.00*g/mole;		//specify the molar mass of deuterium
- G4Element* elD = new G4Element(name="deuterium", symble="D", z=1., a);		//creat deuterium
+ G4Element* elD = new G4Element(name="deuterium", symbol="D", z=1., a);		//creat deuterium
 
  a = 16.00*g/mole;
- G4Element* elO = new G4Element(name="oxygen", symble="O", z=8., a);
+ G4Element* elO = new G4Element(name="oxygen", symbol="O", z=8., a);
 
  density = 1.1079*g/cm3;
 

@@ -8,11 +8,15 @@
 #include "DeuteronNuclearPhysics.hh"
 #include "G4ionIonisation.hh"
 
+
 #include "ElectromagneticPhysics.hh"
 
 PhysicsList::PhysicsList()
 : G4VModularPhysicsList()
 { 
+  G4int verb = 1;
+  SetVerboseLevel(verb);
+
   //Specify the complexity of the output information
   SetVerboseLevel(1);
   //Decay
@@ -23,6 +27,7 @@ PhysicsList::PhysicsList()
 
   //G4ionIonisation
   RegisterPhysics(new DeuteronNuclearPhysics());
+
 
   RegisterPhysics(new ElectromagneticPhysics());
 }
