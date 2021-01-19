@@ -6,8 +6,7 @@
 #include "G4ios.hh"
 #include "g4root.hh"
 
-HeavyWaterSD::HeavyWaterSD(
-                            const G4String& name, 
+HeavyWaterSD::HeavyWaterSD( const G4String& name, 
                             const G4String& hitsCollectionName)
  : G4VSensitiveDetector(name),
    fHitsCollection(nullptr)
@@ -30,9 +29,9 @@ void HeavyWaterSD::Initialize(G4HCofThisEvent* hce)
   hce->AddHitsCollection( hcID, fHitsCollection ); 
 
   // Create hits
-  for (G4int i=0; i<1; i++ ) {
+  //for (G4int i=0; i<1; i++ ) {
     fHitsCollection->insert(new HeavyWaterHit());
-  }
+  //}
 }
 
 G4bool HeavyWaterSD::ProcessHits(G4Step* step, 
@@ -45,11 +44,12 @@ G4bool HeavyWaterSD::ProcessHits(G4Step* step,
   //auto edep = step->GetDeltaEnergy();
 
   int pid = step->GetTrack()->GetParticleDefinition()->GetPDGEncoding();
-  //std::cout << "pid: " << pid << ", edep: " << edep << ", step: " << step << std::endl; 
+  std::cout << "pid: " << pid << ", edep: " << edep << ", step: " << step << std::endl; 
 
   G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
-  analysisManager->FillNtupleDColumn(2, pid);
-  //analysisManager->AddNtupleRow();
+  analysisManager->GetNtuple(2);
+  analysisManager->FillNtupleDColumn(0, pid);
+  analysisManager->AddNtupleRow();
   
   // step length
   G4double stepLength = 0.;
@@ -73,12 +73,8 @@ G4bool HeavyWaterSD::ProcessHits(G4Step* step,
       "MyCode0004", FatalException, msg);
   }         
 
-  // Get hit for total accounting
-  auto hitTotal 
-    = (*fHitsCollection)[fHitsCollection->entries()-1];
-  
   // Add values
-  hit->Add(edep, stepLength, pid);
+  hit->Add(edep, stepLength);
   return true;
 }
 
@@ -90,6 +86,7 @@ void HeavyWaterSD::EndOfEvent(G4HCofThisEvent*)
        << G4endl 
        << "-------->Hits Collection: in this event they are " << nofHits 
        << " hits in the tracker chambers: " << G4endl;
-     for ( std::size_t i=0; i<nofHits; ++i ) (*fHitsCollection)[i]->Print();
+     //for ( std::size_t i=0; i<nofHits; ++i ) 
+     (*fHitsCollection)[0]->Print();
   }
 }

@@ -86,13 +86,14 @@ void EventAction::EndOfEventAction(const G4Event* event)
   //Get analysis manager
   auto analysisManager = G4AnalysisManager::Instance();
   
-  //fill histograms
+  //Fill histograms
   analysisManager->FillH1(0, hwHit->GetEdep());
   analysisManager->FillH1(1, hwHit->GetTrackLength()); 
   analysisManager->FillH1(2, hwHit->GetPid());
   //Fill ntuple
+  analysisManager->GetNtuple(1);
   analysisManager->FillNtupleDColumn(0, hwHit->GetEdep());
   analysisManager->FillNtupleDColumn(1, hwHit->GetTrackLength());
-  analysisManager->FillNtupleDColumn(2, hwHit->GetPid());
+  //analysisManager->FillNtupleDColumn(2, hwHit->GetPid());
   analysisManager->AddNtupleRow();
 }

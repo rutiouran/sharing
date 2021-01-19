@@ -32,7 +32,7 @@ class HeavyWaterHit : public G4VHit
     virtual void Print();
 
     // methods to handle data
-    void Add(G4double de, G4double dl, G4int dp);
+    void Add(G4double de, G4double dl);
 
     // get methods
     G4double GetEdep() const;
@@ -66,11 +66,10 @@ inline void HeavyWaterHit::operator delete(void *hit)
   HeavyWaterHitAllocator->FreeSingle((HeavyWaterHit*) hit);
 }
 
-inline void HeavyWaterHit::Add(G4double de, G4double dl, G4int dp)
+inline void HeavyWaterHit::Add(G4double de, G4double dl)
 {
   fEdep += de; 
   fTrackLength += dl;
-  fPid += dp;
 }
 
 inline G4double HeavyWaterHit::GetEdep() const 

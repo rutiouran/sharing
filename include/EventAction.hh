@@ -19,7 +19,7 @@ public:
   virtual void BeginOfEventAction(const G4Event* event);
   virtual void EndOfEventAction(const G4Event* event);
 
-  void AddEdep(G4double edep) { fEdep += edep; }
+  //void AddEdep(G4double edep) { fEdep += edep; }
 
 private:
   HeavyWaterHitsCollection* GetHitsCollection(G4int hcID, const G4Event* event) const;

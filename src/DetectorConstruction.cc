@@ -41,8 +41,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   //
   G4NistManager* nist = G4NistManager::Instance();
   
-  G4double world_sizeXY = 3.*m;
-  G4double world_sizeZ  = 3.*m;
+  G4double world_sizeXY = 4.*m;
+  G4double world_sizeZ  = 4.*m;
   G4Material* world_mat = nist->FindOrBuildMaterial("G4_Galactic");
 
   G4Box* solidWorld =
@@ -83,7 +83,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  shie_mat1_B4C->AddElement(elB, natoms=4);
  shie_mat1_B4C->AddElement(elC, natoms=1); 
  
- density = 1.048*g/cm3;
+ density = 0.09983*g/cm3;
  G4Material* shie_mat = new G4Material("Boron cantaining polythelene", density, ncomponents=2);	//material:Boron cantaining polythelene
  shie_mat->AddMaterial(shie_mat1_poly, fractionmass=92.0*perCent);
  shie_mat->AddMaterial(shie_mat1_B4C,  fractionmass= 8.0*perCent);
@@ -91,26 +91,41 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  G4Material* shie_mat2_Pb = nist->FindOrBuildMaterial("G4_Pb");                         //material:Pb
 
  //shie_Pb_in
- G4double shie_Pb_in_sizeXY = 1.00*m;
- G4double shie_Pb_in_sizeZ  = 1.00*m;
+ G4double shie_Pb_in_pRMin = 0.00*mm;
+ G4double shie_Pb_in_pRMax = 250.0*mm;
+ G4double shie_Pb_in_pDZ   = 200.0*mm;
+ G4double shie_Pb_in_PSshi = 0.*deg;
+ G4double shie_Pb_in_PDshi = 360.*deg;
 
- G4Box* solidShie_Pb_in =
-        new G4Box("Shie_Pb_in",      //its name
-        0.5*shie_Pb_in_sizeXY, 0.5*shie_Pb_in_sizeXY, 0.5*shie_Pb_in_sizeZ);           //its size
+ G4Tubs* solidShie_Pb_in =
+        new G4Tubs("Shie_Pb_in",      //its name
+        shie_Pb_in_pRMin, shie_Pb_in_pRMax, 0.5*shie_Pb_in_pDZ, shie_Pb_in_PSshi, shie_Pb_in_PDshi);           //its size
  
  //shie_Pb_out
- G4double shie_Pb_out_sizeXY = 1.02*m;
- G4double shie_Pb_out_sizeZ  = 1.02*m;
- 
- G4Box* solidShie_Pb_out = 
-	new G4Box("Shie_Pb_out",	//its name
-	0.5*shie_Pb_out_sizeXY, 0.5*shie_Pb_out_sizeXY, 0.5*shie_Pb_out_sizeZ);		//its size
+ G4double R_Pb = 100.*mm;
+ G4double DZ_Pb_front = 100.*mm;
+ G4double DZ_Pb_behind = 10.*mm;
+
+ G4double shie_Pb_out_pRMin = 0.00*mm;
+ G4double shie_Pb_out_pRMax = 250.0*mm+R_Pb;
+ G4double shie_Pb_out_pDZ   = 200.0*mm+DZ_Pb_front+DZ_Pb_behind;
+ G4double shie_Pb_out_PSshi = 0.*deg;
+ G4double shie_Pb_out_PDshi = 360.*deg;
+
+ G4Tubs* solidShie_Pb_out = 
+	new G4Tubs("Shie_Pb_out",	//its name
+	shie_Pb_out_pRMin, shie_Pb_out_pRMax, 0.5*shie_Pb_out_pDZ, shie_Pb_out_PSshi, shie_Pb_out_PDshi);		//its size
 
  //Shie_Pb
+ G4ThreeVector shie_Pb_in_pos = G4ThreeVector(0., 0., (DZ_Pb_front-DZ_Pb_behind)/2.);	//at (0., 0., (DZ_Pb_front-DZ_Pb_behind)/2.)
+ G4ThreeVector shie_Pb_pos = G4ThreeVector(0., 0., (DZ_Pb_behind-DZ_Pb_front)/2.);   //at (0., 0., (DZ_Pb_behind-DZ_Pb_front)/2.)
+
  G4SubtractionSolid* solidShie_Pb =
 	new G4SubtractionSolid("Shie_Pb", 		//its solid name
 			       solidShie_Pb_out,	//solid one
-			       solidShie_Pb_in);	//solid two
+			       solidShie_Pb_in,		//solid two
+			       0,
+			       shie_Pb_in_pos);
 
  G4LogicalVolume* logicShie_Pb =
 	new G4LogicalVolume(solidShie_Pb,	//its solid
@@ -118,7 +133,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 			    "Shie_Pb");		//its name
 
   new G4PVPlacement(0,                          //no rotation
-                    G4ThreeVector(),            //at (0, 0, 0)
+                    shie_Pb_pos,                //at (0., 0., (DZ_Pb_behind-DZ_Pb_front)/2.)
                     logicShie_Pb, 	        //its logical volume
                     "Shie_Pb",                  //its name
                     logicWorld,                 //its mather volume
@@ -127,26 +142,41 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                     checkOverlaps);             //overlaps checking
  
  //shie_Po_in
- G4double shie_Po_in_sizeXY = 1.02*m;
- G4double shie_Po_in_sizeZ  = 1.02*m;
+ G4double shie_Po_in_pRMin = 0.00*mm;
+ G4double shie_Po_in_pRMax = 250.0*mm+R_Pb;
+ G4double shie_Po_in_pDZ   = 200.0*mm+DZ_Pb_front+DZ_Pb_behind;
+ G4double shie_Po_in_PSshi = 0.*deg;
+ G4double shie_Po_in_PDshi = 360.*deg;
 
- G4Box* solidShie_Po_in =
-	new G4Box("Shie_Po_in",		//it name
-	0.5*shie_Po_in_sizeXY, 0.5*shie_Po_in_sizeXY, 0.5*shie_Po_in_sizeZ);           //its size
+ G4Tubs* solidShie_Po_in =
+	new G4Tubs("Shie_Po_in",		//it name
+	shie_Po_in_pRMin, shie_Po_in_pRMax, 0.5*shie_Po_in_pDZ, shie_Po_in_PSshi, shie_Po_in_PDshi);           //its size
 
  //shie_Po_out
- G4double shie_Po_out_sizeXY = 1.10*m;
- G4double shie_Po_out_sizeZ  = 1.10*m;
+ G4double R_Po = 10.*mm; 
+ G4double DZ_Po_front = 10.*mm;
+ G4double DZ_Po_behind = 100.*mm;
 
- G4Box* solidShie_Po_out =
-        new G4Box("Shie_Po_out",         //it name
-        0.5*shie_Po_out_sizeXY, 0.5*shie_Po_out_sizeXY, 0.5*shie_Po_out_sizeZ);           //its size
+ G4double shie_Po_out_pRMin = 0.00*mm;
+ G4double shie_Po_out_pRMax = 250.0*mm+R_Pb+R_Po;
+ G4double shie_Po_out_pDZ   = 200.0*mm+DZ_Pb_front+DZ_Pb_behind+DZ_Po_front+DZ_Po_behind;
+ G4double shie_Po_out_PSshi = 0.*deg;
+ G4double shie_Po_out_PDshi = 360.*deg;
+
+ G4Tubs* solidShie_Po_out =
+        new G4Tubs("Shie_Po_out",         //it name
+        shie_Po_out_pRMin, shie_Po_out_pRMax, 0.5*shie_Po_out_pDZ, shie_Po_out_PSshi, shie_Po_out_PDshi);           //its size
 
  //Shie_Po
+ G4ThreeVector shie_Po_in_pos = G4ThreeVector(0., 0., (DZ_Pb_behind - DZ_Pb_front)/2.);   //at (0., 0., (DZ_Pb_behind - DZ_Pb_front)/2.)
+ G4ThreeVector shie_Po_pos = G4ThreeVector(0., 0., (DZ_Pb_front + DZ_Po_front - DZ_Pb_behind - DZ_Po_behind)/2.);   //at (0., 0., (DZ_Pb_front + DZ_Po_front - DZ_Pb_behind - DZ_Po_behind)/2.)
+
  G4SubtractionSolid* solidShie_Po =
         new G4SubtractionSolid("Shie_Po",               //its solid name
                                solidShie_Po_out,        //solid one
-                               solidShie_Po_in);        //solid two
+                               solidShie_Po_in,          //solid two
+			       0,
+			       shie_Po_in_pos);
 
  G4LogicalVolume* logicShie_Po =
         new G4LogicalVolume(solidShie_Po,       //its solid
@@ -154,7 +184,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                             "Shie_Po");         //its name
 
   new G4PVPlacement(0,                          //no rotation
-                    G4ThreeVector(),            //at (0, 0, 0)
+                    shie_Po_pos,                //at (0., 0., (DZ_Pb_front + DZ_Po_front - DZ_Pb_behind - DZ_Po_behind)/2.)
                     logicShie_Po,               //its logical volume
                     "Shie_Po",  	        //its name
                     logicWorld,                 //its mather volume
@@ -321,6 +351,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 		    checkOverlaps);		//overlaps checking
 
   fScoringVolume = logicHeavyWater;
+
+  //std::cout << *(G4Material::GetMaterialTable()) << std::endl;	//Get material table
 
   return PhysWorld;
 }

@@ -30,14 +30,17 @@ RunAction::RunAction()
   //
 
   //Creating histograms
-  analysisManager->CreateH1("Ehwt","Edep in heavy water target", 100, 0., 13*MeV);
-  analysisManager->CreateH1("Lhwt","trackL in heavy water target",100, 0., 1*cm);
+  analysisManager->CreateH1("Ehwt", "Edep in heavy water target", 100, 0., 13*MeV);
+  analysisManager->CreateH1("Lhwt", "trackL in heavy water target", 100, 0., 1*cm);
   analysisManager->CreateH1("pid", "Pid in heavy water target", 100, 0., 3000);
 
   //Creating ntuple
-  analysisManager->CreateNtuple("output","Edep and TrackL");
+  analysisManager->CreateNtuple("Edep and PrackL in heavywater", "Edep and TrackL");
   analysisManager->CreateNtupleDColumn("Ehwt");
   analysisManager->CreateNtupleDColumn("Lhwt");
+  analysisManager->FinishNtuple();
+
+  analysisManager->CreateNtuple("Pid in heavywater", "output_pid");
   analysisManager->CreateNtupleDColumn("pid");
   analysisManager->FinishNtuple();
 }
@@ -49,9 +52,6 @@ RunAction::~RunAction()
 
 void RunAction::BeginOfRunAction(const G4Run*)
 { 
-  // inform the runManager to save random number seed
-  //G4RunManager::GetRunManager()->SetRandomNumberStore(false);
-  
   //Get analysis manager
   auto analysisManager = G4AnalysisManager::Instance();
 
@@ -83,6 +83,11 @@ void RunAction::EndOfRunAction(const G4Run*)
       << G4BestUnit(analysisManager->GetH1(1)->mean(), "Length")
       << " rms = "
       << G4BestUnit(analysisManager->GetH1(1)->rms(),  "Length") << G4endl;
+
+    //G4cout << " Pid : mean = "
+      //<< G4BestUnit(analysisManager->GetH1(2)->mean(), "Pid")
+      //<< " rms = "
+      //<< G4BestUnit(analysisManager->GetH1(2)->rms(), "pid") << G4endl; 
   
   //save histograms and ntuple
   //

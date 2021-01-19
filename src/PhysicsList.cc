@@ -38,5 +38,4 @@ PhysicsList::~PhysicsList()
 void PhysicsList::SetCuts()
 {
   G4VUserPhysicsList::SetCuts();
-
 }
