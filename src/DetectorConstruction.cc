@@ -100,11 +100,11 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  G4Tubs* solidShie_Pb_in =
         new G4Tubs("Shie_Pb_in",      //its name
         shie_Pb_in_pRMin, shie_Pb_in_pRMax, 0.5*shie_Pb_in_pDZ, shie_Pb_in_PSshi, shie_Pb_in_PDshi);           //its size
- 
+
  //shie_Pb_out
- G4double R_Pb = 100.*mm;
- G4double DZ_Pb_front = 100.*mm;
- G4double DZ_Pb_behind = 10.*mm;
+ G4double R_Pb = 50.*mm;
+ G4double DZ_Pb_front = 50.*mm;
+ G4double DZ_Pb_behind = 50.*mm;
 
  G4double shie_Pb_out_pRMin = 0.00*mm;
  G4double shie_Pb_out_pRMax = 250.0*mm+R_Pb;
@@ -116,16 +116,34 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	new G4Tubs("Shie_Pb_out",	//its name
 	shie_Pb_out_pRMin, shie_Pb_out_pRMax, 0.5*shie_Pb_out_pDZ, shie_Pb_out_PSshi, shie_Pb_out_PDshi);		//its size
 
+ //shie_Pb_windows
+ G4double shie_Pb_win_DX = 1.5*mm;
+ G4double shie_Pb_win_DY = 3.0*mm;
+ G4double shie_Pb_win_DZ = DZ_Pb_front/2;
+
+ G4EllipticalTube* solidShie_Pb_Wind =
+        new G4EllipticalTube("Shie_Pb_Wind",       //its name
+        shie_Pb_win_DX, shie_Pb_win_DY, shie_Pb_win_DZ);               //its size
+ 
+ G4ThreeVector shie_Pb_wind_pos = G4ThreeVector(0., 150.*mm, -100.*mm-DZ_Pb_behind/2);
+
  //Shie_Pb
- G4ThreeVector shie_Pb_in_pos = G4ThreeVector(0., 0., (DZ_Pb_front-DZ_Pb_behind)/2.);	//at (0., 0., (DZ_Pb_front-DZ_Pb_behind)/2.)
- G4ThreeVector shie_Pb_pos = G4ThreeVector(0., 0., (DZ_Pb_behind-DZ_Pb_front)/2.);   //at (0., 0., (DZ_Pb_behind-DZ_Pb_front)/2.)
+ G4ThreeVector shie_Pb_in_pos = G4ThreeVector(0., 0., (DZ_Pb_front-DZ_Pb_behind)/2.);
+ G4ThreeVector shie_Pb_pos = G4ThreeVector(0., 0., (DZ_Pb_behind-DZ_Pb_front)/2.);
+
+ G4SubtractionSolid* solidShie_Pb1 =
+	new G4SubtractionSolid("Shie_Pb1", 		//its solid name
+			       solidShie_Pb_out,	//solid1
+			       solidShie_Pb_in,		//solid2
+			       0,			//solid2_rotation
+			       shie_Pb_in_pos);		//solid2_tansition
 
  G4SubtractionSolid* solidShie_Pb =
-	new G4SubtractionSolid("Shie_Pb", 		//its solid name
-			       solidShie_Pb_out,	//solid one
-			       solidShie_Pb_in,		//solid two
-			       0,
-			       shie_Pb_in_pos);
+        new G4SubtractionSolid("Shie_Pb",               //its solid name
+                               solidShie_Pb1,           //solid1
+                               solidShie_Pb_Wind,       //solid2
+			       0,			//solid2_rotation
+			       shie_Pb_wind_pos);	//solid2_tansition
 
  G4LogicalVolume* logicShie_Pb =
 	new G4LogicalVolume(solidShie_Pb,	//its solid
@@ -153,9 +171,9 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	shie_Po_in_pRMin, shie_Po_in_pRMax, 0.5*shie_Po_in_pDZ, shie_Po_in_PSshi, shie_Po_in_PDshi);           //its size
 
  //shie_Po_out
- G4double R_Po = 10.*mm; 
- G4double DZ_Po_front = 10.*mm;
- G4double DZ_Po_behind = 100.*mm;
+ G4double R_Po = 50.*mm; 
+ G4double DZ_Po_front = 50.*mm;
+ G4double DZ_Po_behind = 50.*mm;
 
  G4double shie_Po_out_pRMin = 0.00*mm;
  G4double shie_Po_out_pRMax = 250.0*mm+R_Pb+R_Po;
@@ -167,16 +185,34 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
         new G4Tubs("Shie_Po_out",         //it name
         shie_Po_out_pRMin, shie_Po_out_pRMax, 0.5*shie_Po_out_pDZ, shie_Po_out_PSshi, shie_Po_out_PDshi);           //its size
 
- //Shie_Po
- G4ThreeVector shie_Po_in_pos = G4ThreeVector(0., 0., (DZ_Pb_behind - DZ_Pb_front)/2.);   //at (0., 0., (DZ_Pb_behind - DZ_Pb_front)/2.)
- G4ThreeVector shie_Po_pos = G4ThreeVector(0., 0., (DZ_Pb_front + DZ_Po_front - DZ_Pb_behind - DZ_Po_behind)/2.);   //at (0., 0., (DZ_Pb_front + DZ_Po_front - DZ_Pb_behind - DZ_Po_behind)/2.)
+ //shie_Po_windows
+ G4double shie_Po_win_DX = 1.5*mm;
+ G4double shie_Po_win_DY = 3.0*mm;
+ G4double shie_Po_win_DZ = DZ_Po_front/2;
 
+ G4EllipticalTube* solidShie_Po_Wind =
+        new G4EllipticalTube("Shie_Po_Wind",       //its name
+        shie_Po_win_DX, shie_Po_win_DY, shie_Po_win_DZ);               //its size
+
+ G4ThreeVector shie_Po_wind_pos = G4ThreeVector(0., 150.*mm, -100.*mm-DZ_Pb_front/2-DZ_Pb_behind/2-DZ_Po_behind/2); 
+
+ //Shie_Po
+ G4ThreeVector shie_Po_in_pos = G4ThreeVector(0., 0., (DZ_Po_front - DZ_Po_behind)/2.);
+ G4ThreeVector shie_Po_pos = G4ThreeVector(0., 0., (DZ_Pb_behind + DZ_Po_behind - DZ_Pb_front - DZ_Po_front)/2.);
+
+ G4SubtractionSolid* solidShie_Po1 =
+        new G4SubtractionSolid("Shie_Po1",              //its solid name
+                               solidShie_Po_out,        //solid1
+                               solidShie_Po_in,         //solid2
+			       0,			//solid2_rotation
+			       shie_Po_in_pos);		//solid2_transition
+ 
  G4SubtractionSolid* solidShie_Po =
         new G4SubtractionSolid("Shie_Po",               //its solid name
-                               solidShie_Po_out,        //solid one
-                               solidShie_Po_in,          //solid two
-			       0,
-			       shie_Po_in_pos);
+                               solidShie_Po1,           //solid1
+                               solidShie_Po_Wind,       //solid2
+                               0,			//solid2_rotation
+                               shie_Po_wind_pos);	//solid2_transition
 
  G4LogicalVolume* logicShie_Po =
         new G4LogicalVolume(solidShie_Po,       //its solid
