@@ -65,7 +65,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   }
   */
   //set gun position 
-  fParticleGun->SetParticlePosition( G4ThreeVector(0.*mm, 150.*mm, -500.*mm) );
+  fParticleGun->SetParticlePosition( G4ThreeVector(0.*mm, 150.*mm, -50.*mm) );
 
   fParticleGun->GeneratePrimaryVertex(anEvent);
 }

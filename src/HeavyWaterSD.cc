@@ -47,9 +47,8 @@ G4bool HeavyWaterSD::ProcessHits(G4Step* step,
   std::cout << "pid: " << pid << ", edep: " << edep << ", step: " << step << std::endl; 
 
   G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
-  analysisManager->GetNtuple(2);
-  analysisManager->FillNtupleDColumn(0, pid);
-  analysisManager->AddNtupleRow();
+  analysisManager->FillNtupleDColumn(2, pid);
+  //analysisManager->AddNtupleRow();
   
   // step length
   G4double stepLength = 0.;
@@ -74,7 +73,7 @@ G4bool HeavyWaterSD::ProcessHits(G4Step* step,
   }         
 
   // Add values
-  hit->Add(edep, stepLength);
+  hit->Add(edep, stepLength, pid);
   return true;
 }
 

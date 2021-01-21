@@ -91,9 +91,8 @@ void EventAction::EndOfEventAction(const G4Event* event)
   analysisManager->FillH1(1, hwHit->GetTrackLength()); 
   analysisManager->FillH1(2, hwHit->GetPid());
   //Fill ntuple
-  analysisManager->GetNtuple(1);
   analysisManager->FillNtupleDColumn(0, hwHit->GetEdep());
   analysisManager->FillNtupleDColumn(1, hwHit->GetTrackLength());
-  //analysisManager->FillNtupleDColumn(2, hwHit->GetPid());
+  analysisManager->FillNtupleDColumn(2, hwHit->GetPid());
   analysisManager->AddNtupleRow();
 }

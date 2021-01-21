@@ -38,9 +38,6 @@ RunAction::RunAction()
   analysisManager->CreateNtuple("Edep and PrackL in heavywater", "Edep and TrackL");
   analysisManager->CreateNtupleDColumn("Ehwt");
   analysisManager->CreateNtupleDColumn("Lhwt");
-  analysisManager->FinishNtuple();
-
-  analysisManager->CreateNtuple("Pid in heavywater", "output_pid");
   analysisManager->CreateNtupleDColumn("pid");
   analysisManager->FinishNtuple();
 }
