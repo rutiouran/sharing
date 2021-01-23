@@ -6,7 +6,6 @@
 #include "G4Allocator.hh"
 #include "G4ThreeVector.hh"
 #include "G4Threading.hh"
-
 /// Heavy Water Target hit class
 ///
 /// It defines data members to store the the energy deposit and track lengths
@@ -32,16 +31,15 @@ class HeavyWaterHit : public G4VHit
     virtual void Print();
 
     // methods to handle data
-    void Add(G4double de, G4double dl, G4double dp);
+    void Add(G4double de, G4double dl);
 
     // get methods
     G4double GetEdep() const;
     G4double GetTrackLength() const;
-    G4int    GetPid() const;
+
   private:
     G4double fEdep;        ///< Energy deposit in the sensitive volume
     G4double fTrackLength; ///< Track length in the  sensitive volume
-    G4int    fPid;         ///< Pid in the sensitive volume
 };
 
 using HeavyWaterHitsCollection = G4THitsCollection<HeavyWaterHit>;
@@ -66,11 +64,10 @@ inline void HeavyWaterHit::operator delete(void *hit)
   HeavyWaterHitAllocator->FreeSingle((HeavyWaterHit*) hit);
 }
 
-inline void HeavyWaterHit::Add(G4double de, G4double dl, G4double dp)
+inline void HeavyWaterHit::Add(G4double de, G4double dl)
 {
   fEdep += de; 
   fTrackLength += dl;
-  fPid = dp;
 }
 
 inline G4double HeavyWaterHit::GetEdep() const 
@@ -81,11 +78,6 @@ inline G4double HeavyWaterHit::GetEdep() const
 inline G4double HeavyWaterHit::GetTrackLength() const 
 { 
   return fTrackLength; 
-}
-
-inline G4int HeavyWaterHit::GetPid() const
-{
-  return fPid;
 }
 
 #endif

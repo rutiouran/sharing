@@ -42,12 +42,23 @@ G4bool HeavyWaterSD::ProcessHits(G4Step* step,
   
   // energy loss
   //auto edep = step->GetDeltaEnergy();
+  
+  //Fill histograms and ntuple
+  auto analysisManager = G4AnalysisManager::Instance();
 
-  int pid = step->GetTrack()->GetParticleDefinition()->GetPDGEncoding();
+  G4int pid = step->GetTrack()->GetParticleDefinition()->GetPDGEncoding();
   std::cout << "pid: " << pid << ", edep: " << edep << ", step: " << step << std::endl; 
-
-  G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
+  
+  if(pid<1e10)
+  {
+  analysisManager->FillH1(2, pid);
   analysisManager->FillNtupleDColumn(2, pid);
+  }
+  else
+  {
+  analysisManager->FillH1(3, pid);
+  analysisManager->FillNtupleDColumn(3, pid);
+  }
   //analysisManager->AddNtupleRow();
   
   // step length
@@ -73,7 +84,7 @@ G4bool HeavyWaterSD::ProcessHits(G4Step* step,
   }         
 
   // Add values
-  hit->Add(edep, stepLength, pid);
+  hit->Add(edep, stepLength);
   return true;
 }
 

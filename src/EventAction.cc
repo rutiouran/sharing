@@ -89,10 +89,9 @@ void EventAction::EndOfEventAction(const G4Event* event)
   //Fill histograms
   analysisManager->FillH1(0, hwHit->GetEdep());
   analysisManager->FillH1(1, hwHit->GetTrackLength()); 
-  analysisManager->FillH1(2, hwHit->GetPid());
+
   //Fill ntuple
   analysisManager->FillNtupleDColumn(0, hwHit->GetEdep());
   analysisManager->FillNtupleDColumn(1, hwHit->GetTrackLength());
-  analysisManager->FillNtupleDColumn(2, hwHit->GetPid());
   analysisManager->AddNtupleRow();
 }

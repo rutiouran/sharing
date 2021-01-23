@@ -32,13 +32,15 @@ RunAction::RunAction()
   //Creating histograms
   analysisManager->CreateH1("Ehwt", "Edep in heavy water target", 100, 0., 13*MeV);
   analysisManager->CreateH1("Lhwt", "trackL in heavy water target", 100, 0., 1*cm);
-  analysisManager->CreateH1("pid", "Pid in heavy water target", 100, 0., 3000);
+  analysisManager->CreateH1("pid1", "Pid in heavy water target behing 1e10", 100, 1, 3000);
+  analysisManager->CreateH1("Pid2", "Pid in heavy water target after 1e10", 100, 1000000000, 1000100000);
 
   //Creating ntuple
   analysisManager->CreateNtuple("Edep and PrackL in heavywater", "Edep and TrackL");
   analysisManager->CreateNtupleDColumn("Ehwt");
   analysisManager->CreateNtupleDColumn("Lhwt");
-  analysisManager->CreateNtupleDColumn("pid");
+  analysisManager->CreateNtupleDColumn("Pid1");
+  analysisManager->CreateNtupleDColumn("Pid2");
   analysisManager->FinishNtuple();
 }
 

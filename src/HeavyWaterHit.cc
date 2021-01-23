@@ -12,8 +12,7 @@ G4ThreadLocal G4Allocator<HeavyWaterHit>* HeavyWaterHitAllocator = 0;
 HeavyWaterHit::HeavyWaterHit()
  : G4VHit(),
    fEdep(0.),
-   fTrackLength(0.),
-   fPid(0)
+   fTrackLength(0.)
 {}
 
 HeavyWaterHit::~HeavyWaterHit() 
@@ -24,14 +23,12 @@ HeavyWaterHit::HeavyWaterHit(const HeavyWaterHit& right)
 {
   fEdep        = right.fEdep;
   fTrackLength = right.fTrackLength;
-  fPid         = right.fPid;
 }
 
 const HeavyWaterHit& HeavyWaterHit::operator=(const HeavyWaterHit& right)
 {
   fEdep        = right.fEdep;
   fTrackLength = right.fTrackLength;
-  fPid         = right.fPid;
 
   return *this;
 }
@@ -48,7 +45,5 @@ void HeavyWaterHit::Print()
      << std::setw(7) << G4BestUnit( fEdep, "Energy")
      << "Track length: " 
      << std::setw(7) << G4BestUnit( fTrackLength, "Length")
-     << "Pid: "
-     << std::setw(7) << G4BestUnit( fPid, "Pid")
      << G4endl;
 }
