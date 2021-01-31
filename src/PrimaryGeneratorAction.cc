@@ -23,10 +23,10 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
   G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
   G4String particleName;
   G4ParticleDefinition* particle
-    = particleTable->FindParticle(particleName="mu-");
+    = particleTable->FindParticle(particleName="deuteron");
   fParticleGun->SetParticleDefinition(particle);
   fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,1.));
-  fParticleGun->SetParticleEnergy(3.*MeV);
+  fParticleGun->SetParticleEnergy(13.*MeV);
 }
 
 PrimaryGeneratorAction::~PrimaryGeneratorAction()

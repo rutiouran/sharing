@@ -47,19 +47,20 @@ G4bool HeavyWaterSD::ProcessHits(G4Step* step,
   auto analysisManager = G4AnalysisManager::Instance();
 
   G4int pid = step->GetTrack()->GetParticleDefinition()->GetPDGEncoding();
+  if(pid == 2112)
   std::cout << "pid: " << pid << ", edep: " << edep << ", step: " << step << std::endl; 
   
-  if(pid<1e10)
+  if(pid<1e9)
   {
-  analysisManager->FillH1(2, pid);
-  analysisManager->FillNtupleDColumn(2, pid);
+     analysisManager->FillH1(2, pid);
   }
   else
   {
-  analysisManager->FillH1(3, pid);
-  analysisManager->FillNtupleDColumn(3, pid);
+     analysisManager->FillH1(3, pid);
   }
-  //analysisManager->AddNtupleRow();
+
+  analysisManager->FillNtupleDColumn(2, 0, pid);
+  analysisManager->AddNtupleRow(2);
   
   // step length
   G4double stepLength = 0.;
