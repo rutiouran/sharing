@@ -9,9 +9,10 @@
 
 #include "G4UImanager.hh"
 #include "G4UIcommand.hh"
+#include "StackingAction.hh"
 
 #include "PhysicsList.hh"
-#include "QBBC.hh"
+#include "FTFP_BERT_HP.hh"
 #include "G4VisExecutive.hh"
 #include "G4UIExecutive.hh"
 
@@ -40,13 +41,14 @@ int main(int argc,char **argv)		//Detect interactive mode (if no arguments ) and
   runManager->SetUserInitialization(new DetectorConstruction());
 
   //Physics list
-  G4VModularPhysicsList* physicsList = new QBBC;
+  G4VModularPhysicsList* physicsList = new FTFP_BERT_HP;
   //G4VModularPhysicsList* physicsList = new PhysicsList();
   physicsList->SetVerboseLevel(1);
   runManager->SetUserInitialization(physicsList);
 
   //User action initialization
   runManager->SetUserInitialization(new ActionInitialization());
+  runManager->SetUserAction( StackingAction::Instance() );
 
   //Initialization visualization
   //

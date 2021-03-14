@@ -20,9 +20,6 @@
 
 #include "G4SubtractionSolid.hh"
 
-//G4ThreadLocal
-//G4GlobalMagFieldMessenger* DetectorConstrucion::fMagFieldMessenger = 0;
-
 DetectorConstruction::DetectorConstruction()
 :G4VUserDetectorConstruction(),
  fScoringVolume(0)
@@ -33,21 +30,42 @@ DetectorConstruction::~DetectorConstruction()
 
 G4VPhysicalVolume* DetectorConstruction::Construct()
 {
+  G4bool checkOverlaps = true;    //option to switch on/off checking of volumes overlaps
 
-  G4bool checkOverlaps = true;		//option to switch on/off checking of volumes overlaps
+  //The parameters of the shielding external layer
+  G4double R_Pb = 50.*mm;
+  G4double DZ_Pb_front = 100.*mm;
+  G4double DZ_Pb_behind = 100.*mm;
+
+  //The parameters of the shielding internal layer
+  G4double R_Po = 50.*mm;
+  G4double DZ_Po_front = 100.*mm;
+  G4double DZ_Po_behind = 100.*mm;
+ 
+  //The parameter of the vacuum chamber 
+  G4double vach_pRMin = 0.*mm; 
+  G4double vach_pRMax = 250.*mm;
+  G4double vach_pDZ = 200.*mm;
+  G4double vach_pSshi = 0.*deg;
+  G4double vach_pDshi = 360.*deg;
+
+  G4Tubs* solidvach =		//Soild vacuum chamber
+      new G4Tubs("vach",
+        vach_pRMin, vach_pRMax, vach_pDZ/2, vach_pSshi, vach_pDshi);
 
   //
   //World
   //
   G4NistManager* nist = G4NistManager::Instance();
   
-  G4double world_sizeXY = 4.*m;
-  G4double world_sizeZ  = 4.*m;
+  G4double world_sizeXY = 1.2*2*(vach_pRMax + R_Pb + R_Po);
+  G4double world_sizeZ  = 1.2*(vach_pDZ + DZ_Pb_front + DZ_Pb_behind + DZ_Po_front + DZ_Po_behind);
+  
   G4Material* world_mat = nist->FindOrBuildMaterial("G4_Galactic");
 
   G4Box* solidWorld =
         new G4Box("World",	//its name
-        0.5*world_sizeXY, 0.5*world_sizeXY, 0.5*world_sizeZ);		//its size 
+        0.5*world_sizeXY, 0.5*world_sizeXY, 0.5*world_sizeZ);	//its size 
 
   G4LogicalVolume* logicWorld = 
         new G4LogicalVolume(solidWorld,		//its solid
@@ -102,10 +120,6 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
         shie_Pb_in_pRMin, shie_Pb_in_pRMax, 0.5*shie_Pb_in_pDZ, shie_Pb_in_PSshi, shie_Pb_in_PDshi);           //its size
 
  //shie_Pb_out
- G4double R_Pb = 50.*mm;
- G4double DZ_Pb_front = 50.*mm;
- G4double DZ_Pb_behind = 50.*mm;
-
  G4double shie_Pb_out_pRMin = 0.00*mm;
  G4double shie_Pb_out_pRMax = 250.0*mm+R_Pb;
  G4double shie_Pb_out_pDZ   = 200.0*mm+DZ_Pb_front+DZ_Pb_behind;
@@ -171,10 +185,6 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	shie_Po_in_pRMin, shie_Po_in_pRMax, 0.5*shie_Po_in_pDZ, shie_Po_in_PSshi, shie_Po_in_PDshi);           //its size
 
  //shie_Po_out
- G4double R_Po = 50.*mm; 
- G4double DZ_Po_front = 50.*mm;
- G4double DZ_Po_behind = 50.*mm;
-
  G4double shie_Po_out_pRMin = 0.00*mm;
  G4double shie_Po_out_pRMax = 250.0*mm+R_Pb+R_Po;
  G4double shie_Po_out_pDZ   = 200.0*mm+DZ_Pb_front+DZ_Pb_behind+DZ_Po_front+DZ_Po_behind;
@@ -234,15 +244,6 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  G4Material* vach_mat = nist->FindOrBuildMaterial("G4_Galactic");
  
  G4ThreeVector pos1 = G4ThreeVector(0, 0, 0);
-
- G4double vach_pRMin = 0.*mm;		//its size 
- G4double vach_pRMax = 250.*mm;
- G4double vach_pDZ = 200.*mm;
- G4double vach_pSshi = 0.*deg;
- G4double vach_pDshi = 360.*deg; 
- G4Tubs* solidvach =
-      new G4Tubs("vach",
-        vach_pRMin, vach_pRMax, vach_pDZ/2, vach_pSshi, vach_pDshi);
  
  G4LogicalVolume* logicalvach =
       new G4LogicalVolume(solidvach,		//its solid

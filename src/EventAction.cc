@@ -9,6 +9,8 @@
 #include "G4HCofThisEvent.hh"
 #include "G4UnitsTable.hh"
 
+#include "StackingAction.hh"
+
 #include "Randomize.hh"
 #include "g4root.hh"
 #include <iomanip>
@@ -53,7 +55,8 @@ void EventAction::PrintEventStatistics
 }
 
 void EventAction::BeginOfEventAction(const G4Event*)
-{}
+{
+}
 
 void EventAction::EndOfEventAction(const G4Event* event)
 {
@@ -94,4 +97,12 @@ void EventAction::EndOfEventAction(const G4Event* event)
   analysisManager->FillNtupleDColumn(1, 0, hwHit->GetEdep());
   analysisManager->FillNtupleDColumn(1, 1, hwHit->GetTrackLength());
   analysisManager->AddNtupleRow(1);
+
+
+  auto particleMap = StackingAction::Instance()->getNumberOfParticlesPerID();
+
+  for(auto particle : particleMap)
+  {
+     std::cout << "pid: " << particle.first << ", #: " << particle.second << std::endl;
+  }
 }

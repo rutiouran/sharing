@@ -68,6 +68,8 @@ G4bool HeavyWaterSD::ProcessHits(G4Step* step,
     stepLength = step->GetStepLength();
   }
 
+  if(pid == 2112) step->GetTrack()->SetTrackStatus(fStopAndKill);
+
   if ( edep==0. && stepLength == 0. ) return false;      
 
   auto touchable = (step->GetPreStepPoint()->GetTouchable());
