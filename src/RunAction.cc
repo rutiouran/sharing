@@ -2,6 +2,7 @@
 #include "PrimaryGeneratorAction.hh"
 #include "DetectorConstruction.hh"
 #include "EventAction.hh"
+#include "StackingAction.hh"
 
 #include "g4root.hh"
 #include "G4RunManager.hh"
@@ -50,6 +51,13 @@ RunAction::RunAction()
 
 RunAction::~RunAction()
 {
+  auto particleMap = StackingAction::Instance()->getNumberOfParticlesPerID();
+
+  for(auto particle : particleMap)
+  {
+     std::cout << "pid: " << particle.first << ", #: " << particle.second << std::endl;
+  }
+
   delete G4AnalysisManager::Instance();
 }
 

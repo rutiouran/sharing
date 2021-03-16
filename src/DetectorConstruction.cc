@@ -9,15 +9,12 @@
 #include "G4Box.hh"
 #include "G4Tubs.hh"
 #include "G4EllipticalTube.hh"
-#include "G4Orb.hh"
-#include "G4Sphere.hh"
-#include "G4Trd.hh"
 #include "G4LogicalVolume.hh"
 #include "G4PVPlacement.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4VPhysicalVolume.hh"
-#include "G4GlobalMagFieldMessenger.hh"
 
+#include "G4VisAttributes.hh"
 #include "G4SubtractionSolid.hh"
 
 DetectorConstruction::DetectorConstruction()
@@ -33,14 +30,14 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4bool checkOverlaps = true;    //option to switch on/off checking of volumes overlaps
 
   //The parameters of the shielding external layer
-  G4double R_Pb = 50.*mm;
-  G4double DZ_Pb_front = 100.*mm;
-  G4double DZ_Pb_behind = 100.*mm;
+  G4double R_Pb = 5.*mm;
+  G4double DZ_Pb_front = 10.*mm;
+  G4double DZ_Pb_behind = 10.*mm;
 
   //The parameters of the shielding internal layer
-  G4double R_Po = 50.*mm;
-  G4double DZ_Po_front = 100.*mm;
-  G4double DZ_Po_behind = 100.*mm;
+  G4double R_Po = 5.*mm;
+  G4double DZ_Po_front = 10.*mm;
+  G4double DZ_Po_behind = 10.*mm;
  
   //The parameter of the vacuum chamber 
   G4double vach_pRMin = 0.*mm; 
@@ -60,12 +57,14 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   
   G4double world_sizeXY = 1.2*2*(vach_pRMax + R_Pb + R_Po);
   G4double world_sizeZ  = 1.2*(vach_pDZ + DZ_Pb_front + DZ_Pb_behind + DZ_Po_front + DZ_Po_behind);
+
+  G4double worldsize = world_sizeZ>world_sizeXY?world_sizeZ:world_sizeXY;
   
   G4Material* world_mat = nist->FindOrBuildMaterial("G4_Galactic");
 
   G4Box* solidWorld =
         new G4Box("World",	//its name
-        0.5*world_sizeXY, 0.5*world_sizeXY, 0.5*world_sizeZ);	//its size 
+        0.5*worldsize, 0.5*worldsize, 0.5*worldsize);	//its size 
 
   G4LogicalVolume* logicWorld = 
         new G4LogicalVolume(solidWorld,		//its solid
@@ -75,7 +74,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	new G4PVPlacement(0,			//no rotation
 		          G4ThreeVector(),	//at (0,0,0)
 		          logicWorld,		//its logical volume
-		          "world",		//its name
+		          "World",		//its name
 		          0,			//its mather volume
 		          false,		//no boolean operation
 		          0,			//copy number
@@ -108,17 +107,6 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
  G4Material* shie_mat2_Pb = nist->FindOrBuildMaterial("G4_Pb");                         //material:Pb
 
- //shie_Pb_in
- G4double shie_Pb_in_pRMin = 0.00*mm;
- G4double shie_Pb_in_pRMax = 250.0*mm;
- G4double shie_Pb_in_pDZ   = 200.0*mm;
- G4double shie_Pb_in_PSshi = 0.*deg;
- G4double shie_Pb_in_PDshi = 360.*deg;
-
- G4Tubs* solidShie_Pb_in =
-        new G4Tubs("Shie_Pb_in",      //its name
-        shie_Pb_in_pRMin, shie_Pb_in_pRMax, 0.5*shie_Pb_in_pDZ, shie_Pb_in_PSshi, shie_Pb_in_PDshi);           //its size
-
  //shie_Pb_out
  G4double shie_Pb_out_pRMin = 0.00*mm;
  G4double shie_Pb_out_pRMax = 250.0*mm+R_Pb;
@@ -148,7 +136,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  G4SubtractionSolid* solidShie_Pb1 =
 	new G4SubtractionSolid("Shie_Pb1", 		//its solid name
 			       solidShie_Pb_out,	//solid1
-			       solidShie_Pb_in,		//solid2
+			       solidvach,		//solid2
 			       0,			//solid2_rotation
 			       shie_Pb_in_pos);		//solid2_tansition
 
@@ -173,17 +161,6 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                     0,                          //copy number
                     checkOverlaps);             //overlaps checking
  
- //shie_Po_in
- G4double shie_Po_in_pRMin = 0.00*mm;
- G4double shie_Po_in_pRMax = 250.0*mm+R_Pb;
- G4double shie_Po_in_pDZ   = 200.0*mm+DZ_Pb_front+DZ_Pb_behind;
- G4double shie_Po_in_PSshi = 0.*deg;
- G4double shie_Po_in_PDshi = 360.*deg;
-
- G4Tubs* solidShie_Po_in =
-	new G4Tubs("Shie_Po_in",		//it name
-	shie_Po_in_pRMin, shie_Po_in_pRMax, 0.5*shie_Po_in_pDZ, shie_Po_in_PSshi, shie_Po_in_PDshi);           //its size
-
  //shie_Po_out
  G4double shie_Po_out_pRMin = 0.00*mm;
  G4double shie_Po_out_pRMax = 250.0*mm+R_Pb+R_Po;
@@ -213,7 +190,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  G4SubtractionSolid* solidShie_Po1 =
         new G4SubtractionSolid("Shie_Po1",              //its solid name
                                solidShie_Po_out,        //solid1
-                               solidShie_Po_in,         //solid2
+                               solidShie_Pb_out,        //solid2
 			       0,			//solid2_rotation
 			       shie_Po_in_pos);		//solid2_transition
  
@@ -243,8 +220,6 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  //
  G4Material* vach_mat = nist->FindOrBuildMaterial("G4_Galactic");
  
- G4ThreeVector pos1 = G4ThreeVector(0, 0, 0);
- 
  G4LogicalVolume* logicalvach =
       new G4LogicalVolume(solidvach,		//its solid
 	       	          vach_mat,		//its material
@@ -264,14 +239,14 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  //
  G4Material* hewi_mat = nist->FindOrBuildMaterial("G4_Be");
  
- G4ThreeVector pos2 = G4ThreeVector(0, 150*mm, -5.05*mm);
+ G4ThreeVector hewi_pos = G4ThreeVector(0, 150*mm, -5.05*mm);
 
  G4double hewi_DX = 3.*mm;			//its size
  G4double hewi_DY = 6.*mm;
  G4double hewi_DZ = 0.1*mm; 
  
  G4EllipticalTube* solidhewi =
-   new G4EllipticalTube("solidhewi",
+   new G4EllipticalTube("hewi",
        hewi_DX/2, hewi_DY/2, hewi_DZ/2);
 
  G4LogicalVolume* logicalhewi =
@@ -280,7 +255,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 		       "hewi");			//its name
 
    new G4PVPlacement(0,				//no rotation
-		     pos2,			//at(0, 150.*mm, -5.05*mm)
+		     hewi_pos,			//at(0, 150.*mm, -5.05*mm)
 		     logicalhewi,		//its logical volume
                      "hewi",			//its name
 		     logicalvach,		//its mather volume
@@ -292,8 +267,6 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  //
  G4Material* Alch_mat = nist->FindOrBuildMaterial("G4_Al");
  
- G4ThreeVector pos3 = G4ThreeVector(0, 0, 0);
-
  G4double Alch_pRMin = 0.*mm;
  G4double Alch_pRMax = 175.*mm;
  G4double Alch_DZ = 10.*mm;
@@ -309,7 +282,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 		       "Alch");			//its name
 
      new G4PVPlacement(0,			//no rotation
-		       pos3,			//at(0, 0, 0)
+		       G4ThreeVector(),		//at(0, 0, 0)
 		       logicalAlch, 		//its logical volume
 		       "Alch",			//its name
 		       logicalvach, 		//its mather volume
@@ -349,9 +322,6 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  //
  //Heavy Water
  //
- //G4double z, a, density;	//Heavy Water material
- //G4String name, symbol;
- //G4int ncomponents, natoms;
  a = 2.00*g/mole;		//specify the molar mass of deuterium
  G4Element* elD = new G4Element(name="deuterium", symbol="D", z=1., a);		//creat deuterium
 
@@ -364,7 +334,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  HeavyWater_mat->AddElement(elD, natoms=2);
  HeavyWater_mat->AddElement(elO, natoms=1);
 
- G4ThreeVector pos4 = G4ThreeVector(0.*mm, 150.*mm, -4.6*mm);
+ G4ThreeVector hewa_pos = G4ThreeVector(0.*mm, 150.*mm, -4.6*mm);
 
  G4double HeavyWater_DX = 1.5*mm;
  G4double HeavyWater_DY = 3.*mm;
@@ -379,13 +349,24 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 		        "HeavyWater");		//its name
 
   new G4PVPlacement(0,				//no rotation
-		    pos4,			//at (0, 150.*mm, -4.6*mm)
+		    hewa_pos,			//at (0, 150.*mm, -4.6*mm)
 		    logicHeavyWater,		//its logical
 		    "HeavyWater",		//its name
 		    logicalAlch, 		//its mother volume
 		    false, 			//no boolean operation
 		    0,				//copy numble
 		    checkOverlaps);		//overlaps checking
+
+// Visualization attributes
+
+  G4VisAttributes* boxVisAtt= new G4VisAttributes(G4Colour(1.0,1.0,1.0));
+  G4VisAttributes* shieldVisAtt = new G4VisAttributes(G4Colour(1.0,1.0,0.0));
+  G4VisAttributes* heavywaterVisAtt = new G4VisAttributes(G4Colour(1.0,0.0,0.0));
+
+  logicWorld      ->SetVisAttributes(boxVisAtt);
+  logicShie_Pb    ->SetVisAttributes(shieldVisAtt);
+  logicShie_Po    ->SetVisAttributes(shieldVisAtt);
+  logicHeavyWater ->SetVisAttributes(heavywaterVisAtt);
 
   fScoringVolume = logicHeavyWater;
 
@@ -401,7 +382,6 @@ void DetectorConstruction::ConstructSDandField()
  //
  //Sensitive detectors
  //
- 
  auto heavyWaterSD
    = new HeavyWaterSD("HeavyWaterSD", "HeavyWaterHitsCollection");
  G4SDManager::GetSDMpointer()->AddNewDetector(heavyWaterSD);

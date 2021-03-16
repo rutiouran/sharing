@@ -3,13 +3,20 @@
 #include "G4SystemOfUnits.hh"
 #include "G4UnitsTable.hh"
 
+#include "G4HadronElasticPhysicsHP.hh"
+#include "G4HadronPhysicsQGSP_BIC_HP.hh"
+#include "G4IonElasticPhysics.hh"
+#include "G4IonPhysicsPHP.hh"
+#include "G4StoppingPhysics.hh"
+#include "GammaNuclearPhysics.hh"
+#include "ElectromagneticPhysics.hh"
 #include "G4DecayPhysics.hh"
 #include "G4RadioactiveDecayPhysics.hh"
-#include "DeuteronNuclearPhysics.hh"
-#include "G4ionIonisation.hh"
 
-
-#include "ElectromagneticPhysics.hh"
+//#include "G4DecayPhysics.hh"
+//#include "G4RadioactiveDecayPhysics.hh"
+//#include "DeuteronNuclearPhysics.hh"
+//#include "G4ionIonisation.hh"
 
 PhysicsList::PhysicsList()
 : G4VModularPhysicsList()
@@ -17,19 +24,56 @@ PhysicsList::PhysicsList()
   G4int verb = 1;
   SetVerboseLevel(verb);
 
-  //Specify the complexity of the output information
-  SetVerboseLevel(1);
-  //Decay
-  RegisterPhysics(new G4DecayPhysics());
+  //Hadron Elastic scattering
+  //
+  RegisterPhysics(new G4HadronElasticPhysicsHP(verb));
 
-  //Radioactive Decay
-  RegisterPhysics(new G4RadioactiveDecayPhysics());
+  //Hadron Inelastic Physics
+  //
+  RegisterPhysics(new G4HadronPhysicsQGSP_BIC_HP(verb));
 
-  //G4ionIonisation
-  RegisterPhysics(new DeuteronNuclearPhysics());
+  // Ion Elastic scattering
+  //
+  RegisterPhysics(new G4IonElasticPhysics(verb));
+
+  // Ion Inelastic physics
+  //
+  RegisterPhysics(new G4IonPhysicsPHP(verb));
+
+  // stopping Particles
+  //
+  RegisterPhysics(new G4StoppingPhysics(verb));
+
+  // Gamma-Nuclear Physics
+  //
+  RegisterPhysics( new GammaNuclearPhysics("gamma"));
+  
+  // EM physics
+  //
+  RegisterPhysics(new ElectromagneticPhysics(verb));
+
+  // Decay
+  //
+  RegisterPhysics(new G4DecayPhysics(verb));
+
+  // Radioactive decay
+  //
+  RegisterPhysics(new G4RadioactiveDecayPhysics(verb));
 
 
-  RegisterPhysics(new ElectromagneticPhysics());
+//  //Specify the complexity of the output information
+//  SetVerboseLevel(1);
+//  //Decay
+//  RegisterPhysics(new G4DecayPhysics());
+//
+//  //Radioactive Decay
+//  RegisterPhysics(new G4RadioactiveDecayPhysics());
+//
+//  //G4ionIonisation
+//  RegisterPhysics(new DeuteronNuclearPhysics());
+//
+//
+//  RegisterPhysics(new ElectromagneticPhysics());
 }
 
 PhysicsList::~PhysicsList()
@@ -37,5 +81,8 @@ PhysicsList::~PhysicsList()
 
 void PhysicsList::SetCuts()
 {
-  G4VUserPhysicsList::SetCuts();
+  SetCutValue(0*mm, "proton");
+  SetCutValue(10*km, "e-");
+  SetCutValue(10*km, "e+");
+  SetCutValue(10*km, "gamma");
 }

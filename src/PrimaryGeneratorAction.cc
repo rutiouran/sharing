@@ -12,9 +12,9 @@
 #include "Randomize.hh"
 
 PrimaryGeneratorAction::PrimaryGeneratorAction()
-: G4VUserPrimaryGeneratorAction()
-  //fParticleGun(0), 
-  //fWorldBox(0)
+: G4VUserPrimaryGeneratorAction(),
+  fParticleGun(0),
+  fWorldBox(0)
 {
   G4int n_particle = 1;
   fParticleGun  = new G4ParticleGun(n_particle);
@@ -38,34 +38,38 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
   //this function is called at the begining of each event
   //
+  //G4double worldSizeXY = 0;
+  G4double worldSizeZ  = 0;
 
-  // In order to avoid dependence of PrimaryGeneratorAction
-  // on DetectorConstruction class we get Envelope volume
-  // from G4LogicalVolumeStore.
-  /*
-  G4double worldZHalfLength = 0.;
-  auto worldLV = G4LogicalVolumeStore::GetInstance()->GetVolume("World");
-  G4Box* worldBox = nullptr;
-  if ( worldLV )
+  if(!fWorldBox)
   {
-    worldBox = dynamic_cast<G4Box*>(worldLV->GetSolid());
+    G4LogicalVolume* worLV
+      = G4LogicalVolumeStore::GetInstance()->GetVolume("World");
+    if(worLV) 
+      fWorldBox = dynamic_cast<G4Box*>(worLV->GetSolid());
   }
-  if ( worldBox ) 
-  {	  
-    worldZHalfLength = worldBox->GetZHalfLength();
+
+  if ( fWorldBox )
+  {
+    //worldSizeXY = fWorldBox->GetXHalfLength()*2.;
+    worldSizeZ = fWorldBox->GetZHalfLength()*2.;
   }
-  else 
+  else
   {
     G4ExceptionDescription msg;
-    msg << "Envelope volume of box shape not found.\n"; 
+    msg << "Envelope volume of box shape not found.\n";
     msg << "Perhaps you have changed geometry.\n";
     msg << "The gun will be place at the center.";
     G4Exception("B1PrimaryGeneratorAction::GeneratePrimaries()",
      "MyCode0002",JustWarning,msg);
   }
-  */
+
+  G4double x0 = 0.*mm;
+  G4double y0 = 150.*mm;
+  G4double z0 = -1.1/1.2/2*worldSizeZ;
+  
   //set gun position 
-  fParticleGun->SetParticlePosition( G4ThreeVector(0.*mm, 150.*mm, -2000.*mm) );
+  fParticleGun->SetParticlePosition( G4ThreeVector(x0, y0, z0) );
 
   fParticleGun->GeneratePrimaryVertex(anEvent);
 }
