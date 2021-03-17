@@ -12,7 +12,6 @@
 #include "StackingAction.hh"
 
 #include "PhysicsList.hh"
-#include "FTFP_BERT_HP.hh"
 #include "G4VisExecutive.hh"
 #include "G4UIExecutive.hh"
 
@@ -41,8 +40,7 @@ int main(int argc,char **argv)		//Detect interactive mode (if no arguments ) and
   runManager->SetUserInitialization(new DetectorConstruction());
 
   //Physics list
-  G4VModularPhysicsList* physicsList = new FTFP_BERT_HP;
-  //G4VModularPhysicsList* physicsList = new PhysicsList();
+  G4VModularPhysicsList* physicsList = new PhysicsList();
   physicsList->SetVerboseLevel(1);
   runManager->SetUserInitialization(physicsList);
 

@@ -8,6 +8,7 @@
 #include "G4NistManager.hh"
 #include "G4Box.hh"
 #include "G4Tubs.hh"
+#include "G4Sphere.hh"
 #include "G4EllipticalTube.hh"
 #include "G4LogicalVolume.hh"
 #include "G4PVPlacement.hh"
@@ -27,17 +28,21 @@ DetectorConstruction::~DetectorConstruction()
 
 G4VPhysicalVolume* DetectorConstruction::Construct()
 {
+  G4double z, a, density, fractionmass;
+  G4String name, symbol;
+  G4int ncomponents, natoms;
+	
   G4bool checkOverlaps = true;    //option to switch on/off checking of volumes overlaps
 
-  //The parameters of the shielding external layer
-  G4double R_Pb = 5.*mm;
-  G4double DZ_Pb_front = 10.*mm;
-  G4double DZ_Pb_behind = 10.*mm;
+  ////The parameters of the shielding external layer
+  //G4double R_Pb = 5.*mm;
+  //G4double DZ_Pb_front = 10.*mm;
+  //G4double DZ_Pb_behind = 10.*mm;
 
-  //The parameters of the shielding internal layer
-  G4double R_Po = 5.*mm;
-  G4double DZ_Po_front = 10.*mm;
-  G4double DZ_Po_behind = 10.*mm;
+  ////The parameters of the shielding internal layer
+  //G4double R_Po = 5.*mm;
+  //G4double DZ_Po_front = 10.*mm;
+  //G4double DZ_Po_behind = 10.*mm;
  
   //The parameter of the vacuum chamber 
   G4double vach_pRMin = 0.*mm; 
@@ -55,11 +60,12 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   //
   G4NistManager* nist = G4NistManager::Instance();
   
-  G4double world_sizeXY = 1.2*2*(vach_pRMax + R_Pb + R_Po);
-  G4double world_sizeZ  = 1.2*(vach_pDZ + DZ_Pb_front + DZ_Pb_behind + DZ_Po_front + DZ_Po_behind);
-
-  G4double worldsize = world_sizeZ>world_sizeXY?world_sizeZ:world_sizeXY;
+  //G4double world_sizeXY = 1.2*2*(vach_pRMax + R_Pb + R_Po);
+  //G4double world_sizeZ  = 1.2*(vach_pDZ + DZ_Pb_front + DZ_Pb_behind + DZ_Po_front + DZ_Po_behind);
+  //G4double worldsize = world_sizeZ>world_sizeXY?world_sizeZ:world_sizeXY;
   
+  G4double worldsize = 3.*m;
+
   G4Material* world_mat = nist->FindOrBuildMaterial("G4_Galactic");
 
   G4Box* solidWorld =
@@ -79,15 +85,43 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 		          false,		//no boolean operation
 		          0,			//copy number
 		          checkOverlaps);	//overlaps checking
- 
+
+  //
+  //Tracker
+  //
+  G4double Trac_RMax = 1.001*m;
+  G4double Trac_RMin = 1.000*m;
+  G4double Trac_SPhi = 0.*deg;
+  G4double Trac_STheta = 0.*deg;
+  G4double Trac_DPhi = 360.*deg;
+  G4double Trac_DTheta = 360.*deg;
+
+  G4Material* tracker_mat = nist->FindOrBuildMaterial("G4_Galactic");
+  //G4ThreeVector tracker_pos = G4ThreeVector(0.*mm, 150.*mm, -4.6*mm);
+
+  G4Sphere* solidTracker =
+      new G4Sphere("Tracker",
+      Trac_RMin, Trac_RMax, Trac_SPhi, Trac_DPhi, Trac_STheta, Trac_DTheta);
+
+  G4LogicalVolume* logicTracker =
+      new G4LogicalVolume(solidTracker,         //its solid
+                          tracker_mat,          //its material
+                          "Tracker");           //its name
+  
+        new G4PVPlacement(0,                    //no rotation
+                          G4ThreeVector(),      //at (0.*mm, 150.*mm, -4.6*mm)
+                          logicTracker,         //its logical volume
+                          "Tracker",            //its name
+                          logicWorld,           //its mather volume
+                          false,                //no boolean operation
+                          0,                    //copy number
+                          checkOverlaps);       //overlaps checking
+
+/* 
  //
  //Shield(material:Boron containing polyethylene + Pb)
  //
  G4Material* shie_mat1_poly = nist->FindOrBuildMaterial("G4_POLYETHYLENE");		//material: polyethylene
- 
- G4double z, a, density, fractionmass;
- G4String name, symbol;
- G4int ncomponents, natoms;
  
  a = 10.811*g/mole;									//material:B4C
  G4Element* elB = new G4Element(name="Boron", symbol="B", z=5., a);
@@ -214,6 +248,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                     true,                       //boolean operation:subtraction
                     0,                          //copy number
                     checkOverlaps);             //overlaps checking
+*/
 
  //
  //vacuum chanber
@@ -229,7 +264,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 		    G4ThreeVector(),		//at(0,0,0)
                     logicalvach,		//its logical volume
 		    "vach",			//its name
-		    logicWorld,			//its mather volume
+		    logicTracker,		//its mather volume
 		    false, 			//no boolean operation
 		    0, 				//copy number
 		    checkOverlaps);		//overlaps checking
@@ -364,8 +399,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4VisAttributes* heavywaterVisAtt = new G4VisAttributes(G4Colour(1.0,0.0,0.0));
 
   logicWorld      ->SetVisAttributes(boxVisAtt);
-  logicShie_Pb    ->SetVisAttributes(shieldVisAtt);
-  logicShie_Po    ->SetVisAttributes(shieldVisAtt);
+  //logicShie_Pb    ->SetVisAttributes(shieldVisAtt);
+  //logicShie_Po    ->SetVisAttributes(shieldVisAtt);
   logicHeavyWater ->SetVisAttributes(heavywaterVisAtt);
 
   fScoringVolume = logicHeavyWater;

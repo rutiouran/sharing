@@ -15,7 +15,7 @@
 
 //#include "G4DecayPhysics.hh"
 //#include "G4RadioactiveDecayPhysics.hh"
-//#include "DeuteronNuclearPhysics.hh"
+#include "DeuteronNuclearPhysics.hh"
 //#include "G4ionIonisation.hh"
 
 PhysicsList::PhysicsList()
@@ -46,7 +46,7 @@ PhysicsList::PhysicsList()
 
   // Gamma-Nuclear Physics
   //
-  RegisterPhysics( new GammaNuclearPhysics("gamma"));
+  //RegisterPhysics( new GammaNuclearPhysics("gamma"));
   
   // EM physics
   //
@@ -61,6 +61,12 @@ PhysicsList::PhysicsList()
   RegisterPhysics(new G4RadioactiveDecayPhysics(verb));
 
 
+  //G4ionIonisation
+  //
+  RegisterPhysics(new DeuteronNuclearPhysics(verb));
+
+
+
 //  //Specify the complexity of the output information
 //  SetVerboseLevel(1);
 //  //Decay
@@ -69,8 +75,6 @@ PhysicsList::PhysicsList()
 //  //Radioactive Decay
 //  RegisterPhysics(new G4RadioactiveDecayPhysics());
 //
-//  //G4ionIonisation
-//  RegisterPhysics(new DeuteronNuclearPhysics());
 //
 //
 //  RegisterPhysics(new ElectromagneticPhysics());

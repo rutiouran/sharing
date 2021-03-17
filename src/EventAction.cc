@@ -35,6 +35,7 @@ EventAction::GetHitsCollection(G4int hcID,
     msg << "Cannot access hitsCollection ID" << hcID;
     G4Exception("EventAction::GetHitsCollection()",
         "MyCode0003", FatalException, msg);
+
   }
 
   return hitsCollection;
@@ -53,7 +54,7 @@ void EventAction::PrintEventStatistics
 }
 
 void EventAction::BeginOfEventAction(const G4Event*)
-{ }
+{}
 
 void EventAction::EndOfEventAction(const G4Event* event)
 {
