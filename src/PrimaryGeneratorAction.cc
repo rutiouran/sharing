@@ -39,30 +39,30 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   //this function is called at the begining of each event
   //
   //G4double worldSizeXY = 0;
-  G4double worldSizeZ  = 0;
-
-  if(!fWorldBox)
-  {
-    G4LogicalVolume* worLV
-      = G4LogicalVolumeStore::GetInstance()->GetVolume("World");
-    if(worLV) 
-      fWorldBox = dynamic_cast<G4Box*>(worLV->GetSolid());
-  }
-
-  if ( fWorldBox )
-  {
-    //worldSizeXY = fWorldBox->GetXHalfLength()*2.;
-    worldSizeZ = fWorldBox->GetZHalfLength()*2.;
-  }
-  else
-  {
-    G4ExceptionDescription msg;
-    msg << "Envelope volume of box shape not found.\n";
-    msg << "Perhaps you have changed geometry.\n";
-    msg << "The gun will be place at the center.";
-    G4Exception("B1PrimaryGeneratorAction::GeneratePrimaries()",
-     "MyCode0002",JustWarning,msg);
-  }
+//  G4double worldSizeZ  = 0;
+//
+//  if(!fWorldBox)
+//  {
+//    G4LogicalVolume* worLV
+//      = G4LogicalVolumeStore::GetInstance()->GetVolume("World");
+//    if(worLV) 
+//      fWorldBox = dynamic_cast<G4Box*>(worLV->GetSolid());
+//  }
+//
+//  if ( fWorldBox )
+//  {
+//    //worldSizeXY = fWorldBox->GetXHalfLengt()*2.;
+//    worldSizeZ = fWorldBox->GetZHalfLength()*2.;
+//  }
+//  else
+//  {
+//    G4ExceptionDescription msg;
+//    msg << "Envelope volume of box shape not found.\n";
+//    msg << "Perhaps you have changed geometry.\n";
+//    msg << "The gun will be place at the center.";
+//    G4Exception("B1PrimaryGeneratorAction::GeneratePrimaries()",
+//     "MyCode0002",JustWarning,msg);
+//  }
 
   G4double x0 = 0.*mm;
   G4double y0 = 150.*mm;
@@ -71,6 +71,6 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
   //set gun position 
   fParticleGun->SetParticlePosition( G4ThreeVector(x0, y0, z0) );
-
+  //fParticleGun->SetParticleCharge(1*eplus);
   fParticleGun->GeneratePrimaryVertex(anEvent);
 }

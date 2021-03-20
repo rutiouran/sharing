@@ -6,7 +6,9 @@
 #include "G4HadronElasticPhysicsHP.hh"
 #include "G4HadronPhysicsQGSP_BIC_HP.hh"
 #include "G4IonElasticPhysics.hh"
-#include "G4IonPhysicsPHP.hh"
+#include "G4IonPhysics.hh"
+#include "G4IonQMDPhysics.hh"
+#include "G4EmStandardPhysics.hh"
 #include "G4StoppingPhysics.hh"
 #include "GammaNuclearPhysics.hh"
 #include "ElectromagneticPhysics.hh"
@@ -24,6 +26,8 @@ PhysicsList::PhysicsList()
   G4int verb = 1;
   SetVerboseLevel(verb);
 
+  AddTransportation();
+
   //Hadron Elastic scattering
   //
   RegisterPhysics(new G4HadronElasticPhysicsHP(verb));
@@ -38,7 +42,8 @@ PhysicsList::PhysicsList()
 
   // Ion Inelastic physics
   //
-  RegisterPhysics(new G4IonPhysicsPHP(verb));
+  //RegisterPhysics(new G4IonPhysics(verb));
+  RegisterPhysics(new G4IonQMDPhysics(verb));
 
   // stopping Particles
   //
@@ -51,7 +56,7 @@ PhysicsList::PhysicsList()
   // EM physics
   //
   RegisterPhysics(new ElectromagneticPhysics(verb));
-
+  RegisterPhysics(new G4EmStandardPhysics(verb));
   // Decay
   //
   RegisterPhysics(new G4DecayPhysics(verb));

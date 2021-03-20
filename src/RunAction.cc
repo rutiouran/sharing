@@ -36,6 +36,14 @@ RunAction::RunAction()
   analysisManager->CreateH1("pid1", "Pid in heavy water target behind 1e9", 100, -3000, 3000);
   analysisManager->CreateH1("Pid2", "Pid in heavy water target after 1e9", 100, 1000000000, 1000100000);
 
+  analysisManager->CreateH3("neutron flux", "neutron flux in the tracker",
+		            100, -1.5, 1.5,
+			    100, -1.5, 1.5,
+			    100, -1.5, 1.5);
+  analysisManager->CreateH1("nefl-x", "neutron flux in the tracker of the x axis", 100, -1, 1);
+  analysisManager->CreateH1("nefl-y", "neutron flux in the tracker of the y axis", 100, -1, 1);
+  analysisManager->CreateH1("nefl-z", "neutron flux in the tracker of the z axis", 100, -1, 1);
+
   analysisManager->SetFirstNtupleId(1);
 
   //Creating ntuple

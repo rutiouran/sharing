@@ -59,27 +59,25 @@ void DeuteronNuclearPhysics::ConstructProcess()
   auto particleIterator=GetParticleIterator();
   particleIterator->reset();
 
-#if 0
+
   while( (*particleIterator)() ){
     G4ParticleDefinition* particle = particleIterator->value();
     G4String particleName = particle->GetParticleName();
 
     if( particleName == "deuteron" ) {
-	  std::cout << "******** add d" << std::endl;
-      //ph->RegisterProcess(new G4hMultipleScattering(), particle);
+      ph->RegisterProcess(new G4hMultipleScattering(), particle);
       G4ionIonisation* ionIoni = new G4ionIonisation();
       ionIoni->SetEmModel(new G4IonParametrisedLossModel());
-	  //ionIoni->SetEmModel(new G4BraggIonModel(), 1);
-	  //ionIoni->SetEmModel(new G4BetheBlochModel(), 2);
+	  ionIoni->SetEmModel(new G4BraggIonModel(), 1);
+	  ionIoni->SetEmModel(new G4BetheBlochModel(), 2);
       ph->RegisterProcess(ionIoni,                    particle);
       ph->RegisterProcess(new G4NuclearStopping(),    particle);
       
     }
-#endif
 
-  while( (*particleIterator)() ){
-    G4ParticleDefinition* particle = particleIterator->value();
-    G4String particleName = particle->GetParticleName();
+//  while( (*particleIterator)() ){
+//    G4ParticleDefinition* particle = particleIterator->value();
+//    G4String particleName = particle->GetParticleName();
 
     if (particleName == "gamma") {
 

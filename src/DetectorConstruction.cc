@@ -3,6 +3,7 @@
 
 #include "G4SDManager.hh"
 #include "HeavyWaterSD.hh"
+#include "TrackerSD.hh"
 
 #include "G4RunManager.hh"
 #include "G4NistManager.hh"
@@ -19,8 +20,7 @@
 #include "G4SubtractionSolid.hh"
 
 DetectorConstruction::DetectorConstruction()
-:G4VUserDetectorConstruction(),
- fScoringVolume(0)
+:G4VUserDetectorConstruction()
 { }
 
 DetectorConstruction::~DetectorConstruction()
@@ -34,15 +34,15 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	
   G4bool checkOverlaps = true;    //option to switch on/off checking of volumes overlaps
 
-  ////The parameters of the shielding external layer
-  //G4double R_Pb = 5.*mm;
-  //G4double DZ_Pb_front = 10.*mm;
-  //G4double DZ_Pb_behind = 10.*mm;
+  //The parameters of the shielding external layer
+  G4double R_Pb = 10.*mm;
+  G4double DZ_Pb_front = 50.*mm;
+  G4double DZ_Pb_behind = 50.*mm;
 
-  ////The parameters of the shielding internal layer
-  //G4double R_Po = 5.*mm;
-  //G4double DZ_Po_front = 10.*mm;
-  //G4double DZ_Po_behind = 10.*mm;
+  //The parameters of the shielding internal layer
+  G4double R_Po = 10.*mm;
+  G4double DZ_Po_front = 50.*mm;
+  G4double DZ_Po_behind = 50.*mm;
  
   //The parameter of the vacuum chamber 
   G4double vach_pRMin = 0.*mm; 
@@ -60,9 +60,9 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   //
   G4NistManager* nist = G4NistManager::Instance();
   
-  //G4double world_sizeXY = 1.2*2*(vach_pRMax + R_Pb + R_Po);
-  //G4double world_sizeZ  = 1.2*(vach_pDZ + DZ_Pb_front + DZ_Pb_behind + DZ_Po_front + DZ_Po_behind);
-  //G4double worldsize = world_sizeZ>world_sizeXY?world_sizeZ:world_sizeXY;
+//  G4double world_sizeXY = 1.2*2*(vach_pRMax + R_Pb + R_Po);
+//  G4double world_sizeZ  = 1.2*(vach_pDZ + DZ_Pb_front + DZ_Pb_behind + DZ_Po_front + DZ_Po_behind);
+//  G4double worldsize = world_sizeZ>world_sizeXY?world_sizeZ:world_sizeXY;
   
   G4double worldsize = 3.*m;
 
@@ -97,7 +97,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4double Trac_DTheta = 360.*deg;
 
   G4Material* tracker_mat = nist->FindOrBuildMaterial("G4_Galactic");
-  //G4ThreeVector tracker_pos = G4ThreeVector(0.*mm, 150.*mm, -4.6*mm);
+  G4ThreeVector tracker_pos = G4ThreeVector(0.*mm, 150.*mm, -4.6*mm);
 
   G4Sphere* solidTracker =
       new G4Sphere("Tracker",
@@ -109,7 +109,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                           "Tracker");           //its name
   
         new G4PVPlacement(0,                    //no rotation
-                          G4ThreeVector(),      //at (0.*mm, 150.*mm, -4.6*mm)
+                          //G4ThreeVector(),      //at (0, 0, 0)
+			  tracker_pos,
                           logicTracker,         //its logical volume
                           "Tracker",            //its name
                           logicWorld,           //its mather volume
@@ -248,8 +249,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                     true,                       //boolean operation:subtraction
                     0,                          //copy number
                     checkOverlaps);             //overlaps checking
-*/
 
+*/
  //
  //vacuum chanber
  //
@@ -264,7 +265,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 		    G4ThreeVector(),		//at(0,0,0)
                     logicalvach,		//its logical volume
 		    "vach",			//its name
-		    logicTracker,		//its mather volume
+		    logicWorld,			//its mather volume
+		    //logicShie_Po,
 		    false, 			//no boolean operation
 		    0, 				//copy number
 		    checkOverlaps);		//overlaps checking
@@ -357,17 +359,18 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  //
  //Heavy Water
  //
- a = 2.00*g/mole;		//specify the molar mass of deuterium
- G4Element* elD = new G4Element(name="deuterium", symbol="D", z=1., a);		//creat deuterium
+ G4Isotope* O16= new G4Isotope("O16", 8, 16); 
+ G4Element* O  = new G4Element("O_of_Heavy_Water", "O" , 1);
+ O->AddIsotope(O16, 100*perCent);
 
- a = 16.00*g/mole;
- G4Element* elO = new G4Element(name="oxygen", symbol="O", z=8., a);
+ G4Isotope* H2 = new G4Isotope("H2",1,2);
+ G4Element* D  = new G4Element("D_of_Heavy_Water", "D", 1);
+ D->AddIsotope(H2, 100*perCent);
 
- density = 1.1079*g/cm3;
-
- G4Material* HeavyWater_mat = new G4Material(name="HeavyWater_mat", density, ncomponents=2);
- HeavyWater_mat->AddElement(elD, natoms=2);
- HeavyWater_mat->AddElement(elO, natoms=1);
+ G4Material* D2O = new G4Material("D2O", 1.11*g/cm3, ncomponents=2,
+                        kStateLiquid, 293.15*kelvin, 1*atmosphere);
+ D2O->AddElement(D, natoms=2);
+ D2O->AddElement(O, natoms=1);
 
  G4ThreeVector hewa_pos = G4ThreeVector(0.*mm, 150.*mm, -4.6*mm);
 
@@ -375,18 +378,18 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
  G4double HeavyWater_DY = 3.*mm;
  G4double HeavyWater_DZ = 0.4*mm;
  G4EllipticalTube* solidHeavyWater =
-    new G4EllipticalTube("HeavyWater",
+    new G4EllipticalTube("HeavyWater_SO",
         HeavyWater_DX, HeavyWater_DY, HeavyWater_DZ);
 
  G4LogicalVolume* logicHeavyWater =
     new G4LogicalVolume(solidHeavyWater,	//its solid
-		        HeavyWater_mat,		//its material
-		        "HeavyWater");		//its name
+		        D2O,			//its material
+		        "HeavyWater_LV");	//its name
 
   new G4PVPlacement(0,				//no rotation
 		    hewa_pos,			//at (0, 150.*mm, -4.6*mm)
 		    logicHeavyWater,		//its logical
-		    "HeavyWater",		//its name
+		    "HeavyWater_PV",		//its name
 		    logicalAlch, 		//its mother volume
 		    false, 			//no boolean operation
 		    0,				//copy numble
@@ -403,22 +406,25 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   //logicShie_Po    ->SetVisAttributes(shieldVisAtt);
   logicHeavyWater ->SetVisAttributes(heavywaterVisAtt);
 
-  fScoringVolume = logicHeavyWater;
-
-  //std::cout << *(G4Material::GetMaterialTable()) << std::endl;	//Get material table
+  std::cout << *(G4Material::GetMaterialTable()) << std::endl;	//Get material table
 
   return PhysWorld;
 }
 
 void DetectorConstruction::ConstructSDandField()
 {
- //G4SDManager::GetSDMpointer()->SetVerboseLevel(1);
+ G4SDManager::GetSDMpointer()->SetVerboseLevel(1);
  
  //
  //Sensitive detectors
  //
  auto heavyWaterSD
-   = new HeavyWaterSD("HeavyWaterSD", "HeavyWaterHitsCollection");
+   = new HeavyWaterSD("sharing/HeavyWaterSD", "HeavyWaterHitsCollection");
  G4SDManager::GetSDMpointer()->AddNewDetector(heavyWaterSD);
- SetSensitiveDetector("HeavyWater", heavyWaterSD);
+ SetSensitiveDetector("HeavyWater_LV", heavyWaterSD);
+
+ auto trackerSD
+   = new TrackerSD("sharing/TrackerSD", "TrackerHitsCollection");
+ G4SDManager::GetSDMpointer()->AddNewDetector(trackerSD);
+ SetSensitiveDetector("Tracker", trackerSD);
 }
