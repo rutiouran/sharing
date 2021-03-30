@@ -24,31 +24,45 @@ void HeavyWaterSD::Initialize(G4HCofThisEvent* hce)
     = new HeavyWaterHitsCollection(SensitiveDetectorName, collectionName[0]); 
 
   // Add this collection in hce
-  auto hcID 
+  G4int hcID 
     = G4SDManager::GetSDMpointer()->GetCollectionID(collectionName[0]);
   hce->AddHitsCollection( hcID, fHitsCollection ); 
 
-  // Create hits
-  //for (G4int i=0; i<1; i++ ) {
-    fHitsCollection->insert(new HeavyWaterHit());
-  //}
+  fHitsCollection->insert(new HeavyWaterHit());
 }
 
 G4bool HeavyWaterSD::ProcessHits(G4Step* step, 
                                      G4TouchableHistory*)
 {  
-  // energy deposit
+  //Energy deposit
   auto edep = step->GetTotalEnergyDeposit();
-  
-  // energy loss
-  //auto edep = step->GetDeltaEnergy();
-  
+ 
+  //Step length
+  G4double stepLength = 0.;
+  if( step->GetTrack()->GetDefinition()->GetPDGCharge() != 0)
+  {
+    stepLength = step->GetStepLength();
+    G4cout << "记录一次步长" << G4endl;
+  }
+
+  if(edep == 0. && stepLength == 0.) return false;
+
+//  HeavyWaterHit* newHit = new HeavyWaterHit();	//无效方法
+//
+//  newHit->SetTrackID(step->GetTrack()->GetTrackID());
+//  newHit->SetEdep(edep);
+//  newHit->SetTrackLength(stepLength);
+//  newHit->Add(edep, stepLength);
+//  fHitsCollection->insert(newHit);			//无效方法
+
   //Fill histograms and ntuple
   auto analysisManager = G4AnalysisManager::Instance();
 
   G4int pid = step->GetTrack()->GetParticleDefinition()->GetPDGEncoding();
+  
+  G4int ParentID = step->GetTrack()->GetParentID();
   if(pid == 2112)
-  std::cout << "pid: " << pid << ", edep: " << edep << ", step: " << step << std::endl; 
+  G4cout << "pid: " << pid << ", edep: " << edep << ", step: " << step << G4endl; 
   
   if(pid<1e9)
   {
@@ -61,16 +75,9 @@ G4bool HeavyWaterSD::ProcessHits(G4Step* step,
 
   analysisManager->FillNtupleDColumn(2, 0, pid);
   analysisManager->AddNtupleRow(2);
-  
-  // step length
-  G4double stepLength = 0.;
-  if ( step->GetTrack()->GetDefinition()->GetPDGCharge() != 0. ) {
-    stepLength = step->GetStepLength();
-  }
 
-  if(pid == 2112) step->GetTrack()->SetTrackStatus(fStopAndKill);
-
-  if ( edep==0. && stepLength == 0. ) return false;      
+  //Avoid double counting
+  //if(pid == 2112) step->GetTrack()->SetTrackStatus(fStopAndKill);
 
   auto touchable = (step->GetPreStepPoint()->GetTouchable());
     
@@ -100,6 +107,6 @@ void HeavyWaterSD::EndOfEvent(G4HCofThisEvent*)
        << "-------->Hits Collection: in this event they are " << nofHits 
        << " hits in the tracker chambers: " << G4endl;
      //for ( std::size_t i=0; i<nofHits; ++i ) 
-     (*fHitsCollection)[0]->Print();
+     //(*fHitsCollection)[0]->Print();
   }
 }

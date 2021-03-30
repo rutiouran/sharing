@@ -67,7 +67,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   G4double x0 = 0.*mm;
   G4double y0 = 150.*mm;
   //G4double z0 = -1.1/1.2/2*worldSizeZ;
-  G4double z0 = -300.*mm;
+  G4double z0 = -500.*mm;
 
   //set gun position 
   fParticleGun->SetParticlePosition( G4ThreeVector(x0, y0, z0) );

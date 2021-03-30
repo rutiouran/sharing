@@ -7,6 +7,8 @@
 #include "TrackerHit.hh"
 #include "HeavyWaterHit.hh"
 
+#include "G4ThreeVector.hh"
+
 //class RunAction;
 
 /// Event action class
@@ -26,8 +28,10 @@ private:
   
   TrackerHitsCollection*    GetTrackHitsCollection(G4int hcID, const G4Event* event) const;
 
-  void PrintEventStatistics(G4double hwEdep, G4double hwTrackLength) const;
-  
+//  void PrintHeavyEventStatistics(G4double heavyEdep, G4double heavyTrackLength) const;
+//  void PrintTrackEventStatistics(G4int trackID, G4ThreeVector trackPos) const;
+
+
   G4int fHeavyHCID;
   G4int fTrackHCID;
 };

@@ -35,14 +35,14 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4bool checkOverlaps = true;    //option to switch on/off checking of volumes overlaps
 
   //The parameters of the shielding external layer
-  G4double R_Pb = 10.*mm;
-  G4double DZ_Pb_front = 50.*mm;
-  G4double DZ_Pb_behind = 50.*mm;
+  G4double R_Pb = 100.*mm;
+  G4double DZ_Pb_front = 200.*mm;
+  G4double DZ_Pb_behind = 200.*mm;
 
   //The parameters of the shielding internal layer
-  G4double R_Po = 10.*mm;
-  G4double DZ_Po_front = 50.*mm;
-  G4double DZ_Po_behind = 50.*mm;
+  G4double R_Po = 100.*mm;
+  G4double DZ_Po_front = 200.*mm;
+  G4double DZ_Po_behind = 200.*mm;
  
   //The parameter of the vacuum chamber 
   G4double vach_pRMin = 0.*mm; 
@@ -89,7 +89,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   //
   //Tracker
   //
-  G4double Trac_RMax = 1.001*m;
+  G4double Trac_RMax = 1.010*m;
   G4double Trac_RMin = 1.000*m;
   G4double Trac_SPhi = 0.*deg;
   G4double Trac_STheta = 0.*deg;
@@ -118,7 +118,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                           0,                    //copy number
                           checkOverlaps);       //overlaps checking
 
-/* 
+ 
  //
  //Shield(material:Boron containing polyethylene + Pb)
  //
@@ -250,7 +250,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                     0,                          //copy number
                     checkOverlaps);             //overlaps checking
 
-*/
+
  //
  //vacuum chanber
  //
@@ -402,8 +402,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4VisAttributes* heavywaterVisAtt = new G4VisAttributes(G4Colour(1.0,0.0,0.0));
 
   logicWorld      ->SetVisAttributes(boxVisAtt);
-  //logicShie_Pb    ->SetVisAttributes(shieldVisAtt);
-  //logicShie_Po    ->SetVisAttributes(shieldVisAtt);
+  logicShie_Pb    ->SetVisAttributes(shieldVisAtt);
+  logicShie_Po    ->SetVisAttributes(shieldVisAtt);
   logicHeavyWater ->SetVisAttributes(heavywaterVisAtt);
 
   std::cout << *(G4Material::GetMaterialTable()) << std::endl;	//Get material table

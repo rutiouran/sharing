@@ -38,12 +38,13 @@ PhysicsList::PhysicsList()
 
   // Ion Elastic scattering
   //
-  RegisterPhysics(new G4IonElasticPhysics(verb));
+  //RegisterPhysics(new G4IonElasticPhysics(verb));
 
   // Ion Inelastic physics
   //
   //RegisterPhysics(new G4IonPhysics(verb));
-  RegisterPhysics(new G4IonQMDPhysics(verb));
+  //RegisterPhysics(new G4IonQMDPhysics(verb));
+  RegisterPhysics(new G4IonPhysics(verb));
 
   // stopping Particles
   //
@@ -51,12 +52,13 @@ PhysicsList::PhysicsList()
 
   // Gamma-Nuclear Physics
   //
-  //RegisterPhysics( new GammaNuclearPhysics("gamma"));
+  RegisterPhysics( new GammaNuclearPhysics("gamma"));
   
   // EM physics
   //
   RegisterPhysics(new ElectromagneticPhysics(verb));
-  RegisterPhysics(new G4EmStandardPhysics(verb));
+  //RegisterPhysics(new G4EmStandardPhysics(verb));
+
   // Decay
   //
   RegisterPhysics(new G4DecayPhysics(verb));

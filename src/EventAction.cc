@@ -66,17 +66,29 @@ EventAction::GetTrackHitsCollection(G4int hcID,
   return TrackhitsCollection;
 }
 
-void EventAction::PrintEventStatistics
-     (G4double heavyEdep, G4double heavyTrackLength) const
-{
-  //Print event statistics
-  G4cout
-     << "Heavywater: total energy:"
-     << std::setw(7) << G4BestUnit(heavyEdep, "Energy")
-     << "total track length:"
-     << std::setw(7) << G4BestUnit(heavyTrackLength, "Length")
-     << G4endl;
-}
+//void EventAction::PrintHeavyEventStatistics
+//     (G4double heavyEdep, G4double heavyTrackLength) const
+//{
+//  //Print event statistics
+//  G4cout
+//     << "Heavywater: total energy:"
+//     << std::setw(7) << G4BestUnit(heavyEdep, "Energy")
+//     << "total track length:"
+//     << std::setw(7) << G4BestUnit(heavyTrackLength, "Length")
+//     << G4endl;
+//}
+
+//void EventAction::PrintTrackEventStatistics
+//     (G4int trackID, G4ThreeVector trackPos) const
+//{
+//  G4cout
+//     << "Tracker:" << G4endl
+//     << "trackID:"
+//     //<< std::setw(7) << trackID
+//     << "position:"
+//     //<< std::setw(7) << G4BestUnit(trackPos, "Length")
+//     << G4endl;
+//}
 
 void EventAction::BeginOfEventAction(const G4Event*)
 {}
@@ -104,15 +116,18 @@ void EventAction::EndOfEventAction(const G4Event* event)
   auto heavyHit = (*heavyHC)[heavyHC->entries()-1];
   auto trackHit = (*trackHC)[trackHC->entries()-1];
 
-  //Print per event (modulo n)
-  auto eventID = event->GetEventID();
-  auto printModulo = G4RunManager::GetRunManager()->GetPrintProgress();
-  if((printModulo>0)&&(eventID%printModulo == 0))
-  {
-    G4cout << "---> End of event:" << eventID << G4endl;
-
-    PrintEventStatistics(heavyHit->GetEdep(), heavyHit->GetTrackLength()); 
-  }
+//  //Print per event (modulo n)
+//  auto eventID = event->GetEventID();
+//  auto printModulo = G4RunManager::GetRunManager()->GetPrintProgress();
+//  
+//  //if((printModulo>0)&&(eventID%printModulo == 0))
+//  if((printModulo>0)&&(eventID%10000 == 0))
+//  {
+//    G4cout << "---> End of event:" << eventID << G4endl;
+//
+//    //PrintHeavyEventStatistics(heavyHit->GetEdep(), heavyHit->GetTrackLength());
+//    //PrintTrackEventStatistics(trackHit->GetTrackID(), trackHit->GetPos());
+//  }
 
 
   //Fill histograms, ntuple
@@ -121,18 +136,12 @@ void EventAction::EndOfEventAction(const G4Event* event)
   //Get analysis manager
   auto analysisManager = G4AnalysisManager::Instance();
 
-  auto localPos = trackHit->GetPos();
-  
   //Fill histograms
   analysisManager->FillH1(0, heavyHit->GetEdep());
+  G4cout << "Fill : heavywater edep: " << heavyHit->GetEdep() << G4endl;
+
   analysisManager->FillH1(1, heavyHit->GetTrackLength());
-//  analysisManager->FillH3(4, localPos.x(), 
-//		             localPos.y(),
-//			     localPos.z()); 
-//
-//  analysisManager->FillH1(5, localPos.x());
-//  analysisManager->FillH1(6, localPos.y());
-//  analysisManager->FillH1(7, localPos.z());
+  G4cout << "Fill : heavywater TrackLength: " << heavyHit->GetTrackLength() << G4endl;
 
   //Fill ntuple
   analysisManager->FillNtupleDColumn(1, 0, heavyHit->GetEdep());

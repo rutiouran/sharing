@@ -33,13 +33,20 @@ class HeavyWaterHit : public G4VHit
     // methods to handle data
     void Add(G4double de, G4double dl);
 
+//    //Set methods
+//    void SetTrackID    (G4int track)	  {fTrackID = track;};
+//    void SetEdep       (G4double de)      {fEdep = de;};
+//    void SetTrackLength(G4double dl)      {fTrackLength = dl;};
+
     // get methods
-    G4double GetEdep() const;
-    G4double GetTrackLength() const;
+    G4int    GetTrackID() const 	{return fTrackID;};
+    G4double GetEdep() const		{return fEdep;};
+    G4double GetTrackLength() const	{return fTrackLength;};
 
   private:
-    G4double fEdep;        ///< Energy deposit in the sensitive volume
-    G4double fTrackLength; ///< Track length in the  sensitive volume
+    G4int    fTrackID;
+    G4double fEdep;
+    G4double fTrackLength;
 };
 
 using HeavyWaterHitsCollection = G4THitsCollection<HeavyWaterHit>;
@@ -66,18 +73,10 @@ inline void HeavyWaterHit::operator delete(void *hit)
 
 inline void HeavyWaterHit::Add(G4double de, G4double dl)
 {
-  fEdep += de; 
+  fEdep += de;
+  G4cout << "求和步骤: fEdep = " << fEdep << G4endl; 
   fTrackLength += dl;
-}
-
-inline G4double HeavyWaterHit::GetEdep() const 
-{ 
-  return fEdep; 
-}
-
-inline G4double HeavyWaterHit::GetTrackLength() const 
-{ 
-  return fTrackLength; 
+  G4cout << "求和步骤: fTrackLength = " << fTrackLength << G4endl;
 }
 
 #endif
