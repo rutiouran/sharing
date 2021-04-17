@@ -6,11 +6,6 @@
 #include "G4Allocator.hh"
 #include "G4ThreeVector.hh"
 #include "G4Threading.hh"
-/// Heavy Water Target hit class
-///
-/// It defines data members to store the the energy deposit and track lengths
-/// of charged particles in a selected volume:
-/// - fEdep, fTrackLength
 
 class HeavyWaterHit : public G4VHit
 {
@@ -28,25 +23,30 @@ class HeavyWaterHit : public G4VHit
 
     // methods from base class
     virtual void Draw() {}
-    virtual void Print();
 
     // methods to handle data
-    void Add(G4double de, G4double dl);
+    //void Add(G4double de, G4double dl);
 
-//    //Set methods
-//    void SetTrackID    (G4int track)	  {fTrackID = track;};
-//    void SetEdep       (G4double de)      {fEdep = de;};
-//    void SetTrackLength(G4double dl)      {fTrackLength = dl;};
+    //Set methods
+    void SetTrackID    (G4int track)	  {fTrackID = track;};
+    void SetEdep       (G4double de)      {fEdep = de;};
+    void SetTrackLength(G4double dl)      {fTrackLength = dl;};
+    void SetPid(G4double dp)              {fPid = dp;};
+    void SetStep();
 
     // get methods
     G4int    GetTrackID() const 	{return fTrackID;};
     G4double GetEdep() const		{return fEdep;};
     G4double GetTrackLength() const	{return fTrackLength;};
+    G4int    GetPid() const		{return fPid;};
+    G4int    GetStep() const		{return fStep;};
 
   private:
     G4int    fTrackID;
     G4double fEdep;
     G4double fTrackLength;
+    G4int    fPid;
+    G4int    fStep;
 };
 
 using HeavyWaterHitsCollection = G4THitsCollection<HeavyWaterHit>;
@@ -71,12 +71,15 @@ inline void HeavyWaterHit::operator delete(void *hit)
   HeavyWaterHitAllocator->FreeSingle((HeavyWaterHit*) hit);
 }
 
-inline void HeavyWaterHit::Add(G4double de, G4double dl)
+//inline void HeavyWaterHit::Add(G4double de, G4double dl)
+//{
+//  fEdep += de;
+//  fTrackLength += dl;
+//}
+
+inline void HeavyWaterHit::SetStep()
 {
-  fEdep += de;
-  G4cout << "求和步骤: fEdep = " << fEdep << G4endl; 
-  fTrackLength += dl;
-  G4cout << "求和步骤: fTrackLength = " << fTrackLength << G4endl;
+  fStep++;
 }
 
 #endif

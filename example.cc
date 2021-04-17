@@ -12,8 +12,6 @@
 #include "StackingAction.hh"
 
 #include "PhysicsList.hh"
-#include "FTFP_BERT.hh"
-#include "QGSP_BIC_HP.hh"
 #include "Shielding.hh"
 
 #include "G4VisExecutive.hh"
@@ -44,10 +42,9 @@ int main(int argc,char **argv)		//Detect interactive mode (if no arguments ) and
   runManager->SetUserInitialization(new DetectorConstruction());
 
   //Physics list
-  G4VModularPhysicsList* physicsList = new QGSP_BIC_HP;
-  //PhysicsList* physicsList = new PhysicsList;
+  PhysicsList* physicsList = new PhysicsList;
   physicsList->SetVerboseLevel(1);
-  runManager->SetUserInitialization(new Shielding);
+  //runManager->SetUserInitialization(new Shielding);
   runManager->SetUserInitialization(physicsList);
 
   //User action initialization

@@ -13,7 +13,9 @@ HeavyWaterHit::HeavyWaterHit()
  : G4VHit(),
    fTrackID(-1),
    fEdep(0.),
-   fTrackLength(0.)
+   fTrackLength(0.),
+   fPid(0),
+   fStep(-1)
 {}
 
 HeavyWaterHit::~HeavyWaterHit() 
@@ -25,6 +27,8 @@ HeavyWaterHit::HeavyWaterHit(const HeavyWaterHit& right)
   fTrackID     = right.fTrackID;
   fEdep        = right.fEdep;
   fTrackLength = right.fTrackLength;
+  fPid         = right.fPid;
+  fStep        = right.fStep;
 }
 
 const HeavyWaterHit& HeavyWaterHit::operator=(const HeavyWaterHit& right)
@@ -32,6 +36,8 @@ const HeavyWaterHit& HeavyWaterHit::operator=(const HeavyWaterHit& right)
   fTrackID     = right.fTrackID;
   fEdep        = right.fEdep;
   fTrackLength = right.fTrackLength;
+  fPid         = right.fPid;
+  fStep        = right.fStep;
 
   return *this;
 }
@@ -39,14 +45,4 @@ const HeavyWaterHit& HeavyWaterHit::operator=(const HeavyWaterHit& right)
 G4bool HeavyWaterHit::operator==(const HeavyWaterHit& right) const
 {
   return ( this == &right ) ? true : false;
-}
-
-void HeavyWaterHit::Print()
-{
-//  G4cout
-//     << "Edep: " 
-//     << std::setw(7) << G4BestUnit( fEdep, "Energy")
-//     << "Track length: " 
-//     << std::setw(7) << G4BestUnit( fTrackLength, "Length")
-//     << G4endl;
 }

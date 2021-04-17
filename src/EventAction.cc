@@ -66,30 +66,6 @@ EventAction::GetTrackHitsCollection(G4int hcID,
   return TrackhitsCollection;
 }
 
-//void EventAction::PrintHeavyEventStatistics
-//     (G4double heavyEdep, G4double heavyTrackLength) const
-//{
-//  //Print event statistics
-//  G4cout
-//     << "Heavywater: total energy:"
-//     << std::setw(7) << G4BestUnit(heavyEdep, "Energy")
-//     << "total track length:"
-//     << std::setw(7) << G4BestUnit(heavyTrackLength, "Length")
-//     << G4endl;
-//}
-
-//void EventAction::PrintTrackEventStatistics
-//     (G4int trackID, G4ThreeVector trackPos) const
-//{
-//  G4cout
-//     << "Tracker:" << G4endl
-//     << "trackID:"
-//     //<< std::setw(7) << trackID
-//     << "position:"
-//     //<< std::setw(7) << G4BestUnit(trackPos, "Length")
-//     << G4endl;
-//}
-
 void EventAction::BeginOfEventAction(const G4Event*)
 {}
 
@@ -112,23 +88,11 @@ void EventAction::EndOfEventAction(const G4Event* event)
   auto heavyHC = GetHeavyHitsCollection(fHeavyHCID, event);
   auto trackHC = GetTrackHitsCollection(fTrackHCID, event);
 
-  //Get hit with total values
-  auto heavyHit = (*heavyHC)[heavyHC->entries()-1];
-  auto trackHit = (*trackHC)[trackHC->entries()-1];
+  std::cout << "trackHC: " << trackHC->entries() << std::endl;
 
-//  //Print per event (modulo n)
-//  auto eventID = event->GetEventID();
-//  auto printModulo = G4RunManager::GetRunManager()->GetPrintProgress();
-//  
-//  //if((printModulo>0)&&(eventID%printModulo == 0))
-//  if((printModulo>0)&&(eventID%10000 == 0))
-//  {
-//    G4cout << "---> End of event:" << eventID << G4endl;
-//
-//    //PrintHeavyEventStatistics(heavyHit->GetEdep(), heavyHit->GetTrackLength());
-//    //PrintTrackEventStatistics(trackHit->GetTrackID(), trackHit->GetPos());
-//  }
-
+//  //Get hit with total values
+//  auto heavyHit = (*heavyHC)[heavyHC->entries()-1];
+//  auto trackHit = (*trackHC)[trackHC->entries()-1];
 
   //Fill histograms, ntuple
   //
@@ -136,15 +100,66 @@ void EventAction::EndOfEventAction(const G4Event* event)
   //Get analysis manager
   auto analysisManager = G4AnalysisManager::Instance();
 
-  //Fill histograms
-  analysisManager->FillH1(0, heavyHit->GetEdep());
-  G4cout << "Fill : heavywater edep: " << heavyHit->GetEdep() << G4endl;
+  G4double heavyEdep = 0.; // The deposit energy in heavy water
+  G4double heavyTral = 0.; // The track length in heavy water
 
-  analysisManager->FillH1(1, heavyHit->GetTrackLength());
-  G4cout << "Fill : heavywater TrackLength: " << heavyHit->GetTrackLength() << G4endl;
+  for(long unsigned int i=0; i<heavyHC->entries(); i++)
+  {
+    heavyEdep = (*heavyHC)[i]->GetEdep();
+    heavyTral = (*heavyHC)[i]->GetTrackLength();
+    if((*heavyHC)[i]->GetTrackID()!=1 && (*heavyHC)[i]->GetStep()==0 && (*heavyHC)[i]->GetPid()<1e9)
+      analysisManager->FillNtupleDColumn(1, 2, (*heavyHC)[i]->GetPid());
+    else
+      analysisManager->FillNtupleDColumn(1, 3, (*heavyHC)[i]->GetPid());
+  }
+  analysisManager->FillNtupleDColumn(1, 0, heavyEdep);
+  analysisManager->FillNtupleDColumn(1, 1, heavyTral);
+  analysisManager->AddNtupleRow(1);
 
-  //Fill ntuple
-  analysisManager->FillNtupleDColumn(1, 0, heavyHit->GetEdep());
-  analysisManager->FillNtupleDColumn(1, 1, heavyHit->GetTrackLength());
-  analysisManager->AddNtupleRow();
+//  analysisManager->FillNtupleDColumn(2, 0, (*trackHC)[0]->GetKineticEnergy());
+//  analysisManager->FillNtupleDColumn(2, 1, (*trackHC)[0]->GetPos().x()/CLHEP::m);
+//  analysisManager->FillNtupleDColumn(2, 2, (*trackHC)[0]->GetPos().y()/CLHEP::m);
+//  analysisManager->FillNtupleDColumn(2, 3, (*trackHC)[0]->GetPos().z()/CLHEP::m);
+//  analysisManager->AddNtupleRow(2); 
+
+//  //Fill histograms
+//  analysisManager->FillH1(0, heavyHit->GetEdep());
+//  analysisManager->FillH1(1, heavyHit->GetTrackLength());
+//  if(heavyHit->GetTrackID()<1e9)
+//  {
+//     analysisManager->FillH1(2, heavyHit->GetTrackID());
+//  }
+//  else
+//  {
+//     analysisManager->FillH1(3, heavyHit->GetTrackID());
+//  }
+//
+//  if(heavyHit->GetTrackID() != 1000010020) G4cout << "Fill pid" << G4endl;
+//
+//  //Fill ntuple
+//  analysisManager->FillNtupleDColumn(1, 0, heavyHit->GetEdep());
+//  analysisManager->FillNtupleDColumn(1, 1, heavyHit->GetTrackLength());
+//  analysisManager->AddNtupleRow(1);
+//
+//  analysisManager->FillNtupleDColumn(2, 0, heavyHit->GetTrackID());
+//  analysisManager->AddNtupleRow(2);
+//
+//  if(trackHit->GetTrackID() == 2112)
+//  {
+//  //std::cout << "neutern in tracker" << ": " << localPos.x() << ", " << localPos.y() << ", " << localPos.z() << std::endl;
+//
+//  analysisManager->FillH3(0, trackHit->GetPos().x()/CLHEP::m,
+//                             trackHit->GetPos().y()/CLHEP::m,
+//                             trackHit->GetPos().z()/CLHEP::m);
+//
+//  analysisManager->FillH1(4, trackHit->GetPos().x()/CLHEP::m);
+//  analysisManager->FillH1(5, trackHit->GetPos().y()/CLHEP::m);
+//  analysisManager->FillH1(6, trackHit->GetPos().z()/CLHEP::m);
+//
+//  analysisManager->FillNtupleDColumn(3, 0, trackHit->GetKineticEnergy());
+//  analysisManager->FillNtupleDColumn(3, 1, trackHit->GetPos().x()/CLHEP::m);
+//  analysisManager->FillNtupleDColumn(3, 2, trackHit->GetPos().y()/CLHEP::m);
+//  analysisManager->FillNtupleDColumn(3, 3, trackHit->GetPos().z()/CLHEP::m);
+//  analysisManager->AddNtupleRow(3);
+//  }
 }

@@ -32,7 +32,7 @@ RunAction::RunAction()
 
   //Creating histograms
   analysisManager->CreateH1("Ehwt", "Edep in heavy water target", 100, 0., 20*MeV);
-  analysisManager->CreateH1("Lhwt", "trackL in heavy water target", 100, 0., 5*cm);
+  analysisManager->CreateH1("Lhwt", "trackL in heavy water target", 100, 0., 2*cm);
   analysisManager->CreateH1("pid1", "Pid in heavy water target behind 1e9", 100, -3000, 3000);
   analysisManager->CreateH1("Pid2", "Pid in heavy water target after 1e9", 100, 1000000000, 1000100000);
 
@@ -47,13 +47,29 @@ RunAction::RunAction()
   analysisManager->SetFirstNtupleId(1);
 
   //Creating ntuple
-  analysisManager->CreateNtuple("EdepTrackLen", "EdepTrackLen");
+  analysisManager->CreateNtuple("HeavyWater", "HeavyWater");
   analysisManager->CreateNtupleDColumn("Ehwt");
   analysisManager->CreateNtupleDColumn("Lhwt");
-  analysisManager->FinishNtuple();
-
-  analysisManager->CreateNtuple("pid", "pid");
+//  analysisManager->FinishNtuple();
+//
+//  analysisManager->CreateNtuple("pid", "pid");
   analysisManager->CreateNtupleDColumn("Pid1");
+  analysisManager->CreateNtupleDColumn("Pid2");
+  analysisManager->FinishNtuple();
+  
+  analysisManager->CreateNtuple("neutronEnergy", "neutronEnergy");
+  analysisManager->CreateNtupleDColumn("neutronEnergy1");
+  analysisManager->CreateNtupleDColumn("neutronfluxx");
+  analysisManager->CreateNtupleDColumn("neutronfluxy");
+  analysisManager->CreateNtupleDColumn("neutronfluxz");
+  analysisManager->FinishNtuple();
+  
+  analysisManager->CreateNtuple("Target", "Target");
+  for(G4int i=1; i<=3; i++)
+  {
+    analysisManager->CreateNtupleDColumn(title1+std::to_string(i));
+    analysisManager->CreateNtupleDColumn(title2+std::to_string(i));
+  }
   analysisManager->FinishNtuple();
 }
 
@@ -81,36 +97,10 @@ void RunAction::BeginOfRunAction(const G4Run*)
 
 void RunAction::EndOfRunAction(const G4Run*)
 {
-  // print histogram statistics
-  //
   auto analysisManager = G4AnalysisManager::Instance();
-//  if ( analysisManager->GetH1(1) ) {
-//    G4cout << G4endl << " ----> print histograms statistic ";
-//    if(isMaster) {
-//      G4cout << "for the entire run " << G4endl << G4endl;
-//    }
-//    else {
-//      G4cout << "for the local thread " << G4endl << G4endl;
-//    }
-//
-//    G4cout << " Edeu : mean = "
-//       << G4BestUnit(analysisManager->GetH1(0)->mean(), "Energy")
-//       << " rms = "
-//       << G4BestUnit(analysisManager->GetH1(0)->rms(),  "Energy") << G4endl;
-//
-//    G4cout << " Ldeu : mean = "
-//      << G4BestUnit(analysisManager->GetH1(1)->mean(), "Length")
-//      << " rms = "
-//      << G4BestUnit(analysisManager->GetH1(1)->rms(),  "Length") << G4endl;
-//
-//    G4cout << " Pid : mean = "
-//      << G4BestUnit(analysisManager->GetH1(2)->mean(), "Pid")
-//      << " rms = "
-//      << G4BestUnit(analysisManager->GetH1(2)->rms(), "pid") << G4endl; 
   
   //save histograms and ntuple
   //
   analysisManager->Write();
   analysisManager->CloseFile();
-//}
 }

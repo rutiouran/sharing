@@ -42,39 +42,42 @@ G4bool HeavyWaterSD::ProcessHits(G4Step* step,
   if( step->GetTrack()->GetDefinition()->GetPDGCharge() != 0)
   {
     stepLength = step->GetStepLength();
-    G4cout << "记录一次步长" << G4endl;
   }
 
   if(edep == 0. && stepLength == 0.) return false;
 
-//  HeavyWaterHit* newHit = new HeavyWaterHit();	//无效方法
-//
-//  newHit->SetTrackID(step->GetTrack()->GetTrackID());
-//  newHit->SetEdep(edep);
-//  newHit->SetTrackLength(stepLength);
-//  newHit->Add(edep, stepLength);
-//  fHitsCollection->insert(newHit);			//无效方法
+  HeavyWaterHit* newHit = new HeavyWaterHit();
+
+  newHit->SetTrackID(step->GetTrack()->GetTrackID());
+  newHit->SetEdep(edep);
+  newHit->SetTrackLength(stepLength);
+  newHit->SetPid(step->GetTrack()->GetParticleDefinition()->GetPDGEncoding());
+  newHit->SetStep();
+  //newHit->Add(edep, stepLength);
+  fHitsCollection->insert(newHit);
 
   //Fill histograms and ntuple
-  auto analysisManager = G4AnalysisManager::Instance();
-
-  G4int pid = step->GetTrack()->GetParticleDefinition()->GetPDGEncoding();
-  
-  G4int ParentID = step->GetTrack()->GetParentID();
-  if(pid == 2112)
-  G4cout << "pid: " << pid << ", edep: " << edep << ", step: " << step << G4endl; 
-  
-  if(pid<1e9)
-  {
-     analysisManager->FillH1(2, pid);
-  }
-  else
-  {
-     analysisManager->FillH1(3, pid);
-  }
-
-  analysisManager->FillNtupleDColumn(2, 0, pid);
-  analysisManager->AddNtupleRow(2);
+//  auto analysisManager = G4AnalysisManager::Instance();
+//
+//  G4int pid = step->GetTrack()->GetParticleDefinition()->GetPDGEncoding();
+//  
+//  G4int ParentID = step->GetTrack()->GetParentID();
+//  if(pid == 2112)
+//  G4cout << "pid: " << pid << ", edep: " << edep << ", step: " << step << G4endl; 
+//  
+//  if(pid<1e9)
+//  {
+//     analysisManager->FillH1(2, pid);
+//     G4cout << "Fill pid" << G4endl;
+//  }
+//  else
+//  {
+//     analysisManager->FillH1(3, pid);
+//     G4cout << "Fill pid" << G4endl;
+//  }
+//
+//  analysisManager->FillNtupleDColumn(2, 0, pid);
+//  analysisManager->AddNtupleRow(2);
 
   //Avoid double counting
   //if(pid == 2112) step->GetTrack()->SetTrackStatus(fStopAndKill);
@@ -94,19 +97,19 @@ G4bool HeavyWaterSD::ProcessHits(G4Step* step,
   }         
 
   // Add values
-  hit->Add(edep, stepLength);
+  //hit->Add(edep, stepLength);
   return true;
 }
 
 void HeavyWaterSD::EndOfEvent(G4HCofThisEvent*)
 {
-  if ( verboseLevel>1 ) { 
-     auto nofHits = fHitsCollection->entries();
-     G4cout
-       << G4endl 
-       << "-------->Hits Collection: in this event they are " << nofHits 
-       << " hits in the tracker chambers: " << G4endl;
-     //for ( std::size_t i=0; i<nofHits; ++i ) 
-     //(*fHitsCollection)[0]->Print();
-  }
+//  if ( verboseLevel>1 ) { 
+//     auto nofHits = fHitsCollection->entries();
+//     G4cout
+//       << G4endl 
+//       << "-------->Hits Collection: in this event they are " << nofHits 
+//       << " hits in the tracker chambers: " << G4endl;
+//     //for ( std::size_t i=0; i<nofHits; ++i ) 
+//     //(*fHitsCollection)[0]->Print();
+//  }
 }
